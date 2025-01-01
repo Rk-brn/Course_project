@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CategoryForm.h"
 namespace Courseproject {
 
 	using namespace System;

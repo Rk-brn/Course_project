@@ -15,7 +15,9 @@ int main(array<System::String^>^ args) {
 
 System::Void Courseproject::MyForm::button_start_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	
+	CategoryForm^ form1 = gcnew CategoryForm();
+	form1->Show();
+	this->Hide();
 	return System::Void();
 }
 
