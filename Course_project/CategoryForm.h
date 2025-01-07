@@ -1,7 +1,9 @@
 #pragma once
 #include <Windows.h>
-#include "Category.h" // Подключаем класс Category
-#include <vector>  //  Добавляем вектор из std 
+#include "Category.h" 
+#include <vector>
+#include <string>
+
 
 namespace Courseproject {
 
@@ -11,7 +13,7 @@ namespace Courseproject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	using namespace System::IO;
 	/// <summary>
 	/// Сводка для CategoryForm
 	/// </summary>
@@ -46,7 +48,11 @@ namespace Courseproject {
 		/// </summary>
 		System::ComponentModel::Container ^components;
 	public:
-		std::vector<Category> GetCategories();
+		System::String^ categoryFilePath;
+		// Метод для сохранения категорий в файл
+		void SaveCategoriesToFile();
+		// Метод для загрузки категорий из файла
+		std::vector<Category> LoadCategoriesFromFile();
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
