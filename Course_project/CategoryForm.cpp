@@ -37,3 +37,11 @@ System::Void Courseproject::CategoryForm::buttonCreateCategory_Click(System::Obj
     textBoxCategoryDescription->Text = "";
     return System::Void();
 }
+
+System::Void Courseproject::CategoryForm::âåðíóòüñÿÍàçàäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    //TransactionForm^ transactionForm = gcnew TransactionForm(this); // Ïåðåäàåì ññûëêó íà CategoryForm
+    //transactionForm->Show();
+    this->Close();
+    return System::Void();
+}

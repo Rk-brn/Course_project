@@ -1,8 +1,8 @@
 #pragma once
 #include <Windows.h>
-
 #include "Category.h" // Ïîäêëş÷àåì êëàññ Category
 #include <vector>  //  Äîáàâëÿåì âåêòîğ èç std 
+
 namespace Courseproject {
 
 	using namespace System;
@@ -36,6 +36,9 @@ namespace Courseproject {
 	private: System::Windows::Forms::Button^ buttonCreateCategory;
 	private: System::Windows::Forms::TextBox^ textBoxCategoryDescription;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ èíôîğìàöèÿToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ âåğíóòüñÿÍàçàäToolStripMenuItem;
 
 	private:
 		/// <summary>
@@ -56,6 +59,10 @@ namespace Courseproject {
 			this->buttonCreateCategory = (gcnew System::Windows::Forms::Button());
 			this->textBoxCategoryDescription = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->èíôîğìàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->âåğíóòüñÿÍàçàäToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// textBoxCategoryName
@@ -91,6 +98,32 @@ namespace Courseproject {
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"label1";
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->èíôîğìàöèÿToolStripMenuItem,
+					this->âåğíóòüñÿÍàçàäToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(1201, 28);
+			this->menuStrip1->TabIndex = 4;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// èíôîğìàöèÿToolStripMenuItem
+			// 
+			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
+			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(120, 24);
+			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ ";
+			// 
+			// âåğíóòüñÿÍàçàäToolStripMenuItem
+			// 
+			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Name = L"âåğíóòüñÿÍàçàäToolStripMenuItem";
+			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Size = System::Drawing::Size(138, 24);
+			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Text = L"Âåğíóòüñÿ íàçàä";
+			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Click += gcnew System::EventHandler(this, &CategoryForm::âåğíóòüñÿÍàçàäToolStripMenuItem_Click);
+			// 
 			// CategoryForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -100,13 +133,18 @@ namespace Courseproject {
 			this->Controls->Add(this->textBoxCategoryDescription);
 			this->Controls->Add(this->buttonCreateCategory);
 			this->Controls->Add(this->textBoxCategoryName);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"CategoryForm";
 			this->Text = L"CategoryForm";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void buttonCreateCategory_Click(System::Object^ sender, System::EventArgs^ e);
-	};
+	private: System::Void âåğíóòüñÿÍàçàäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+};
 }
