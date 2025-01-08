@@ -10,7 +10,7 @@ namespace Courseproject {
 Courseproject::CategoryForm::CategoryForm(void) : categoryFilePath(gcnew System::String(CATEGORY_FILE_NAME))
 {
     InitializeComponent();
-    //LoadCategoriesFromFile(); // «агрузка категорий при создании формы
+    
 }
 
 std::vector<Category> Courseproject::CategoryForm::LoadCategoriesFromFile()

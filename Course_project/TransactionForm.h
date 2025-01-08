@@ -11,7 +11,8 @@ namespace Courseproject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	using namespace System::IO;
+	using namespace System::Collections::Generic;
 	/// <summary>
 	/// Сводка для TransactionForm
 	/// </summary>
@@ -21,7 +22,7 @@ namespace Courseproject {
 	public ref class TransactionForm : public System::Windows::Forms::Form
 	{
 	public:
-		TransactionForm(Courseproject::CategoryForm^ categoryForm);
+		TransactionForm(void);
 
 	protected:
 		/// <summary>
@@ -53,6 +54,19 @@ namespace Courseproject {
 
 	private:
 		Courseproject::CategoryForm^ categoryForm;
+	
+		System::String^ transactionFilePath;
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ информацияToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ вернутьсяНазадToolStripMenuItem;
+		   System::String^ categoryFilePath;
+
+		std::vector<Transaction> LoadTransactionsFromFile();
+
+		// Загрузка категорий из файла
+		void LoadCategoriesFromFile();
+		// Функция для сохранения транзакций в файл
+		void SaveTransactionsToFile();
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -76,6 +90,10 @@ namespace Courseproject {
 			this->comboBox_TransactionType = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox_Category = (gcnew System::Windows::Forms::ComboBox());
 			this->maskedTextBox_DataType = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->информацияToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->вернутьсяНазадToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button_TransactionCreat
@@ -135,6 +153,33 @@ namespace Courseproject {
 			this->maskedTextBox_DataType->Size = System::Drawing::Size(100, 22);
 			this->maskedTextBox_DataType->TabIndex = 7;
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->информацияToolStripMenuItem,
+					this->вернутьсяНазадToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(1378, 28);
+			this->menuStrip1->TabIndex = 8;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// информацияToolStripMenuItem
+			// 
+			this->информацияToolStripMenuItem->Name = L"информацияToolStripMenuItem";
+			this->информацияToolStripMenuItem->Size = System::Drawing::Size(116, 24);
+			this->информацияToolStripMenuItem->Text = L"Информация";
+			this->информацияToolStripMenuItem->Click += gcnew System::EventHandler(this, &TransactionForm::информацияToolStripMenuItem_Click);
+			// 
+			// вернутьсяНазадToolStripMenuItem
+			// 
+			this->вернутьсяНазадToolStripMenuItem->Name = L"вернутьсяНазадToolStripMenuItem";
+			this->вернутьсяНазадToolStripMenuItem->Size = System::Drawing::Size(138, 24);
+			this->вернутьсяНазадToolStripMenuItem->Text = L"Вернуться назад";
+			this->вернутьсяНазадToolStripMenuItem->Click += gcnew System::EventHandler(this, &TransactionForm::вернутьсяНазадToolStripMenuItem_Click);
+			// 
 			// TransactionForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -147,13 +192,19 @@ namespace Courseproject {
 			this->Controls->Add(this->textBox_TransactionText);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button_TransactionCreat);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"TransactionForm";
 			this->Text = L"TransactionForm";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void button_TransactionCreat_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void вернутьсяНазадToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
