@@ -128,6 +128,7 @@ namespace Courseproject {
 			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
 			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(120, 24);
 			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ ";
+			this->èíôîğìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &CategoryForm::èíôîğìàöèÿToolStripMenuItem_Click);
 			// 
 			// âåğíóòüñÿÍàçàäToolStripMenuItem
 			// 
@@ -178,5 +179,6 @@ namespace Courseproject {
 #pragma endregion
 	private: System::Void buttonCreateCategory_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void âåğíóòüñÿÍàçàäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
