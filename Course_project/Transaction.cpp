@@ -1,12 +1,12 @@
 #include "Transaction.h"
-Transaction::Transaction(std::string name, double amount, std::string date, std::string type, Category* category)
-    : name_(name), amount_(amount), date_(date), type_(type), category_(category) {}
+Transaction::Transaction(std::string name, int amount, std::string date, std::string type, Category* category, std::string typeAccount)
+    : name_(name), amount_(amount), date_(date), type_(type), category_(category), typeAccount_(typeAccount) {}
 
 std::string Transaction::getName() const {
     return name_;
 }
 
-double Transaction::getAmount() const {
+int Transaction::getAmount() const {
     return amount_;
 }
 
@@ -21,3 +21,9 @@ std::string Transaction::getType() const {
 Category* Transaction::getCategory() const {
     return category_;
 }
+
+
+std::string Transaction::getTypeAccount() const {
+    return typeAccount_;
+}
+

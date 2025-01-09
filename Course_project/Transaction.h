@@ -6,13 +6,13 @@ class Transaction
 {
 public:
     // Конструктор
-    Transaction(std::string name, double amount, std::string date, std::string type, Category* category);
+    Transaction(std::string name, int amount, std::string date, std::string type, Category* category, std::string typeAccount);
 
     // Метод для получения имени транзакции
     std::string getName() const;
 
     // Метод для получения суммы транзакции
-    double getAmount() const;
+    int getAmount() const;
 
     // Метод для получения даты транзакции
     std::string getDate() const;
@@ -23,11 +23,14 @@ public:
     // Метод для получения категории
     Category* getCategory() const;
 
+    std::string getTypeAccount() const;
+
 private:
     std::string name_;
-    double amount_;
+    int amount_;
     std::string date_;
     std::string type_;
     Category* category_;
+    std::string typeAccount_;
 };
 
