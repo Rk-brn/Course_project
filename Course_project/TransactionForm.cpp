@@ -54,7 +54,7 @@ namespace Courseproject {
                 std::string name, amountStr, date, type, categoryName;
                 if (std::getline(iss, name, ';') && std::getline(iss, amountStr, ';') && std::getline(iss, date, ';') && std::getline(iss, type, ';') && std::getline(iss, categoryName, ';'))
                 {
-                    double amount = std::stod(amountStr);
+                    int amount = std::stod(amountStr);
 
                     // Поиск категории
                     Category* category = nullptr;
@@ -123,7 +123,7 @@ namespace Courseproject {
 
         double transactionAmount;
         try {
-            transactionAmount = System::Double::Parse(transactionAmountStr);
+            transactionAmount = System::Int32::Parse(transactionAmountStr);
         }
         catch (System::FormatException^) {
             MessageBox::Show("Неверный формат суммы.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
