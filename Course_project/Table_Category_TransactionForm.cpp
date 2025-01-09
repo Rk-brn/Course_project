@@ -62,8 +62,8 @@ namespace Courseproject {
         dataGridViewTransactions->Columns->Clear();
 
         // Добавляем столбец для номера строки
-        dataGridViewTransactions->Columns->Add("RowNumber", "#"); // "#" - заголовок столбца
-        dataGridViewTransactions->Columns[0]->Width = 40; // Задаем ширину столбца
+        dataGridViewTransactions->Columns->Add("RowNumber", "#");
+        dataGridViewTransactions->Columns[0]->Width = 40;
 
         // Добавляем столбцы для транзакций
         dataGridViewTransactions->Columns->Add("TransactionName", "Название транзакции");
@@ -72,31 +72,38 @@ namespace Courseproject {
         dataGridViewTransactions->Columns->Add("TransactionType", "Тип");
         dataGridViewTransactions->Columns->Add("CategoryName", "Категория");
         dataGridViewTransactions->Columns->Add("AccountName", "Счёт");
+
         msclr::interop::marshal_context context2;
         std::string filePath = context2.marshal_as<std::string>(gcnew System::String("transactions.txt"));
         std::ifstream file(filePath);
 
         if (file.is_open()) {
             std::string line;
-            int rowNumber = 1; // Начинаем нумерацию с 1
+            int rowNumber = 1;
             while (std::getline(file, line)) {
                 std::istringstream iss(line);
                 std::string transactionName, transactionAmountStr, transactionDate, transactionType, categoryName, accountName;
-                std::getline(iss, transactionName, ';');
-                std::getline(iss, transactionAmountStr, ';');
-                std::getline(iss, transactionDate, ';');
-                std::getline(iss, transactionType, ';');
-                std::getline(iss, categoryName, ';');
-                std::getline(iss, accountName, ';');
-                int rowIndex = dataGridViewTransactions->Rows->Add();
-                dataGridViewTransactions->Rows[rowIndex]->Cells["RowNumber"]->Value = rowNumber; // Заполняем номер строки
-                dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionName"]->Value = gcnew System::String(transactionName.c_str());
-                dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionAmount"]->Value = gcnew System::String(transactionAmountStr.c_str());
-                dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionDate"]->Value = gcnew System::String(transactionDate.c_str());
-                dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionType"]->Value = gcnew System::String(transactionType.c_str());
-                dataGridViewTransactions->Rows[rowIndex]->Cells["CategoryName"]->Value = gcnew System::String(categoryName.c_str());
-                dataGridViewTransactions->Rows[rowIndex]->Cells["AccountName"]->Value = gcnew System::String(accountName.c_str());
-                rowNumber++; // Увеличиваем номер строки
+
+                if (std::getline(iss, transactionName, ';') &&
+                    std::getline(iss, transactionAmountStr, ';') &&
+                    std::getline(iss, transactionDate, ';') &&
+                    std::getline(iss, transactionType, ';') &&
+                    std::getline(iss, categoryName, ';') &&
+                    std::getline(iss, accountName, ';'))
+                {
+
+                    int rowIndex = dataGridViewTransactions->Rows->Add();
+                    dataGridViewTransactions->Rows[rowIndex]->Cells["RowNumber"]->Value = rowNumber;
+                    dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionName"]->Value = gcnew System::String(transactionName.c_str());
+                    dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionAmount"]->Value = gcnew System::String(transactionAmountStr.c_str());
+                    dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionDate"]->Value = gcnew System::String(transactionDate.c_str());
+                    dataGridViewTransactions->Rows[rowIndex]->Cells["TransactionType"]->Value = gcnew System::String(transactionType.c_str());
+                    dataGridViewTransactions->Rows[rowIndex]->Cells["CategoryName"]->Value = gcnew System::String(categoryName.c_str());
+                    dataGridViewTransactions->Rows[rowIndex]->Cells["AccountName"]->Value = gcnew System::String(accountName.c_str());
+
+
+                    rowNumber++;
+                }
             }
             file.close();
         }

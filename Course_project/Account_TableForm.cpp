@@ -30,34 +30,30 @@ namespace Courseproject {
             while (std::getline(file, line))
             {
                 std::istringstream iss(line);
-                std::string name, balanceStr;
+                std::string name, balanceStr, count;
 
                 if (std::getline(iss, name, ':')) {
 
                     std::istringstream nameStream(name);
                     std::string accountName;
-                    std::getline(nameStream, accountName, ' ');
-                    if (std::getline(iss, balanceStr, ',')) {
+                    std::getline(nameStream, accountName, ':');
+                    if (std::getline(iss, balanceStr, ':')) {
 
                         std::string balanceString;
                         std::istringstream balanceStream(balanceStr);
                         std::getline(balanceStream, balanceString, ':');
 
-                        // Поиск аккаунта в векторе accounts по имени
-                        int transactionCount = 0;
-                        for (const auto& account : accounts)
-                        {
-                            if (account.getName() == accountName)
-                            {
-                                transactionCount = account.getTransactionCount();
-                                break;
-                            }
-                        }
+                        if (std::getline(iss, count, ',')) {
 
-                        int rowIndex = dataGridView1->Rows->Add();
-                        dataGridView1->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(accountName.c_str());
-                        dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = gcnew System::String(balanceString.c_str());
-                        dataGridView1->Rows[rowIndex]->Cells["TransactionCount"]->Value = transactionCount; 
+                            std::string countString;
+                            std::istringstream countStream(count);
+                            std::getline(countStream, countString, ':');
+
+                            int rowIndex = dataGridView1->Rows->Add();
+                            dataGridView1->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(accountName.c_str());
+                            dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = gcnew System::String(balanceString.c_str());
+                            dataGridView1->Rows[rowIndex]->Cells["TransactionCount"]->Value = gcnew System::String(countString.c_str());
+                        }
                     }
                 }
             }

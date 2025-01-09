@@ -22,13 +22,13 @@ System::Void Courseproject::AccountForm::button_creat_account_Click(System::Obje
         MessageBox::Show("Некорректный формат баланса. Введите целое число.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
         return;
     }
-    
-    Account newAccount(name, balance);
+    int countTrans = 0;
+    Account newAccount(name, balance, countTrans);
     accounts.push_back(newAccount);
   
     std::ofstream file("account.txt", std::ios::app); // Открываем файл в режиме добавления (append)
     if (file.is_open()) {
-        file << name << ":" << balance << ",\n";
+        file << name << ":" << balance << ":" << countTrans << ",\n";
         file.close();
         MessageBox::Show("Счёт успешно создан и записан в файл account.txt", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
     }

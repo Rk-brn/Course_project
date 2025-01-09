@@ -31,12 +31,13 @@ namespace Courseproject {
                 std::istringstream iss(line);
                 std::string name;
                 std::string balance;
-                if (std::getline(iss, name, ':') && std::getline(iss, balance, ',')) {
+                std::string count;
+                if (std::getline(iss, name, ':') && std::getline(iss, balance, ':') && std::getline(iss, count, ',')) {
 
                     std::string accountName;
                     std::istringstream nameStream(name);
 
-                    std::getline(nameStream, accountName, ' ');
+                    std::getline(nameStream, accountName, ':');
 
                     comboBox_Account->Items->Add(gcnew String(accountName.c_str()));
                 }
@@ -129,7 +130,7 @@ namespace Courseproject {
                     << transaction.getAmount() << ";"
                     << transaction.getDate() << ";"
                     << transaction.getType() << ";"
-                    << transaction.getCategory()->getName() << ";\n"
+                    << transaction.getCategory()->getName() << ";"
                     << transaction.getTypeAccount() << ";\n";
             }
             file.close();
