@@ -28,7 +28,7 @@ System::Void Courseproject::AccountForm::button_creat_account_Click(System::Obje
   
     std::ofstream file("account.txt", std::ios::app); // Открываем файл в режиме добавления (append)
     if (file.is_open()) {
-        file << "Name: " << name << ", Balance: " << balance << "\n"; // Записываем в файл
+        file << name << ":" << balance << ",\n";
         file.close();
         MessageBox::Show("Счёт успешно создан и записан в файл account.txt", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
     }
