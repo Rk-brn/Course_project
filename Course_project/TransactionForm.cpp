@@ -9,11 +9,13 @@ namespace Courseproject {
     std::vector<Transaction> transactions;
     const char* TRANSACTION_FILE_NAME = "transactions.txt";
     const char* CATEGOR_FILE_NAME = "categories.txt";
+    const char* ACCOUNT_FILE_NAME = "account.txt";
 
     TransactionForm::TransactionForm() : transactionFilePath(gcnew System::String(TRANSACTION_FILE_NAME)), categoryFilePath(gcnew System::String(CATEGOR_FILE_NAME))
     {
         InitializeComponent();
         LoadCategoriesFromFile();// Загрузка категорий из файла
+        LoadAccountsFromFile();// Загрузка аккаунтов из файла
     }
 
 
@@ -38,10 +40,39 @@ namespace Courseproject {
         }
     }
 
+
+    void  TransactionForm::LoadAccountsFromFile()
+    {
+        msclr::interop::marshal_context context;
+        std::string filePath = context.marshal_as<std::string>(ACCOUNT_FILE_NAME);
+        std::ifstream file(filePath);
+        if (file.is_open())
+        {
+            std::string line;
+            while (std::getline(file, line))
+            {
+                std::istringstream iss(line);
+                std::string name;
+                std::string balance;
+                if (std::getline(iss, name, ':') && std::getline(iss, balance, ',')) {
+
+                    std::string accountName;
+                    std::istringstream nameStream(name);
+
+                    std::getline(nameStream, accountName, ' ');
+
+                    comboBox_Account->Items->Add(gcnew String(accountName.c_str()));
+                }
+            }
+            file.close();
+        }
+    }
+
     // Метод для загрузки транзакций из файла
+   
     std::vector<Transaction> TransactionForm::LoadTransactionFile()
     {
-        
+
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(transactionFilePath);
         std::ifstream file(filePath);
@@ -51,8 +82,8 @@ namespace Courseproject {
             while (std::getline(file, line))
             {
                 std::istringstream iss(line);
-                std::string name, amountStr, date, type, categoryName;
-                if (std::getline(iss, name, ';') && std::getline(iss, amountStr, ';') && std::getline(iss, date, ';') && std::getline(iss, type, ';') && std::getline(iss, categoryName, ';'))
+                std::string name, amountStr, date, type, categoryName, accountType;
+                if (std::getline(iss, name, ';') && std::getline(iss, amountStr, ';') && std::getline(iss, date, ';') && std::getline(iss, type, ';') && std::getline(iss, categoryName, ';') && std::getline(iss, accountType, ';'))
                 {
                     double amount = std::stod(amountStr);
 
@@ -76,7 +107,7 @@ namespace Courseproject {
                         categoryFile.close();
                     }
                     if (category != nullptr)
-                        transactions.push_back(Transaction(name, amount, date, type, category));
+                        transactions.push_back(Transaction(name, amount, date, type, category, accountType));
                     else
                     {
                         MessageBox::Show("Ошибка загрузки файла.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -100,7 +131,8 @@ namespace Courseproject {
                     << transaction.getAmount() << ";"
                     << transaction.getDate() << ";"
                     << transaction.getType() << ";"
-                    << transaction.getCategory()->getName() << ";\n";
+                    << transaction.getCategory()->getName() << ";"
+                    << transaction.getTypeAccount() << ";\n";
             }
             file.close();
         }
@@ -111,17 +143,19 @@ namespace Courseproject {
         String^ transactionName = textBox_TransactionText->Text;
         String^ transactionAmountStr = textBox_TransactionAmount->Text; String^ transactionType = comboBox_TransactionType->SelectedItem != nullptr ? comboBox_TransactionType->SelectedItem->ToString() : "";
         String^ selectedCategoryName = comboBox_Category->SelectedItem != nullptr ? comboBox_Category->SelectedItem->ToString() : "";
-        String^ dateString = maskedTextBox_DataType->Text;
+        System::DateTime selectedDate = dateTimePicker_Date->Value;
+        String^ dateString = selectedDate.ToString("dd/MM/yyyy");
+        String^ selectedAccountName = comboBox_Account->SelectedItem != nullptr ? comboBox_Account->SelectedItem->ToString() : "";
 
 
         if (String::IsNullOrEmpty(transactionName) || String::IsNullOrEmpty(transactionAmountStr)
-            || String::IsNullOrEmpty(transactionType) || String::IsNullOrEmpty(selectedCategoryName) || String::IsNullOrEmpty(dateString)) {
+            || String::IsNullOrEmpty(transactionType) || String::IsNullOrEmpty(selectedCategoryName) || String::IsNullOrEmpty(dateString) || String::IsNullOrEmpty(selectedAccountName)) {
             MessageBox::Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;
         }
 
 
-        double transactionAmount;
+        int transactionAmount;
         try {
             transactionAmount = System::Double::Parse(transactionAmountStr);
         }
@@ -164,7 +198,8 @@ namespace Courseproject {
             transactionAmount,
             msclr::interop::marshal_as<std::string>(dateString),
             msclr::interop::marshal_as<std::string>(transactionType),
-            selectedCategory
+            selectedCategory,
+            msclr::interop::marshal_as<std::string>(selectedAccountName)
         );
 
         transactions.push_back(newTransaction);
@@ -176,7 +211,8 @@ namespace Courseproject {
         textBox_TransactionAmount->Text = "";
         comboBox_TransactionType->SelectedIndex = -1;
         comboBox_Category->SelectedIndex = -1;
-        maskedTextBox_DataType->Text = "";
+        dateTimePicker_Date->Value = System::DateTime::Now;
+        comboBox_Account->SelectedIndex = -1;
 
         return System::Void();
     }

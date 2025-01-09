@@ -47,7 +47,7 @@ namespace Courseproject {
 	private: System::Windows::Forms::ComboBox^ comboBox_Category;
 
 
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox_DataType;
+
 
 
 
@@ -58,7 +58,10 @@ namespace Courseproject {
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ информацияToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ вернутьсяНазадToolStripMenuItem;
-		System::String^ categoryFilePath;
+	private: System::Windows::Forms::ComboBox^ comboBox_Account;
+	private: System::Windows::Forms::DateTimePicker^ dateTimePicker_Date;
+
+		   System::String^ categoryFilePath;
 
 	public:
 		std::vector<Transaction> LoadTransactionFile();
@@ -67,6 +70,8 @@ namespace Courseproject {
 		void LoadCategoriesFromFile();
 		// Функция для сохранения транзакций в файл
 		void SaveTransactionsToFile();
+
+		void LoadAccountsFromFile();// Загрузка аккаунтов из файла
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -88,10 +93,11 @@ namespace Courseproject {
 			this->textBox_TransactionAmount = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox_TransactionType = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox_Category = (gcnew System::Windows::Forms::ComboBox());
-			this->maskedTextBox_DataType = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->информацияToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->вернутьсяНазадToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->comboBox_Account = (gcnew System::Windows::Forms::ComboBox());
+			this->dateTimePicker_Date = (gcnew System::Windows::Forms::DateTimePicker());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -140,17 +146,10 @@ namespace Courseproject {
 			// comboBox_Category
 			// 
 			this->comboBox_Category->FormattingEnabled = true;
-			this->comboBox_Category->Location = System::Drawing::Point(925, 379);
+			this->comboBox_Category->Location = System::Drawing::Point(989, 337);
 			this->comboBox_Category->Name = L"comboBox_Category";
 			this->comboBox_Category->Size = System::Drawing::Size(121, 24);
 			this->comboBox_Category->TabIndex = 6;
-			// 
-			// maskedTextBox_DataType
-			// 
-			this->maskedTextBox_DataType->Location = System::Drawing::Point(633, 339);
-			this->maskedTextBox_DataType->Name = L"maskedTextBox_DataType";
-			this->maskedTextBox_DataType->Size = System::Drawing::Size(100, 22);
-			this->maskedTextBox_DataType->TabIndex = 7;
 			// 
 			// menuStrip1
 			// 
@@ -179,12 +178,28 @@ namespace Courseproject {
 			this->вернутьсяНазадToolStripMenuItem->Text = L"Вернуться назад";
 			this->вернутьсяНазадToolStripMenuItem->Click += gcnew System::EventHandler(this, &TransactionForm::вернутьсяНазадToolStripMenuItem_Click);
 			// 
+			// comboBox_Account
+			// 
+			this->comboBox_Account->FormattingEnabled = true;
+			this->comboBox_Account->Location = System::Drawing::Point(989, 455);
+			this->comboBox_Account->Name = L"comboBox_Account";
+			this->comboBox_Account->Size = System::Drawing::Size(121, 24);
+			this->comboBox_Account->TabIndex = 9;
+			// 
+			// dateTimePicker_Date
+			// 
+			this->dateTimePicker_Date->Location = System::Drawing::Point(620, 335);
+			this->dateTimePicker_Date->Name = L"dateTimePicker_Date";
+			this->dateTimePicker_Date->Size = System::Drawing::Size(200, 22);
+			this->dateTimePicker_Date->TabIndex = 10;
+			// 
 			// TransactionForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1378, 689);
-			this->Controls->Add(this->maskedTextBox_DataType);
+			this->Controls->Add(this->dateTimePicker_Date);
+			this->Controls->Add(this->comboBox_Account);
 			this->Controls->Add(this->comboBox_Category);
 			this->Controls->Add(this->comboBox_TransactionType);
 			this->Controls->Add(this->textBox_TransactionAmount);
