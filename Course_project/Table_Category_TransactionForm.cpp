@@ -10,6 +10,9 @@ namespace Courseproject {
         InitializeComponent();
         LoadCategoriesToDataGridView(); // Загрузка категорий при создании формы
         LoadTransactionsToDataGridView();
+        TransactionForm^ transactionForm = gcnew TransactionForm();
+        transactionForm->LoadTransactionFile(); // Обновляем вектор транзакций из файла
+        transactionForm->Close();
     }
 
     System::Void Table_Category_TransactionForm::button1_Click(System::Object^ sender, System::EventArgs^ e)
@@ -191,6 +194,10 @@ namespace Courseproject {
                 }
                 outFile.close();
             }
+            // Обновление вектора transactions
+            TransactionForm^ transactionForm = gcnew TransactionForm();
+            transactionForm->LoadTransactionFile(); // Обновляем вектор транзакций из файла
+            transactionForm->Close();
 
             MessageBox::Show("Запись успешно удалена.", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
             LoadTransactionsToDataGridView();
