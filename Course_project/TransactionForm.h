@@ -17,8 +17,7 @@ namespace Courseproject {
 	/// Сводка для TransactionForm
 	/// </summary>
 	// Объявляем класс CategoryForm
-	std::vector<Transaction> transactions;
-
+	
 	public ref class TransactionForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -59,9 +58,10 @@ namespace Courseproject {
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ информацияToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ вернутьсяНазадToolStripMenuItem;
-		   System::String^ categoryFilePath;
+		System::String^ categoryFilePath;
 
-		std::vector<Transaction> LoadTransactionsFromFile();
+	public:
+		std::vector<Transaction> LoadTransactionFile();
 
 		// Загрузка категорий из файла
 		void LoadCategoriesFromFile();
@@ -73,9 +73,8 @@ namespace Courseproject {
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
-	//public:
-	//	//метод для получения вектора транзакций
-	//	std::vector<Transaction>& getTransactions();
+
+
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Требуемый метод для поддержки конструктора — не изменяйте 

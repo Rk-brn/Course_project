@@ -6,11 +6,11 @@
 #include "CategoryForm.h"
 
 namespace Courseproject {
-
+    std::vector<Transaction> transactions;
     const char* TRANSACTION_FILE_NAME = "transactions.txt";
-    const char* CATEGORY_FILE_NAME = "categories.txt";
+    const char* CATEGOR_FILE_NAME = "categories.txt";
 
-    TransactionForm::TransactionForm() : transactionFilePath(gcnew System::String(TRANSACTION_FILE_NAME)), categoryFilePath(gcnew System::String(CATEGORY_FILE_NAME))
+    TransactionForm::TransactionForm() : transactionFilePath(gcnew System::String(TRANSACTION_FILE_NAME)), categoryFilePath(gcnew System::String(CATEGOR_FILE_NAME))
     {
         InitializeComponent();
         LoadCategoriesFromFile();// Загрузка категорий из файла
@@ -39,9 +39,9 @@ namespace Courseproject {
     }
 
     // Метод для загрузки транзакций из файла
-    std::vector<Transaction> TransactionForm::LoadTransactionsFromFile()
+    std::vector<Transaction> TransactionForm::LoadTransactionFile()
     {
-        std::vector<Transaction> transactions;
+        
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(transactionFilePath);
         std::ifstream file(filePath);
