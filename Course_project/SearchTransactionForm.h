@@ -241,6 +241,7 @@ namespace Courseproject {
 			// 
 			// dataGridView_search
 			// 
+			this->dataGridView_search->AllowUserToAddRows = false;
 			this->dataGridView_search->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView_search->Location = System::Drawing::Point(90, 523);
 			this->dataGridView_search->Name = L"dataGridView_search";
@@ -307,12 +308,14 @@ namespace Courseproject {
 			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
 			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 24);
 			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ";
+			this->èíôîğìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &SearchTransactionForm::èíôîğìàöèÿToolStripMenuItem_Click);
 			// 
 			// âåğíóòüñÿÍàçàäToolStripMenuItem
 			// 
 			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Name = L"âåğíóòüñÿÍàçàäToolStripMenuItem";
 			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Size = System::Drawing::Size(138, 24);
 			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Text = L"Âåğíóòüñÿ íàçàä";
+			this->âåğíóòüñÿÍàçàäToolStripMenuItem->Click += gcnew System::EventHandler(this, &SearchTransactionForm::âåğíóòüñÿÍàçàäToolStripMenuItem_Click);
 			// 
 			// SearchTransactionForm
 			// 
@@ -352,5 +355,7 @@ namespace Courseproject {
 #pragma endregion
 	private: System::Void button_Search_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void buttonClear_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void âåğíóòüñÿÍàçàäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

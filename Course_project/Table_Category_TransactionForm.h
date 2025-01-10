@@ -203,22 +203,24 @@ namespace Courseproject {
 			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
 			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 24);
 			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ";
+			this->èíôîğìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::èíôîğìàöèÿToolStripMenuItem_Click);
 			// 
 			// âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem
 			// 
 			this->âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem->Name = L"âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem";
 			this->âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem->Size = System::Drawing::Size(145, 24);
 			this->âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem->Text = L"Âåğíóòüñÿ ê ñ÷¸òó";
+			this->âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem_Click);
 			// 
 			// dataGridViewTransactions
 			// 
 			this->dataGridViewTransactions->AllowUserToAddRows = false;
 			this->dataGridViewTransactions->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridViewTransactions->Location = System::Drawing::Point(60, 51);
+			this->dataGridViewTransactions->Location = System::Drawing::Point(240, 51);
 			this->dataGridViewTransactions->Name = L"dataGridViewTransactions";
 			this->dataGridViewTransactions->RowHeadersWidth = 51;
 			this->dataGridViewTransactions->RowTemplate->Height = 24;
-			this->dataGridViewTransactions->Size = System::Drawing::Size(1163, 301);
+			this->dataGridViewTransactions->Size = System::Drawing::Size(898, 314);
 			this->dataGridViewTransactions->TabIndex = 5;
 			// 
 			// groupBox_edit_del_tran
@@ -284,5 +286,7 @@ private: System::Void îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem_Click(System::Objec
 private: System::Void óäàëèòüÇàïèñüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_edit_del_tr_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ïîèñêToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

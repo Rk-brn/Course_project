@@ -76,6 +76,7 @@ namespace Courseproject {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(1108, 297);
 			this->dataGridView1->TabIndex = 0;
+			this->dataGridView1->AllowUserToAddRows = false;
 			// 
 			// menuStrip1
 			// 

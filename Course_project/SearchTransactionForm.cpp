@@ -270,4 +270,15 @@ namespace Courseproject {
         dataGridView_search->Rows->Clear();
         return System::Void();
     }
+    System::Void SearchTransactionForm::èíôîðìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        MessageBox::Show("Áóäåò òåêñò", "Èíôîðìàöèÿ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        return System::Void();
+        
+    }
+    System::Void SearchTransactionForm::âåðíóòüñÿÍàçàäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        this->Close();
+        return System::Void();
+    }
 }
