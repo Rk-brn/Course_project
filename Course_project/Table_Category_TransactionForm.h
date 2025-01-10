@@ -1,9 +1,12 @@
 #pragma once
-#include <Windows.h>
+
 #include "Category.h"
 #include "Transaction.h"
 #include "CategoryForm.h" 
 #include "TransactionForm.h"
+#include "SearchTransactionForm.h"
+
+#include <Windows.h>
 
 namespace Courseproject {
 
@@ -193,6 +196,7 @@ namespace Courseproject {
 			this->ïîèñêToolStripMenuItem->Name = L"ïîèñêToolStripMenuItem";
 			this->ïîèñêToolStripMenuItem->Size = System::Drawing::Size(70, 24);
 			this->ïîèñêToolStripMenuItem->Text = L"Ïîèñê ";
+			this->ïîèñêToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::ïîèñêToolStripMenuItem_Click);
 			// 
 			// èíôîğìàöèÿToolStripMenuItem
 			// 
@@ -279,5 +283,6 @@ private: System::Void äîáàâèòüÒğàíçàêöèşToolStripMenuItem_Click(System::Object^ 
 private: System::Void îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void óäàëèòüÇàïèñüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_edit_del_tr_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ïîèñêToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

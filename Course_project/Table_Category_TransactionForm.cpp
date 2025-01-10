@@ -214,4 +214,9 @@ namespace Courseproject {
         }
         return System::Void();
     }
+    System::Void Table_Category_TransactionForm::ïîèñêToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        SearchTransactionForm^ searchform = gcnew SearchTransactionForm();
+        searchform->ShowDialog();
+    }
  }

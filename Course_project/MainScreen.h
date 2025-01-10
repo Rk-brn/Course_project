@@ -62,7 +62,7 @@ namespace Courseproject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(302, 63);
+			this->label1->Location = System::Drawing::Point(420, 182);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(136, 17);
 			this->label1->TabIndex = 0;
@@ -70,7 +70,7 @@ namespace Courseproject {
 			// 
 			// button_start
 			// 
-			this->button_start->Location = System::Drawing::Point(279, 121);
+			this->button_start->Location = System::Drawing::Point(397, 240);
 			this->button_start->Name = L"button_start";
 			this->button_start->Size = System::Drawing::Size(178, 23);
 			this->button_start->TabIndex = 1;
@@ -80,7 +80,7 @@ namespace Courseproject {
 			// 
 			// button_inf
 			// 
-			this->button_inf->Location = System::Drawing::Point(279, 181);
+			this->button_inf->Location = System::Drawing::Point(397, 300);
 			this->button_inf->Name = L"button_inf";
 			this->button_inf->Size = System::Drawing::Size(178, 23);
 			this->button_inf->TabIndex = 2;
@@ -90,7 +90,7 @@ namespace Courseproject {
 			// 
 			// button_out
 			// 
-			this->button_out->Location = System::Drawing::Point(279, 251);
+			this->button_out->Location = System::Drawing::Point(397, 370);
 			this->button_out->Name = L"button_out";
 			this->button_out->Size = System::Drawing::Size(178, 23);
 			this->button_out->TabIndex = 3;
@@ -102,7 +102,7 @@ namespace Courseproject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(708, 380);
+			this->ClientSize = System::Drawing::Size(1051, 632);
 			this->Controls->Add(this->button_out);
 			this->Controls->Add(this->button_inf);
 			this->Controls->Add(this->button_start);
