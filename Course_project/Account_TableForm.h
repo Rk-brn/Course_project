@@ -37,13 +37,19 @@ namespace Courseproject {
 	private: System::Windows::Forms::ToolStripMenuItem^ ïîêàçàòüÂñåÒğàíçàêöèèToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ èíôîğìàöèÿToolStripMenuItem;
+	private: System::Windows::Forms::GroupBox^ groupBox1;
+	private: System::Windows::Forms::Button^ buttonLoadTransactions;
+	private: System::Windows::Forms::ComboBox^ comboBoxAccounts;
+	private: System::Windows::Forms::DataGridView^ dataGridViewTransactions;
 	private: System::Windows::Forms::ToolStripMenuItem^ âåğíóòüñÿÂÌåíşToolStripMenuItem;
 
 	private:
 		void LoadAccountsToDataGridView();
 
 
-		
+		void LoadAccountsToComboBox();
+		void LoadTransactionsForAccount(const std::string& accountName);
+
 		void UpdateAccountData(const std::string& accountName, int newTransactionCount);
 		void UpdateBalancesFromTransactions();
 		int GetBalanceFromTransactions(const std::string& accountName);
@@ -69,20 +75,26 @@ namespace Courseproject {
 			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->èíôîğìàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->âåğíóòüñÿÂÌåíşToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->buttonLoadTransactions = (gcnew System::Windows::Forms::Button());
+			this->comboBoxAccounts = (gcnew System::Windows::Forms::ComboBox());
+			this->dataGridViewTransactions = (gcnew System::Windows::Forms::DataGridView());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
+			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewTransactions))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// dataGridView1
 			// 
+			this->dataGridView1->AllowUserToAddRows = false;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(88, 140);
+			this->dataGridView1->Location = System::Drawing::Point(58, 77);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(1108, 297);
+			this->dataGridView1->Size = System::Drawing::Size(725, 298);
 			this->dataGridView1->TabIndex = 0;
-			this->dataGridView1->AllowUserToAddRows = false;
 			// 
 			// menuStrip1
 			// 
@@ -126,6 +138,7 @@ namespace Courseproject {
 			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem->Name = L"ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem";
 			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem->Size = System::Drawing::Size(330, 26);
 			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem->Text = L"Ïîêàçàòü òîëüêî äëÿ îäíîãî ñ÷¸òà";
+			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click);
 			// 
 			// èíôîğìàöèÿToolStripMenuItem
 			// 
@@ -139,11 +152,53 @@ namespace Courseproject {
 			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Size = System::Drawing::Size(154, 24);
 			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Text = L"Âåğíóòüñÿ â ìåíş ";
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->buttonLoadTransactions);
+			this->groupBox1->Controls->Add(this->comboBoxAccounts);
+			this->groupBox1->Controls->Add(this->dataGridViewTransactions);
+			this->groupBox1->Location = System::Drawing::Point(271, 426);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(894, 199);
+			this->groupBox1->TabIndex = 2;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"groupBox1";
+			this->groupBox1->Visible = false;
+			// 
+			// buttonLoadTransactions
+			// 
+			this->buttonLoadTransactions->Location = System::Drawing::Point(743, 127);
+			this->buttonLoadTransactions->Name = L"buttonLoadTransactions";
+			this->buttonLoadTransactions->Size = System::Drawing::Size(122, 53);
+			this->buttonLoadTransactions->TabIndex = 2;
+			this->buttonLoadTransactions->Text = L"button1";
+			this->buttonLoadTransactions->UseVisualStyleBackColor = true;
+			this->buttonLoadTransactions->Click += gcnew System::EventHandler(this, &Account_TableForm::buttonLoadTransactions_Click);
+			// 
+			// comboBoxAccounts
+			// 
+			this->comboBoxAccounts->FormattingEnabled = true;
+			this->comboBoxAccounts->Location = System::Drawing::Point(733, 44);
+			this->comboBoxAccounts->Name = L"comboBoxAccounts";
+			this->comboBoxAccounts->Size = System::Drawing::Size(132, 24);
+			this->comboBoxAccounts->TabIndex = 1;
+			// 
+			// dataGridViewTransactions
+			// 
+			this->dataGridViewTransactions->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridViewTransactions->Location = System::Drawing::Point(18, 30);
+			this->dataGridViewTransactions->Name = L"dataGridViewTransactions";
+			this->dataGridViewTransactions->RowHeadersWidth = 51;
+			this->dataGridViewTransactions->RowTemplate->Height = 24;
+			this->dataGridViewTransactions->Size = System::Drawing::Size(662, 150);
+			this->dataGridViewTransactions->TabIndex = 0;
+			// 
 			// Account_TableForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1286, 698);
+			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
@@ -152,6 +207,8 @@ namespace Courseproject {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->groupBox1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewTransactions))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -159,5 +216,7 @@ namespace Courseproject {
 #pragma endregion
 	private: System::Void ñîçäàòüÑ÷¸òToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ïîêàçàòüÂñåÒğàíçàêöèèToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void buttonLoadTransactions_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

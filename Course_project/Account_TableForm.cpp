@@ -252,4 +252,97 @@ namespace Courseproject {
         LoadAccountsToDataGridView();
     }
 
+
+    void Account_TableForm::LoadAccountsToComboBox() {
+        msclr::interop::marshal_context context;
+        std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
+        std::ifstream file(filePath);
+        if (file.is_open())
+        {
+            std::string line;
+            while (std::getline(file, line))
+            {
+                std::istringstream iss(line);
+                std::string name;
+                std::string balance;
+                std::string count;
+                if (std::getline(iss, name, ':') && std::getline(iss, balance, ':') && std::getline(iss, count, ',')) {
+
+                    std::string accountName;
+                    std::istringstream nameStream(name);
+
+                    std::getline(nameStream, accountName, ':');
+
+                    comboBoxAccounts->Items->Add(gcnew String(accountName.c_str()));
+                }
+            }
+            file.close();
+        }
+    }
+    void Account_TableForm::LoadTransactionsForAccount(const std::string& accountName) {
+        dataGridViewTransactions->Columns->Clear();
+        dataGridViewTransactions->Columns->Add("Name", "Название");
+        dataGridViewTransactions->Columns->Add("Amount", "Сумма");
+        dataGridViewTransactions->Columns->Add("Date", "Дата");
+        dataGridViewTransactions->Columns->Add("Type", "Тип");
+        dataGridViewTransactions->Columns->Add("Category", "Категория");
+
+        msclr::interop::marshal_context context;
+        std::string filePath = context.marshal_as<std::string>(gcnew System::String("transactions.txt"));
+        std::ifstream file(filePath);
+
+        if (file.is_open())
+        {
+            std::string line;
+            while (std::getline(file, line))
+            {
+                std::istringstream iss(line);
+                std::string transactionName, amountStr, dateStr, typeStr, categoryStr, accountType;
+                if (std::getline(iss, transactionName, ';'))
+                {
+                    if (std::getline(iss, amountStr, ';')) {
+                        if (std::getline(iss, dateStr, ';')) {
+                            if (std::getline(iss, typeStr, ';')) {
+                                if (std::getline(iss, categoryStr, ';'))
+                                {
+                                    if (std::getline(iss, accountType, ';'))
+                                    {
+                                        if (accountType == accountName) {
+                                            int rowIndex = dataGridViewTransactions->Rows->Add();
+                                            dataGridViewTransactions->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(transactionName.c_str());
+                                            dataGridViewTransactions->Rows[rowIndex]->Cells["Amount"]->Value = gcnew System::String(amountStr.c_str());
+                                            dataGridViewTransactions->Rows[rowIndex]->Cells["Date"]->Value = gcnew System::String(dateStr.c_str());
+                                            dataGridViewTransactions->Rows[rowIndex]->Cells["Type"]->Value = gcnew System::String(typeStr.c_str());
+                                            dataGridViewTransactions->Rows[rowIndex]->Cells["Category"]->Value = gcnew System::String(categoryStr.c_str());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        file.close();
+    }
+    
+
+
+    System::Void Account_TableForm::показатьТолькоДляОдногоСчётаToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        groupBox1->Visible = true;
+        LoadAccountsToComboBox();
+        return System::Void();
+    }
+
+    System::Void Account_TableForm::buttonLoadTransactions_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        if (comboBoxAccounts->SelectedItem != nullptr) {
+            System::String^ selectedAccount = comboBoxAccounts->SelectedItem->ToString();
+            msclr::interop::marshal_context context;
+            std::string accountName = context.marshal_as<std::string>(selectedAccount);
+            LoadTransactionsForAccount(accountName);
+        }
+        return System::Void();
+    }
 }
