@@ -34,19 +34,17 @@ namespace Courseproject {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button_TransactionCreat;
+	public: System::Windows::Forms::Button^ button_TransactionCreat;
 	protected:
 
 	protected:
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ textBox_TransactionText;
-	private: System::Windows::Forms::TextBox^ textBox_TransactionAmount;
-
-
-	private: System::Windows::Forms::ComboBox^ comboBox_TransactionType;
-	private: System::Windows::Forms::ComboBox^ comboBox_Category;
-
-
+	public: System::Windows::Forms::Label^ label1;
+			System::Windows::Forms::TextBox^ textBox_TransactionText;
+			System::Windows::Forms::TextBox^ textBox_TransactionAmount;
+			System::Windows::Forms::ComboBox^ comboBox_TransactionType;
+			System::Windows::Forms::ComboBox^ comboBox_Category;
+			System::Windows::Forms::DateTimePicker^ dateTimePicker_Date;
+			System::Windows::Forms::ComboBox^ comboBox_Account;
 
 
 
@@ -60,23 +58,25 @@ namespace Courseproject {
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ информацияToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ вернутьсяНазадToolStripMenuItem;
-	private: System::Windows::Forms::DateTimePicker^ dateTimePicker_Date;
+	
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label7;
-	private: System::Windows::Forms::ComboBox^ comboBox_Account;
+	
 		
 	public:
 		std::vector<Transaction> LoadTransactionFile();
-
+		
 		// Загрузка категорий из файла
 		void LoadCategoriesFromFile();
 		// Функция для сохранения транзакций в файл
 		void SaveTransactionsToFile();
-
+		bool isChanged = false; // Флаг для отслеживания изменений
+		bool isEditing = false; // Флаг редактирования
+		int rowIndexToEdit = -1; // Индекс строки для редактирования
 		void LoadAccountsFromFile();
 	private:
 		/// <summary>

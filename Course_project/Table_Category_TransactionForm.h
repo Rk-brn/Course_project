@@ -53,6 +53,10 @@ namespace Courseproject {
 	private: System::Windows::Forms::DataGridView^ dataGridViewTransactions;
 	private: System::Windows::Forms::GroupBox^ groupBox_edit_del_tran;
 	private: System::Windows::Forms::Button^ button_edit_del_tr;
+	private: System::Windows::Forms::Button^ button_changed_tr;
+	private: System::Windows::Forms::TextBox^ textBoxdel_cat;
+	private: System::Windows::Forms::ToolStripMenuItem^ óäàëèòüÒğàíçàêöèşToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ óäàëèòüÊàòåãîğèşToolStripMenuItem;
 	private: System::Windows::Forms::TextBox^ textBox_edit_del_tr;
 
 
@@ -62,7 +66,8 @@ namespace Courseproject {
 		/// </summary>
 		System::ComponentModel::Container ^components;
 		int flag_prosmotr = 0;
-		int flag_edit_del = 0;
+		int flag_del = 0;
+		int flag_edit = 0;
 		void LoadCategoriesToDataGridView();
 		void LoadTransactionsToDataGridView();
 #pragma region Windows Form Designer generated code
@@ -76,17 +81,21 @@ namespace Courseproject {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->groupBox_prosmotr_category = (gcnew System::Windows::Forms::GroupBox());
+			this->textBoxdel_cat = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->äîáàâèòüÒğàíçàêöèşToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->óäàëèòüÇàïèñüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->óäàëèòüÒğàíçàêöèşToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->óäàëèòüÊàòåãîğèşToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ïğîñìîòğÊàòåãîğèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ïîèñêToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->èíôîğìàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dataGridViewTransactions = (gcnew System::Windows::Forms::DataGridView());
 			this->groupBox_edit_del_tran = (gcnew System::Windows::Forms::GroupBox());
+			this->button_changed_tr = (gcnew System::Windows::Forms::Button());
 			this->button_edit_del_tr = (gcnew System::Windows::Forms::Button());
 			this->textBox_edit_del_tr = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -100,7 +109,7 @@ namespace Courseproject {
 			// 
 			this->dataGridView1->AllowUserToAddRows = false;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(29, 91);
+			this->dataGridView1->Location = System::Drawing::Point(27, 37);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
@@ -110,7 +119,7 @@ namespace Courseproject {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(376, 104);
+			this->button1->Location = System::Drawing::Point(382, 149);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(217, 48);
 			this->button1->TabIndex = 1;
@@ -121,17 +130,18 @@ namespace Courseproject {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(382, 203);
+			this->button2->Location = System::Drawing::Point(388, 149);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(211, 48);
 			this->button2->TabIndex = 2;
-			this->button2->Text = L"Îáíîâèòü òàáëèöó";
+			this->button2->Text = L"Óäàëèòü êàòåãîğèş";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Visible = false;
 			this->button2->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::button2_Click);
 			// 
 			// groupBox_prosmotr_category
 			// 
+			this->groupBox_prosmotr_category->Controls->Add(this->textBoxdel_cat);
 			this->groupBox_prosmotr_category->Controls->Add(this->button1);
 			this->groupBox_prosmotr_category->Controls->Add(this->button2);
 			this->groupBox_prosmotr_category->Controls->Add(this->dataGridView1);
@@ -142,6 +152,14 @@ namespace Courseproject {
 			this->groupBox_prosmotr_category->TabStop = false;
 			this->groupBox_prosmotr_category->Text = L"Ïğîñìîòğ êàòåãîğèé";
 			this->groupBox_prosmotr_category->Visible = false;
+			// 
+			// textBoxdel_cat
+			// 
+			this->textBoxdel_cat->Location = System::Drawing::Point(409, 62);
+			this->textBoxdel_cat->Name = L"textBoxdel_cat";
+			this->textBoxdel_cat->Size = System::Drawing::Size(110, 22);
+			this->textBoxdel_cat->TabIndex = 3;
+			this->textBoxdel_cat->Visible = false;
 			// 
 			// menuStrip1
 			// 
@@ -176,13 +194,32 @@ namespace Courseproject {
 			this->ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem->Name = L"ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem";
 			this->ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem->Size = System::Drawing::Size(177, 24);
 			this->ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem->Text = L"Ğåäàêòèğîâàòü çàïèñü";
+			this->ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem_Click);
 			// 
 			// óäàëèòüÇàïèñüToolStripMenuItem
 			// 
+			this->óäàëèòüÇàïèñüToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->óäàëèòüÒğàíçàêöèşToolStripMenuItem,
+					this->óäàëèòüÊàòåãîğèşToolStripMenuItem
+			});
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Name = L"óäàëèòüÇàïèñüToolStripMenuItem";
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Size = System::Drawing::Size(131, 24);
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Text = L"Óäàëèòü çàïèñü";
-			this->óäàëèòüÇàïèñüToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::óäàëèòüÇàïèñüToolStripMenuItem_Click);
+			
+			// 
+			// óäàëèòüÒğàíçàêöèşToolStripMenuItem
+			// 
+			this->óäàëèòüÒğàíçàêöèşToolStripMenuItem->Name = L"óäàëèòüÒğàíçàêöèşToolStripMenuItem";
+			this->óäàëèòüÒğàíçàêöèşToolStripMenuItem->Size = System::Drawing::Size(236, 26);
+			this->óäàëèòüÒğàíçàêöèşToolStripMenuItem->Text = L"Óäàëèòü òğàíçàêöèş";
+			this->óäàëèòüÒğàíçàêöèşToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::óäàëèòüÒğàíçàêöèşToolStripMenuItem_Click);
+			// 
+			// óäàëèòüÊàòåãîğèşToolStripMenuItem
+			// 
+			this->óäàëèòüÊàòåãîğèşToolStripMenuItem->Name = L"óäàëèòüÊàòåãîğèşToolStripMenuItem";
+			this->óäàëèòüÊàòåãîğèşToolStripMenuItem->Size = System::Drawing::Size(236, 26);
+			this->óäàëèòüÊàòåãîğèşToolStripMenuItem->Text = L"Óäàëèòü êàòåãîğèş";
+			this->óäàëèòüÊàòåãîğèşToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::óäàëèòüÊàòåãîğèşToolStripMenuItem_Click);
 			// 
 			// ïğîñìîòğÊàòåãîğèéToolStripMenuItem
 			// 
@@ -225,21 +262,33 @@ namespace Courseproject {
 			// 
 			// groupBox_edit_del_tran
 			// 
+			this->groupBox_edit_del_tran->Controls->Add(this->button_changed_tr);
 			this->groupBox_edit_del_tran->Controls->Add(this->button_edit_del_tr);
 			this->groupBox_edit_del_tran->Controls->Add(this->textBox_edit_del_tr);
-			this->groupBox_edit_del_tran->Location = System::Drawing::Point(878, 371);
+			this->groupBox_edit_del_tran->Location = System::Drawing::Point(872, 371);
 			this->groupBox_edit_del_tran->Name = L"groupBox_edit_del_tran";
-			this->groupBox_edit_del_tran->Size = System::Drawing::Size(345, 277);
+			this->groupBox_edit_del_tran->Size = System::Drawing::Size(448, 277);
 			this->groupBox_edit_del_tran->TabIndex = 6;
 			this->groupBox_edit_del_tran->TabStop = false;
 			this->groupBox_edit_del_tran->Text = L"groupBox1";
 			this->groupBox_edit_del_tran->Visible = false;
 			// 
+			// button_changed_tr
+			// 
+			this->button_changed_tr->Location = System::Drawing::Point(36, 176);
+			this->button_changed_tr->Name = L"button_changed_tr";
+			this->button_changed_tr->Size = System::Drawing::Size(200, 75);
+			this->button_changed_tr->TabIndex = 2;
+			this->button_changed_tr->Text = L"button3";
+			this->button_changed_tr->UseVisualStyleBackColor = true;
+			this->button_changed_tr->Visible = false;
+			this->button_changed_tr->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::button_changed_tr_Click);
+			// 
 			// button_edit_del_tr
 			// 
-			this->button_edit_del_tr->Location = System::Drawing::Point(130, 186);
+			this->button_edit_del_tr->Location = System::Drawing::Point(242, 176);
 			this->button_edit_del_tr->Name = L"button_edit_del_tr";
-			this->button_edit_del_tr->Size = System::Drawing::Size(200, 51);
+			this->button_edit_del_tr->Size = System::Drawing::Size(200, 75);
 			this->button_edit_del_tr->TabIndex = 1;
 			this->button_edit_del_tr->Text = L"button3";
 			this->button_edit_del_tr->UseVisualStyleBackColor = true;
@@ -268,6 +317,7 @@ namespace Courseproject {
 			this->Text = L"Table_Category_TransactionForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox_prosmotr_category->ResumeLayout(false);
+			this->groupBox_prosmotr_category->PerformLayout();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewTransactions))->EndInit();
@@ -283,10 +333,14 @@ namespace Courseproject {
 	private: System::Void ïğîñìîòğÊàòåãîğèéToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void äîáàâèòüÒğàíçàêöèşToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void óäàëèòüÇàïèñüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+
 private: System::Void button_edit_del_tr_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ïîèñêToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void âåğíóòüñÿÊÑ÷¸òóToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ğåäàêòèğîâàòüÇàïèñüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_changed_tr_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void óäàëèòüÊàòåãîğèşToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void óäàëèòüÒğàíçàêöèşToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

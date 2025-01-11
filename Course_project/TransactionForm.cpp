@@ -140,11 +140,11 @@ namespace Courseproject {
     System::Void TransactionForm::button_TransactionCreat_Click(System::Object^ sender, System::EventArgs^ e) {
         // Получение данных из полей формы
         String^ transactionName = textBox_TransactionText->Text;
-        String^ transactionAmountStr = textBox_TransactionAmount->Text; String^ transactionType = comboBox_TransactionType->SelectedItem != nullptr ? comboBox_TransactionType->SelectedItem->ToString() : "";
+        String^ transactionAmountStr = textBox_TransactionAmount->Text;
+        String^ transactionType = comboBox_TransactionType->SelectedItem != nullptr ? comboBox_TransactionType->SelectedItem->ToString() : "";
         String^ selectedCategoryName = comboBox_Category->SelectedItem != nullptr ? comboBox_Category->SelectedItem->ToString() : "";
         System::DateTime selectedDate = dateTimePicker_Date->Value;
         String^ dateString = selectedDate.ToString("dd/MM/yyyy");
-
         String^ selectedAccountName = comboBox_Account->SelectedItem != nullptr ? comboBox_Account->SelectedItem->ToString() : "";
 
         if (String::IsNullOrEmpty(transactionName) || String::IsNullOrEmpty(transactionAmountStr)
@@ -155,13 +155,10 @@ namespace Courseproject {
 
 
         int transactionAmount;
-        try {
-            transactionAmount = System::Int32::Parse(transactionAmountStr);
-        }
-        catch (System::FormatException^) {
-            MessageBox::Show("Неверный формат суммы.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-            return;
-        }
+
+        transactionAmount = std::stoi(msclr::interop::marshal_as<std::string>(transactionAmountStr));
+
+
 
 
         Category* selectedCategory = nullptr;
@@ -171,6 +168,7 @@ namespace Courseproject {
         if (file.is_open())
         {
             std::string line;
+            bool found = false;
             while (std::getline(file, line))
             {
                 std::istringstream iss(line);
@@ -180,19 +178,31 @@ namespace Courseproject {
                     if (gcnew String(name.c_str()) == selectedCategoryName)
                     {
                         selectedCategory = new Category(name, description);
+                        found = true;
                         break;
                     }
                 }
+
             }
             file.close();
+            if (!found) {
+                MessageBox::Show("Выбранная категория не найдена в файле.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                return;
+            }
+
         }
+        else {
+            MessageBox::Show("Ошибка открытия файла категорий", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            return;
+        }
+
+
 
         if (selectedCategory == nullptr) {
             MessageBox::Show("Выбранная категория не найдена.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;
         }
 
-        // Создаем объект транзакции
         Transaction newTransaction(msclr::interop::marshal_as<std::string>(transactionName),
             transactionAmount,
             msclr::interop::marshal_as<std::string>(dateString),
@@ -200,11 +210,60 @@ namespace Courseproject {
             selectedCategory,
             msclr::interop::marshal_as<std::string>(selectedAccountName)
         );
+        msclr::interop::marshal_context context2;
+        std::string transactionFilePath = context2.marshal_as<std::string>(this->transactionFilePath);
 
-        transactions.push_back(newTransaction);
-        SaveTransactionsToFile();
+        if (isEditing) {
+            std::ifstream file(transactionFilePath);
+            std::vector<std::string> lines;
 
-        MessageBox::Show("Транзакция успешно создана.", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            if (file.is_open()) {
+                std::string line;
+                while (std::getline(file, line))
+                {
+                    lines.push_back(line);
+                }
+                file.close();
+            }
+
+            if (rowIndexToEdit >= 0 && rowIndexToEdit < lines.size()) {
+                std::string newTransactionLine = msclr::interop::marshal_as<std::string>(transactionName) + ";" +
+                    std::to_string(transactionAmount) + ";" +
+                    msclr::interop::marshal_as<std::string>(dateString) + ";" +
+                    msclr::interop::marshal_as<std::string>(transactionType) + ";" +
+                    msclr::interop::marshal_as<std::string>(selectedCategoryName) + ";" +
+                    msclr::interop::marshal_as<std::string>(selectedAccountName) + ";";
+
+
+                lines[rowIndexToEdit] = newTransactionLine;
+                std::ofstream outFile(transactionFilePath);
+                if (outFile.is_open()) {
+                    for (const auto& line : lines) {
+                        outFile << line << std::endl;
+                    }
+                    outFile.close();
+
+                    MessageBox::Show("Транзакция успешно изменена.", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                    isChanged = true;
+                    this->Close();
+
+                }
+                else {
+                    MessageBox::Show("Ошибка открытия файла для записи.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                }
+
+            }
+            else {
+                MessageBox::Show("Ошибка при редактировании транзакции.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            }
+
+        }
+        else {
+            transactions.push_back(newTransaction);
+            SaveTransactionsToFile();
+            MessageBox::Show("Транзакция успешно создана.", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        }
+
         // Очистка полей
         textBox_TransactionText->Text = "";
         textBox_TransactionAmount->Text = "";
