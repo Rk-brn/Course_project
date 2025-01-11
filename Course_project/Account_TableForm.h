@@ -42,6 +42,12 @@ namespace Courseproject {
 	private:
 		void LoadAccountsToDataGridView();
 
+
+		
+		void UpdateAccountData(const std::string& accountName, int newTransactionCount);
+		void UpdateBalancesFromTransactions();
+		int GetBalanceFromTransactions(const std::string& accountName);
+
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
