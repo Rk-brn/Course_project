@@ -105,11 +105,51 @@ namespace Courseproject {
     }
 
     int Account_TableForm::GetBalanceFromTransactions(const std::string& accountName) {
+        
         msclr::interop::marshal_context context;
+        std::string accountFilePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
+        std::ifstream accountFile(accountFilePath);
+        int initialBalance = 0;
+        if (accountFile.is_open())
+        {
+            std::string line;
+            while (std::getline(accountFile, line))
+            {
+                std::istringstream iss(line);
+                std::string name, balanceStr, count;
+                if (std::getline(iss, name, ':')) {
+                    std::istringstream nameStream(name);
+                    std::string currentAccountName;
+                    std::getline(nameStream, currentAccountName, ':');
+                    if (currentAccountName == accountName)
+                    {
+                        if (std::getline(iss, balanceStr, ':')) {
+                            try
+                            {
+                                initialBalance = std::stoi(balanceStr);
+                                std::cout << "Initial balance: " << initialBalance << std::endl;
+                            }
+                            catch (const std::invalid_argument& e)
+                            {
+                                std::cerr << "Error parsing initial balance for account:" << accountName << std::endl;
+                            }
+                            catch (const std::out_of_range& e)
+                            {
+                                std::cerr << "Error number out of range" << std::endl;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            accountFile.close();
+        }
+        
+       
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("transactions.txt"));
         std::ifstream file(filePath);
 
-        int balance = 0;
+        int balance = initialBalance;
         std::cout << "Start processing transactions for account: " << accountName << std::endl;
         if (file.is_open())
         {
@@ -163,6 +203,7 @@ namespace Courseproject {
             }
             file.close();
         }
+
         std::cout << "Final balance for " << accountName << " is: " << balance << std::endl;
         return balance;
     }
@@ -186,6 +227,7 @@ namespace Courseproject {
                     std::string currentAccountName;
                     std::getline(nameStream, currentAccountName, ':');
                     accounts.push_back(currentAccountName);
+                    
                 }
 
             }
@@ -254,6 +296,7 @@ namespace Courseproject {
 
 
     void Account_TableForm::LoadAccountsToComboBox() {
+        comboBoxAccounts->Items->Clear();
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
         std::ifstream file(filePath);
