@@ -12,13 +12,12 @@ namespace Courseproject {
         UpdateBalancesFromTransactions();
     }
     void Account_TableForm::LoadAccountsToDataGridView() {
-        // Очищаем предыдущие столбцы (если есть)
         dataGridView1->Columns->Clear();
         // Добавляем столбцы
         dataGridView1->Columns->Add("Name", "Имя счёта");
         dataGridView1->Columns->Add("Balance", "Баланс");
         dataGridView1->Columns->Add("TransactionCount", "Кол-во транзакций");
-
+        dataGridView1->Columns->Add("Description", "Описание счёта");
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
         std::ifstream file(filePath);
@@ -29,7 +28,7 @@ namespace Courseproject {
             while (std::getline(file, line))
             {
                 std::istringstream iss(line);
-                std::string name, balanceStr, count;
+                std::string name, balanceStr, count, description;
 
                 if (std::getline(iss, name, ':')) {
 
@@ -42,16 +41,19 @@ namespace Courseproject {
                         std::istringstream balanceStream(balanceStr);
                         std::getline(balanceStream, balanceString, ':');
 
-                        if (std::getline(iss, count, ',')) {
-
+                        if (std::getline(iss, count, ':'))
+                        {
                             std::string countString;
                             std::istringstream countStream(count);
                             std::getline(countStream, countString, ':');
-
-                            int rowIndex = dataGridView1->Rows->Add();
-                            dataGridView1->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(accountName.c_str());
-                            dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = gcnew System::String(balanceString.c_str());
-                            dataGridView1->Rows[rowIndex]->Cells["TransactionCount"]->Value = gcnew System::String(countString.c_str());
+                            if (std::getline(iss, description, ','))
+                            {
+                                int rowIndex = dataGridView1->Rows->Add();
+                                dataGridView1->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(accountName.c_str());
+                                dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = gcnew System::String(balanceString.c_str());
+                                dataGridView1->Rows[rowIndex]->Cells["TransactionCount"]->Value = gcnew System::String(countString.c_str());
+                                dataGridView1->Rows[rowIndex]->Cells["Description"]->Value = gcnew System::String(description.c_str());
+                            }
                         }
                     }
                 }
@@ -66,23 +68,31 @@ namespace Courseproject {
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
         std::ifstream file(filePath);
         std::vector<std::string> lines;
-
         if (file.is_open())
         {
             std::string line;
             while (std::getline(file, line))
             {
                 std::istringstream iss(line);
-                std::string name, balanceStr, count;
+                std::string name, balanceStr, count, description;
                 if (std::getline(iss, name, ':')) {
                     std::istringstream nameStream(name);
                     std::string currentAccountName;
                     std::getline(nameStream, currentAccountName, ':');
 
                     if (currentAccountName == accountName) {
+                        if (std::getline(iss, balanceStr, ':'))
+                        {
+                            if (std::getline(iss, count, ':'))
+                            {
+                                if (std::getline(iss, description, ','))
+                                {
+                                    std::string updateLine = currentAccountName + ":" + std::to_string(GetBalanceFromTransactions(accountName)) + ":" + std::to_string(newTransactionCount) + ":" + description + ",";
+                                    lines.push_back(updateLine);
+                                }
+                            }
+                        }
 
-                        std::string updateLine = currentAccountName + ":" + std::to_string(GetBalanceFromTransactions(accountName)) + ":" + std::to_string(newTransactionCount) + ",";
-                        lines.push_back(updateLine);
                     }
                     else {
                         lines.push_back(line);
@@ -101,55 +111,15 @@ namespace Courseproject {
             }
             outFile.close();
         }
-
     }
 
     int Account_TableForm::GetBalanceFromTransactions(const std::string& accountName) {
         
         msclr::interop::marshal_context context;
-        std::string accountFilePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
-        std::ifstream accountFile(accountFilePath);
-        int initialBalance = 0;
-        if (accountFile.is_open())
-        {
-            std::string line;
-            while (std::getline(accountFile, line))
-            {
-                std::istringstream iss(line);
-                std::string name, balanceStr, count;
-                if (std::getline(iss, name, ':')) {
-                    std::istringstream nameStream(name);
-                    std::string currentAccountName;
-                    std::getline(nameStream, currentAccountName, ':');
-                    if (currentAccountName == accountName)
-                    {
-                        if (std::getline(iss, balanceStr, ':')) {
-                            try
-                            {
-                                initialBalance = std::stoi(balanceStr);
-                                std::cout << "Initial balance: " << initialBalance << std::endl;
-                            }
-                            catch (const std::invalid_argument& e)
-                            {
-                                std::cerr << "Error parsing initial balance for account:" << accountName << std::endl;
-                            }
-                            catch (const std::out_of_range& e)
-                            {
-                                std::cerr << "Error number out of range" << std::endl;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            accountFile.close();
-        }
-        
-       
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("transactions.txt"));
         std::ifstream file(filePath);
 
-        int balance = initialBalance;
+        int balance = 0;
         std::cout << "Start processing transactions for account: " << accountName << std::endl;
         if (file.is_open())
         {
@@ -309,13 +279,12 @@ namespace Courseproject {
                 std::string name;
                 std::string balance;
                 std::string count;
-                if (std::getline(iss, name, ':') && std::getline(iss, balance, ':') && std::getline(iss, count, ',')) {
-
+                std::string description;
+                if (std::getline(iss, name, ':') && std::getline(iss, balance, ':') && std::getline(iss, count, ':') && std::getline(iss, description, ','))
+                {
                     std::string accountName;
                     std::istringstream nameStream(name);
-
                     std::getline(nameStream, accountName, ':');
-
                     comboBoxAccounts->Items->Add(gcnew String(accountName.c_str()));
                 }
             }

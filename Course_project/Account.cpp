@@ -1,10 +1,11 @@
 #include "Account.h"
 
-Account::Account(std::string name, int balance, int transactionCount)
+Account::Account(std::string name, int balance, int transactionCount, std::string description)
 {
     this->name = name;
     this->balance = balance;
     this->transactionCount = transactionCount;
+    this->description = description;
 }
 
 std::string Account::getName() const
@@ -30,4 +31,9 @@ void Account::setBalance(int balance)
 void Account::setTransactionCount(int transactionCount)
 {
     this->transactionCount = transactionCount;
+}
+
+std::string Account::getDescription() const
+{
+    return std::string();
 }

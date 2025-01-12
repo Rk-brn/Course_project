@@ -6,10 +6,11 @@ class Account
     std::string name;
     int balance;
     int transactionCount;
-
+    std::string description;
     public:
-        Account(std::string name, int balance, int transactionCount = 0);
+        Account(std::string name, int balance, int transactionCount, std::string description);
         std::string getName() const;
+        std::string getDescription() const;
         int getBalance() const;
         int getTransactionCount() const;
         void setBalance(int balance);
