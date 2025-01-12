@@ -343,6 +343,7 @@ namespace Courseproject {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Name = L"SearchTransactionForm";
 			this->Text = L"SearchTransactionForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_search))->EndInit();

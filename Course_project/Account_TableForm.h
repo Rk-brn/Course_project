@@ -145,12 +145,14 @@ namespace Courseproject {
 			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
 			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 24);
 			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ";
+			this->èíôîğìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::èíôîğìàöèÿToolStripMenuItem_Click);
 			// 
 			// âåğíóòüñÿÂÌåíşToolStripMenuItem
 			// 
 			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Name = L"âåğíóòüñÿÂÌåíşToolStripMenuItem";
 			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Size = System::Drawing::Size(154, 24);
 			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Text = L"Âåğíóòüñÿ â ìåíş ";
+			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::âåğíóòüñÿÂÌåíşToolStripMenuItem_Click);
 			// 
 			// groupBox1
 			// 
@@ -203,6 +205,7 @@ namespace Courseproject {
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Account_TableForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Account_TableForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
@@ -218,5 +221,7 @@ namespace Courseproject {
 private: System::Void ïîêàçàòüÂñåÒğàíçàêöèèToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void buttonLoadTransactions_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void âåğíóòüñÿÂÌåíşToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

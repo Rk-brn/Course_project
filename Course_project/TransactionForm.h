@@ -282,6 +282,7 @@ namespace Courseproject {
 			this->Controls->Add(this->button_TransactionCreat);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Name = L"TransactionForm";
 			this->Text = L"TransactionForm";
 			this->menuStrip1->ResumeLayout(false);

@@ -357,4 +357,14 @@ namespace Courseproject {
         }
         return System::Void();
     }
+    System::Void Account_TableForm::èíôîðìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        MessageBox::Show("Áóäåò òåêñò", "Èíôîðìàöèÿ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        return System::Void();
+    }
+    System::Void Account_TableForm::âåðíóòüñÿÂÌåíþToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        this->Close();
+        return System::Void();
+    }
 }

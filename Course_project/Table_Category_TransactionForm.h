@@ -205,7 +205,6 @@ namespace Courseproject {
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Name = L"óäàëèòüÇàïèñüToolStripMenuItem";
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Size = System::Drawing::Size(131, 24);
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Text = L"Óäàëèòü çàïèñü";
-			
 			// 
 			// óäàëèòüÒðàíçàêöèþToolStripMenuItem
 			// 
@@ -314,6 +313,7 @@ namespace Courseproject {
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Table_Category_TransactionForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Table_Category_TransactionForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox_prosmotr_category->ResumeLayout(false);

@@ -62,7 +62,7 @@ namespace Courseproject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(420, 182);
+			this->label1->Location = System::Drawing::Point(442, 110);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(136, 17);
 			this->label1->TabIndex = 0;
@@ -70,9 +70,9 @@ namespace Courseproject {
 			// 
 			// button_start
 			// 
-			this->button_start->Location = System::Drawing::Point(397, 240);
+			this->button_start->Location = System::Drawing::Point(378, 182);
 			this->button_start->Name = L"button_start";
-			this->button_start->Size = System::Drawing::Size(178, 23);
+			this->button_start->Size = System::Drawing::Size(277, 83);
 			this->button_start->TabIndex = 1;
 			this->button_start->Text = L"Запуск программы";
 			this->button_start->UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@ namespace Courseproject {
 			// 
 			// button_inf
 			// 
-			this->button_inf->Location = System::Drawing::Point(397, 300);
+			this->button_inf->Location = System::Drawing::Point(378, 293);
 			this->button_inf->Name = L"button_inf";
-			this->button_inf->Size = System::Drawing::Size(178, 23);
+			this->button_inf->Size = System::Drawing::Size(277, 83);
 			this->button_inf->TabIndex = 2;
 			this->button_inf->Text = L"Информация";
 			this->button_inf->UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@ namespace Courseproject {
 			// 
 			// button_out
 			// 
-			this->button_out->Location = System::Drawing::Point(397, 370);
+			this->button_out->Location = System::Drawing::Point(378, 405);
 			this->button_out->Name = L"button_out";
-			this->button_out->Size = System::Drawing::Size(178, 23);
+			this->button_out->Size = System::Drawing::Size(277, 86);
 			this->button_out->TabIndex = 3;
 			this->button_out->Text = L"Выход";
 			this->button_out->UseVisualStyleBackColor = true;
@@ -102,12 +102,13 @@ namespace Courseproject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1051, 632);
+			this->ClientSize = System::Drawing::Size(1069, 662);
 			this->Controls->Add(this->button_out);
 			this->Controls->Add(this->button_inf);
 			this->Controls->Add(this->button_start);
 			this->Controls->Add(this->label1);
 			this->Name = L"MyForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Главный экран";
 			this->ResumeLayout(false);
 			this->PerformLayout();

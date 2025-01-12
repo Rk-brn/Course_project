@@ -34,13 +34,20 @@ namespace Courseproject {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label_creat_account;
+	private: System::Windows::Forms::Label^ label_creat_name_ac;
+	private: System::Windows::Forms::Label^ label_creat_des_ac;
 	protected:
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label3;
+
+	protected:
+
+
 	private: System::Windows::Forms::TextBox^ textBox_name_account;
 	private: System::Windows::Forms::TextBox^ textBox_balance_account;
 	private: System::Windows::Forms::Button^ button_creat_account;
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ èíôîğìàöèÿToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem;
 
 	private:
 		/// <summary>
@@ -55,83 +62,121 @@ namespace Courseproject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label_creat_account = (gcnew System::Windows::Forms::Label());
+			this->label_creat_name_ac = (gcnew System::Windows::Forms::Label());
+			this->label_creat_des_ac = (gcnew System::Windows::Forms::Label());
 			this->textBox_name_account = (gcnew System::Windows::Forms::TextBox());
 			this->textBox_balance_account = (gcnew System::Windows::Forms::TextBox());
 			this->button_creat_account = (gcnew System::Windows::Forms::Button());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->èíôîğìàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// label1
+			// label_creat_account
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(434, 108);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(46, 17);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"label1";
+			this->label_creat_account->AutoSize = true;
+			this->label_creat_account->Location = System::Drawing::Point(485, 78);
+			this->label_creat_account->Name = L"label_creat_account";
+			this->label_creat_account->Size = System::Drawing::Size(114, 17);
+			this->label_creat_account->TabIndex = 0;
+			this->label_creat_account->Text = L"Ñîçäàíèå ñ÷¸òà";
 			// 
-			// label2
+			// label_creat_name_ac
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(201, 344);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(46, 17);
-			this->label2->TabIndex = 1;
-			this->label2->Text = L"label2";
+			this->label_creat_name_ac->AutoSize = true;
+			this->label_creat_name_ac->Location = System::Drawing::Point(189, 248);
+			this->label_creat_name_ac->Name = L"label_creat_name_ac";
+			this->label_creat_name_ac->Size = System::Drawing::Size(175, 17);
+			this->label_creat_name_ac->TabIndex = 1;
+			this->label_creat_name_ac->Text = L"Ââåäèòå íàçâàíèå ñ÷¸òà:";
 			// 
-			// label3
+			// label_creat_des_ac
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(189, 510);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(46, 17);
-			this->label3->TabIndex = 2;
-			this->label3->Text = L"label3";
+			this->label_creat_des_ac->AutoSize = true;
+			this->label_creat_des_ac->Location = System::Drawing::Point(772, 248);
+			this->label_creat_des_ac->Name = L"label_creat_des_ac";
+			this->label_creat_des_ac->Size = System::Drawing::Size(176, 17);
+			this->label_creat_des_ac->TabIndex = 2;
+			this->label_creat_des_ac->Text = L"Ââåäèòå îïèñàíèå ñ÷¸òà:";
 			// 
 			// textBox_name_account
 			// 
-			this->textBox_name_account->Location = System::Drawing::Point(204, 398);
+			this->textBox_name_account->Location = System::Drawing::Point(192, 299);
 			this->textBox_name_account->Name = L"textBox_name_account";
 			this->textBox_name_account->Size = System::Drawing::Size(100, 22);
 			this->textBox_name_account->TabIndex = 3;
 			// 
 			// textBox_balance_account
 			// 
-			this->textBox_balance_account->Location = System::Drawing::Point(192, 570);
+			this->textBox_balance_account->Location = System::Drawing::Point(775, 299);
 			this->textBox_balance_account->Name = L"textBox_balance_account";
 			this->textBox_balance_account->Size = System::Drawing::Size(100, 22);
 			this->textBox_balance_account->TabIndex = 4;
 			// 
 			// button_creat_account
 			// 
-			this->button_creat_account->Location = System::Drawing::Point(962, 611);
+			this->button_creat_account->Location = System::Drawing::Point(901, 498);
 			this->button_creat_account->Name = L"button_creat_account";
 			this->button_creat_account->Size = System::Drawing::Size(211, 67);
 			this->button_creat_account->TabIndex = 5;
-			this->button_creat_account->Text = L"Ñîçäàòü ñ÷¸ò";
+			this->button_creat_account->Text = L"Ñîçäàòü ñ÷¸ò!";
 			this->button_creat_account->UseVisualStyleBackColor = true;
 			this->button_creat_account->Click += gcnew System::EventHandler(this, &AccountForm::button_creat_account_Click);
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->èíôîğìàöèÿToolStripMenuItem,
+					this->âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(1181, 28);
+			this->menuStrip1->TabIndex = 6;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// èíôîğìàöèÿToolStripMenuItem
+			// 
+			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
+			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 24);
+			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ";
+			this->èíôîğìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &AccountForm::èíôîğìàöèÿToolStripMenuItem_Click);
+			// 
+			// âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem
+			// 
+			this->âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem->Name = L"âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem";
+			this->âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem->Size = System::Drawing::Size(201, 24);
+			this->âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem->Text = L"Âåğíóòüñÿ íàçàä ê ñ÷åòàì";
+			this->âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem->Click += gcnew System::EventHandler(this, &AccountForm::âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem_Click);
 			// 
 			// AccountForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1273, 745);
+			this->ClientSize = System::Drawing::Size(1181, 656);
 			this->Controls->Add(this->button_creat_account);
 			this->Controls->Add(this->textBox_balance_account);
 			this->Controls->Add(this->textBox_name_account);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label_creat_des_ac);
+			this->Controls->Add(this->label_creat_name_ac);
+			this->Controls->Add(this->label_creat_account);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"AccountForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AccountForm";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void button_creat_account_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void âåğíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

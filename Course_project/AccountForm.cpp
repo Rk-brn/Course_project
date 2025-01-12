@@ -34,3 +34,16 @@ System::Void Courseproject::AccountForm::button_creat_account_Click(System::Obje
     textBox_name_account->Text = "";
     return System::Void();
 }
+
+System::Void Courseproject::AccountForm::èíôîðìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    MessageBox::Show("Áóäåò òåêñò", "Èíôîðìàöèÿ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    return System::Void();
+    
+}
+
+System::Void Courseproject::AccountForm::âåðíóòüñÿÍàçàäÊÑ÷åòàìToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    this->Close();
+    return System::Void();
+}
