@@ -367,4 +367,10 @@ namespace Courseproject {
         this->Close();
         return System::Void();
     }
+    System::Void Account_TableForm::êîíâåðòàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        CurrencyConverterForm^ convert = gcnew CurrencyConverterForm();
+        convert->ShowDialog();
+        return System::Void();
+    }
 }

@@ -8,7 +8,7 @@ Currency::Currency(std::string name, int rate)
 
 std::string Currency::getName() const
 {
-	return std::string();
+	return Name;
 }
 
 int Currency::getRate() const

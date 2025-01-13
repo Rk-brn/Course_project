@@ -1,6 +1,7 @@
 #pragma once
 #include "AccountForm.h"
 #include "Table_Category_TransactionForm.h"
+#include "CurrencyConverterForm.h"
 namespace Courseproject {
 
 	using namespace System;
@@ -41,6 +42,7 @@ namespace Courseproject {
 	private: System::Windows::Forms::Button^ buttonLoadTransactions;
 	private: System::Windows::Forms::ComboBox^ comboBoxAccounts;
 	private: System::Windows::Forms::DataGridView^ dataGridViewTransactions;
+	private: System::Windows::Forms::ToolStripMenuItem^ êîíâåğòàöèÿToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ âåğíóòüñÿÂÌåíşToolStripMenuItem;
 
 	private:
@@ -79,6 +81,7 @@ namespace Courseproject {
 			this->buttonLoadTransactions = (gcnew System::Windows::Forms::Button());
 			this->comboBoxAccounts = (gcnew System::Windows::Forms::ComboBox());
 			this->dataGridViewTransactions = (gcnew System::Windows::Forms::DataGridView());
+			this->êîíâåğòàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -99,9 +102,9 @@ namespace Courseproject {
 			// menuStrip1
 			// 
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->ñîçäàòüÑ÷¸òToolStripMenuItem,
-					this->ïğîñìîòğÒğàíçàêöèéToolStripMenuItem, this->èíôîğìàöèÿToolStripMenuItem, this->âåğíóòüñÿÂÌåíşToolStripMenuItem
+					this->ïğîñìîòğÒğàíçàêöèéToolStripMenuItem, this->èíôîğìàöèÿToolStripMenuItem, this->âåğíóòüñÿÂÌåíşToolStripMenuItem, this->êîíâåğòàöèÿToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -195,6 +198,13 @@ namespace Courseproject {
 			this->dataGridViewTransactions->Size = System::Drawing::Size(662, 150);
 			this->dataGridViewTransactions->TabIndex = 0;
 			// 
+			// êîíâåğòàöèÿToolStripMenuItem
+			// 
+			this->êîíâåğòàöèÿToolStripMenuItem->Name = L"êîíâåğòàöèÿToolStripMenuItem";
+			this->êîíâåğòàöèÿToolStripMenuItem->Size = System::Drawing::Size(119, 24);
+			this->êîíâåğòàöèÿToolStripMenuItem->Text = L"Êîíâåğòàöèÿ ";
+			this->êîíâåğòàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::êîíâåğòàöèÿToolStripMenuItem_Click);
+			// 
 			// Account_TableForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -223,5 +233,6 @@ private: System::Void ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click(System
 private: System::Void buttonLoadTransactions_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void âåğíóòüñÿÂÌåíşToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void êîíâåğòàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

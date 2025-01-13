@@ -6,15 +6,16 @@
 #include <algorithm>
 
 namespace Courseproject {
+    bool isNumber(const std::string& str) 
+    {
+        return std::all_of(str.begin(), str.end(), ::isdigit);
+    }
+
     CurrencyCreatForm::CurrencyCreatForm(void)
     {
         InitializeComponent();
     }
-    bool isNumber(const std::string& str)
-    {
-        return std::all_of(str.begin(), str.end(), ::isdigit);
-    }
-   
+    
     System::Void CurrencyCreatForm::buttonCreatCurrency_Click(System::Object^ sender, System::EventArgs^ e)
     {
         msclr::interop::marshal_context context;

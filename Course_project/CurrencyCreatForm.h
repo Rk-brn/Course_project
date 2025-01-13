@@ -44,7 +44,7 @@ namespace Courseproject {
 		/// ќб€зательна€ переменна€ конструктора.
 		/// </summary>
 		System::ComponentModel::Container ^components;
-		bool isNumber(const std::string& str);
+		
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// “ребуемый метод дл€ поддержки конструктора Ч не измен€йте 
