@@ -41,6 +41,7 @@ namespace Courseproject {
 
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chartAnalytics;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chartMonthly;
 
 
 	private:
@@ -59,6 +60,9 @@ namespace Courseproject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
 			System::Windows::Forms::DataVisualization::Charting::Legend^ legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
 			System::Windows::Forms::DataVisualization::Charting::Series^ series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
@@ -69,7 +73,9 @@ namespace Courseproject {
 			this->buttonAnalitics = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->chartAnalytics = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->chartMonthly = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartAnalytics))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartMonthly))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -109,7 +115,7 @@ namespace Courseproject {
 			// 
 			// buttonAnalitics
 			// 
-			this->buttonAnalitics->Location = System::Drawing::Point(1002, 473);
+			this->buttonAnalitics->Location = System::Drawing::Point(1029, 66);
 			this->buttonAnalitics->Name = L"buttonAnalitics";
 			this->buttonAnalitics->Size = System::Drawing::Size(119, 60);
 			this->buttonAnalitics->TabIndex = 4;
@@ -119,7 +125,7 @@ namespace Courseproject {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(1002, 575);
+			this->button2->Location = System::Drawing::Point(1041, 167);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(119, 47);
 			this->button2->TabIndex = 5;
@@ -128,25 +134,42 @@ namespace Courseproject {
 			// 
 			// chartAnalytics
 			// 
-			chartArea2->Name = L"ChartArea1";
-			this->chartAnalytics->ChartAreas->Add(chartArea2);
-			legend2->Name = L"Legend1";
-			this->chartAnalytics->Legends->Add(legend2);
-			this->chartAnalytics->Location = System::Drawing::Point(325, 289);
+			chartArea1->Name = L"ChartArea1";
+			this->chartAnalytics->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chartAnalytics->Legends->Add(legend1);
+			this->chartAnalytics->Location = System::Drawing::Point(95, 322);
 			this->chartAnalytics->Name = L"chartAnalytics";
+			series1->ChartArea = L"ChartArea1";
+			series1->Legend = L"Legend1";
+			series1->Name = L"Series1";
+			this->chartAnalytics->Series->Add(series1);
+			this->chartAnalytics->Size = System::Drawing::Size(449, 290);
+			this->chartAnalytics->TabIndex = 6;
+			this->chartAnalytics->Text = L"chart1";
+			// 
+			// chartMonthly
+			// 
+			chartArea2->Name = L"ChartArea1";
+			this->chartMonthly->ChartAreas->Add(chartArea2);
+			legend2->Name = L"Legend1";
+			this->chartMonthly->Legends->Add(legend2);
+			this->chartMonthly->Location = System::Drawing::Point(639, 322);
+			this->chartMonthly->Name = L"chartMonthly";
 			series2->ChartArea = L"ChartArea1";
 			series2->Legend = L"Legend1";
 			series2->Name = L"Series1";
-			this->chartAnalytics->Series->Add(series2);
-			this->chartAnalytics->Size = System::Drawing::Size(503, 300);
-			this->chartAnalytics->TabIndex = 6;
-			this->chartAnalytics->Text = L"chart1";
+			this->chartMonthly->Series->Add(series2);
+			this->chartMonthly->Size = System::Drawing::Size(419, 300);
+			this->chartMonthly->TabIndex = 7;
+			this->chartMonthly->Text = L"chart1";
 			// 
 			// AccountAnalyticsForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1172, 655);
+			this->Controls->Add(this->chartMonthly);
 			this->Controls->Add(this->chartAnalytics);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->buttonAnalitics);
@@ -159,6 +182,7 @@ namespace Courseproject {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AccountAnalyticsForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartAnalytics))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartMonthly))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
