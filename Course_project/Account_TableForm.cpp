@@ -373,4 +373,10 @@ namespace Courseproject {
         convert->ShowDialog();
         return System::Void();
     }
+    System::Void Account_TableForm::àíàëèòèêàToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        AccountAnalyticsForm^ analyticsForm = gcnew AccountAnalyticsForm();
+        analyticsForm->ShowDialog();
+        return System::Void();
+    }
 }
