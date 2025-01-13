@@ -281,4 +281,54 @@ namespace Courseproject {
         this->Close();
         return System::Void();
     }
+    System::Void SearchTransactionForm::checkBoxName_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
+    {
+        textBoxName->Visible = true;
+        if (checkBoxName->Checked == false) {
+            textBoxName->Visible = false;
+        }
+        return System::Void();
+    }
+    System::Void SearchTransactionForm::checkBoxAmount_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
+    {
+        textBoxAmount->Visible = true;
+        groupBox_znak->Visible = true;
+        if (checkBoxAmount->Checked == false) {
+            textBoxAmount->Visible = false;
+            groupBox_znak->Visible = false;
+        }
+        return System::Void();
+    }
+    System::Void SearchTransactionForm::checkBoxDate_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
+    {
+        dateTimePickerDate->Visible = true;
+        if (checkBoxDate->Checked == false) {
+            dateTimePickerDate->Visible = false;
+        }
+        return System::Void();
+    }
+    System::Void SearchTransactionForm::checkBoxType_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
+    {
+        comboBoxType->Visible = true;
+        if (checkBoxType->Checked == false) {
+            comboBoxType->Visible = false;
+        }
+        return System::Void();
+    }
+    System::Void SearchTransactionForm::checkBoxCategory_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
+    {
+        comboBoxCategory->Visible = true;
+        if (checkBoxCategory->Checked == false) {
+            comboBoxCategory->Visible = false;
+        }
+        return System::Void();
+    }
+    System::Void SearchTransactionForm::checkBoxAccount_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
+    {
+        comboBoxAccount->Visible = true;
+        if (checkBoxAccount->Checked == false) {
+            comboBoxAccount->Visible = false;
+        }
+        return System::Void();
+    }
 }

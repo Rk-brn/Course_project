@@ -125,7 +125,7 @@ namespace Courseproject {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(1041, 167);
+			this->button2->Location = System::Drawing::Point(1029, 168);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(119, 47);
 			this->button2->TabIndex = 5;

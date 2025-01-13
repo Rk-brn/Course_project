@@ -65,6 +65,7 @@ namespace Courseproject {
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ информацияToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ вернутьсяНазадToolStripMenuItem;
+	private: System::Windows::Forms::GroupBox^ groupBox_znak;
 
 
 
@@ -107,8 +108,10 @@ namespace Courseproject {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->информацияToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->вернутьсяНазадToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->groupBox_znak = (gcnew System::Windows::Forms::GroupBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_search))->BeginInit();
 			this->menuStrip1->SuspendLayout();
+			this->groupBox_znak->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -118,13 +121,13 @@ namespace Courseproject {
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(46, 17);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"label1";
+			this->label1->Text = L"Поиск транзакций!";
 			// 
 			// button_Search
 			// 
-			this->button_Search->Location = System::Drawing::Point(1200, 523);
+			this->button_Search->Location = System::Drawing::Point(1168, 539);
 			this->button_Search->Name = L"button_Search";
-			this->button_Search->Size = System::Drawing::Size(158, 56);
+			this->button_Search->Size = System::Drawing::Size(158, 65);
 			this->button_Search->TabIndex = 1;
 			this->button_Search->Text = L"Поиск";
 			this->button_Search->UseVisualStyleBackColor = true;
@@ -132,7 +135,7 @@ namespace Courseproject {
 			// 
 			// buttonClear
 			// 
-			this->buttonClear->Location = System::Drawing::Point(1200, 651);
+			this->buttonClear->Location = System::Drawing::Point(1168, 667);
 			this->buttonClear->Name = L"buttonClear";
 			this->buttonClear->Size = System::Drawing::Size(158, 65);
 			this->buttonClear->TabIndex = 2;
@@ -143,76 +146,84 @@ namespace Courseproject {
 			// checkBoxName
 			// 
 			this->checkBoxName->AutoSize = true;
-			this->checkBoxName->Location = System::Drawing::Point(159, 195);
+			this->checkBoxName->Location = System::Drawing::Point(87, 195);
 			this->checkBoxName->Name = L"checkBoxName";
-			this->checkBoxName->Size = System::Drawing::Size(98, 21);
+			this->checkBoxName->Size = System::Drawing::Size(151, 21);
 			this->checkBoxName->TabIndex = 3;
-			this->checkBoxName->Text = L"checkBox1";
+			this->checkBoxName->Text = L"Использовать имя";
 			this->checkBoxName->UseVisualStyleBackColor = true;
+			this->checkBoxName->CheckedChanged += gcnew System::EventHandler(this, &SearchTransactionForm::checkBoxName_CheckedChanged);
 			// 
 			// checkBoxAmount
 			// 
 			this->checkBoxAmount->AutoSize = true;
-			this->checkBoxAmount->Location = System::Drawing::Point(159, 332);
+			this->checkBoxAmount->Location = System::Drawing::Point(87, 332);
 			this->checkBoxAmount->Name = L"checkBoxAmount";
-			this->checkBoxAmount->Size = System::Drawing::Size(98, 21);
+			this->checkBoxAmount->Size = System::Drawing::Size(165, 21);
 			this->checkBoxAmount->TabIndex = 4;
-			this->checkBoxAmount->Text = L"checkBox2";
+			this->checkBoxAmount->Text = L"Использовать сумму";
 			this->checkBoxAmount->UseVisualStyleBackColor = true;
+			this->checkBoxAmount->CheckedChanged += gcnew System::EventHandler(this, &SearchTransactionForm::checkBoxAmount_CheckedChanged);
 			// 
 			// checkBoxDate
 			// 
 			this->checkBoxDate->AutoSize = true;
 			this->checkBoxDate->Location = System::Drawing::Point(609, 195);
 			this->checkBoxDate->Name = L"checkBoxDate";
-			this->checkBoxDate->Size = System::Drawing::Size(98, 21);
+			this->checkBoxDate->Size = System::Drawing::Size(156, 21);
 			this->checkBoxDate->TabIndex = 5;
-			this->checkBoxDate->Text = L"checkBox3";
+			this->checkBoxDate->Text = L"Использовать дату";
 			this->checkBoxDate->UseVisualStyleBackColor = true;
+			this->checkBoxDate->CheckedChanged += gcnew System::EventHandler(this, &SearchTransactionForm::checkBoxDate_CheckedChanged);
 			// 
 			// checkBoxType
 			// 
 			this->checkBoxType->AutoSize = true;
 			this->checkBoxType->Location = System::Drawing::Point(609, 332);
 			this->checkBoxType->Name = L"checkBoxType";
-			this->checkBoxType->Size = System::Drawing::Size(98, 21);
+			this->checkBoxType->Size = System::Drawing::Size(230, 21);
 			this->checkBoxType->TabIndex = 6;
-			this->checkBoxType->Text = L"checkBox4";
+			this->checkBoxType->Text = L"Использовать тип транзакции";
 			this->checkBoxType->UseVisualStyleBackColor = true;
+			this->checkBoxType->CheckedChanged += gcnew System::EventHandler(this, &SearchTransactionForm::checkBoxType_CheckedChanged);
 			// 
 			// checkBoxCategory
 			// 
 			this->checkBoxCategory->AutoSize = true;
 			this->checkBoxCategory->Location = System::Drawing::Point(1041, 195);
 			this->checkBoxCategory->Name = L"checkBoxCategory";
-			this->checkBoxCategory->Size = System::Drawing::Size(98, 21);
+			this->checkBoxCategory->Size = System::Drawing::Size(195, 21);
 			this->checkBoxCategory->TabIndex = 7;
-			this->checkBoxCategory->Text = L"checkBox5";
+			this->checkBoxCategory->Text = L"Использовать категорию";
 			this->checkBoxCategory->UseVisualStyleBackColor = true;
+			this->checkBoxCategory->CheckedChanged += gcnew System::EventHandler(this, &SearchTransactionForm::checkBoxCategory_CheckedChanged);
 			// 
 			// checkBoxAccount
 			// 
 			this->checkBoxAccount->AutoSize = true;
 			this->checkBoxAccount->Location = System::Drawing::Point(1041, 319);
 			this->checkBoxAccount->Name = L"checkBoxAccount";
-			this->checkBoxAccount->Size = System::Drawing::Size(98, 21);
+			this->checkBoxAccount->Size = System::Drawing::Size(156, 21);
 			this->checkBoxAccount->TabIndex = 8;
-			this->checkBoxAccount->Text = L"checkBox6";
+			this->checkBoxAccount->Text = L"Использовать счёт";
 			this->checkBoxAccount->UseVisualStyleBackColor = true;
+			this->checkBoxAccount->CheckedChanged += gcnew System::EventHandler(this, &SearchTransactionForm::checkBoxAccount_CheckedChanged);
 			// 
 			// textBoxName
 			// 
-			this->textBoxName->Location = System::Drawing::Point(159, 243);
+			this->textBoxName->Location = System::Drawing::Point(87, 243);
 			this->textBoxName->Name = L"textBoxName";
 			this->textBoxName->Size = System::Drawing::Size(100, 22);
 			this->textBoxName->TabIndex = 9;
+			this->textBoxName->Visible = false;
 			// 
 			// textBoxAmount
 			// 
-			this->textBoxAmount->Location = System::Drawing::Point(157, 380);
+			this->textBoxAmount->Location = System::Drawing::Point(85, 380);
 			this->textBoxAmount->Name = L"textBoxAmount";
 			this->textBoxAmount->Size = System::Drawing::Size(100, 22);
 			this->textBoxAmount->TabIndex = 10;
+			this->textBoxAmount->Visible = false;
 			// 
 			// comboBoxType
 			// 
@@ -222,6 +233,7 @@ namespace Courseproject {
 			this->comboBoxType->Name = L"comboBoxType";
 			this->comboBoxType->Size = System::Drawing::Size(121, 24);
 			this->comboBoxType->TabIndex = 11;
+			this->comboBoxType->Visible = false;
 			// 
 			// comboBoxCategory
 			// 
@@ -230,6 +242,7 @@ namespace Courseproject {
 			this->comboBoxCategory->Name = L"comboBoxCategory";
 			this->comboBoxCategory->Size = System::Drawing::Size(121, 24);
 			this->comboBoxCategory->TabIndex = 12;
+			this->comboBoxCategory->Visible = false;
 			// 
 			// comboBoxAccount
 			// 
@@ -238,12 +251,13 @@ namespace Courseproject {
 			this->comboBoxAccount->Name = L"comboBoxAccount";
 			this->comboBoxAccount->Size = System::Drawing::Size(121, 24);
 			this->comboBoxAccount->TabIndex = 13;
+			this->comboBoxAccount->Visible = false;
 			// 
 			// dataGridView_search
 			// 
 			this->dataGridView_search->AllowUserToAddRows = false;
 			this->dataGridView_search->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView_search->Location = System::Drawing::Point(90, 523);
+			this->dataGridView_search->Location = System::Drawing::Point(87, 539);
 			this->dataGridView_search->Name = L"dataGridView_search";
 			this->dataGridView_search->RowHeadersWidth = 51;
 			this->dataGridView_search->RowTemplate->Height = 24;
@@ -256,38 +270,39 @@ namespace Courseproject {
 			this->dateTimePickerDate->Name = L"dateTimePickerDate";
 			this->dateTimePickerDate->Size = System::Drawing::Size(200, 22);
 			this->dateTimePickerDate->TabIndex = 15;
+			this->dateTimePickerDate->Visible = false;
 			// 
 			// radioButtonAmountEqual
 			// 
 			this->radioButtonAmountEqual->AutoSize = true;
-			this->radioButtonAmountEqual->Location = System::Drawing::Point(305, 357);
+			this->radioButtonAmountEqual->Location = System::Drawing::Point(17, 32);
 			this->radioButtonAmountEqual->Name = L"radioButtonAmountEqual";
-			this->radioButtonAmountEqual->Size = System::Drawing::Size(110, 21);
+			this->radioButtonAmountEqual->Size = System::Drawing::Size(167, 21);
 			this->radioButtonAmountEqual->TabIndex = 16;
 			this->radioButtonAmountEqual->TabStop = true;
-			this->radioButtonAmountEqual->Text = L"radioButton1";
+			this->radioButtonAmountEqual->Text = L"= (полностью равны)";
 			this->radioButtonAmountEqual->UseVisualStyleBackColor = true;
 			// 
 			// radioButtonAmountLess
 			// 
 			this->radioButtonAmountLess->AutoSize = true;
-			this->radioButtonAmountLess->Location = System::Drawing::Point(305, 401);
+			this->radioButtonAmountLess->Location = System::Drawing::Point(17, 63);
 			this->radioButtonAmountLess->Name = L"radioButtonAmountLess";
-			this->radioButtonAmountLess->Size = System::Drawing::Size(110, 21);
+			this->radioButtonAmountLess->Size = System::Drawing::Size(252, 21);
 			this->radioButtonAmountLess->TabIndex = 17;
 			this->radioButtonAmountLess->TabStop = true;
-			this->radioButtonAmountLess->Text = L"radioButton2";
+			this->radioButtonAmountLess->Text = L"> (меньше, чем введённое число)";
 			this->radioButtonAmountLess->UseVisualStyleBackColor = true;
 			// 
 			// radioButtonAmountMore
 			// 
 			this->radioButtonAmountMore->AutoSize = true;
-			this->radioButtonAmountMore->Location = System::Drawing::Point(305, 444);
+			this->radioButtonAmountMore->Location = System::Drawing::Point(17, 90);
 			this->radioButtonAmountMore->Name = L"radioButtonAmountMore";
-			this->radioButtonAmountMore->Size = System::Drawing::Size(110, 21);
+			this->radioButtonAmountMore->Size = System::Drawing::Size(251, 21);
 			this->radioButtonAmountMore->TabIndex = 18;
 			this->radioButtonAmountMore->TabStop = true;
-			this->radioButtonAmountMore->Text = L"radioButton3";
+			this->radioButtonAmountMore->Text = L"< (больше, чем введённое число)";
 			this->radioButtonAmountMore->UseVisualStyleBackColor = true;
 			// 
 			// menuStrip1
@@ -299,7 +314,7 @@ namespace Courseproject {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1430, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1375, 28);
 			this->menuStrip1->TabIndex = 19;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -317,14 +332,25 @@ namespace Courseproject {
 			this->вернутьсяНазадToolStripMenuItem->Text = L"Вернуться назад";
 			this->вернутьсяНазадToolStripMenuItem->Click += gcnew System::EventHandler(this, &SearchTransactionForm::вернутьсяНазадToolStripMenuItem_Click);
 			// 
+			// groupBox_znak
+			// 
+			this->groupBox_znak->Controls->Add(this->radioButtonAmountEqual);
+			this->groupBox_znak->Controls->Add(this->radioButtonAmountMore);
+			this->groupBox_znak->Controls->Add(this->radioButtonAmountLess);
+			this->groupBox_znak->Location = System::Drawing::Point(200, 380);
+			this->groupBox_znak->Name = L"groupBox_znak";
+			this->groupBox_znak->Size = System::Drawing::Size(285, 131);
+			this->groupBox_znak->TabIndex = 20;
+			this->groupBox_znak->TabStop = false;
+			this->groupBox_znak->Text = L"Выбор тип сравнения";
+			this->groupBox_znak->Visible = false;
+			// 
 			// SearchTransactionForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1430, 771);
-			this->Controls->Add(this->radioButtonAmountMore);
-			this->Controls->Add(this->radioButtonAmountLess);
-			this->Controls->Add(this->radioButtonAmountEqual);
+			this->ClientSize = System::Drawing::Size(1375, 771);
+			this->Controls->Add(this->groupBox_znak);
 			this->Controls->Add(this->dateTimePickerDate);
 			this->Controls->Add(this->dataGridView_search);
 			this->Controls->Add(this->comboBoxAccount);
@@ -343,12 +369,14 @@ namespace Courseproject {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Name = L"SearchTransactionForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"SearchTransactionForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_search))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->groupBox_znak->ResumeLayout(false);
+			this->groupBox_znak->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -358,5 +386,11 @@ namespace Courseproject {
 private: System::Void buttonClear_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void вернутьсяНазадToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void checkBoxName_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+private: System::Void checkBoxAmount_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+private: System::Void checkBoxDate_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+private: System::Void checkBoxType_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+private: System::Void checkBoxCategory_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+private: System::Void checkBoxAccount_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
 };
 }

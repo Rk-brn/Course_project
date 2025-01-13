@@ -341,7 +341,25 @@ namespace Courseproject {
 
 
     System::Void Account_TableForm::ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-    {
+    {/*
+        if (table_transaction) {
+            this->groupBox_prosmotr_category->Visible = false;
+            this->dataGridView1->Visible = false;
+            this->button1->Visible = false;
+            this->button2->Visible = false;
+            this->textBoxdel_cat->Visible = false;
+            this->textBoxdel_cat->Clear();
+            flag_prosmotr = 0;
+        }
+        else if (!flag_prosmotr) {
+            this->groupBox1->Visible = true;
+            this->dataGridView1->Visible = true;
+            this->button1->Visible = true;
+            this->button1->Enabled = true;
+            this->button2->Visible = false;
+            this->button2->Enabled = false;
+            flag_prosmotr = 1;
+        }*/
         groupBox1->Visible = true;
         LoadAccountsToComboBox();
         return System::Void();

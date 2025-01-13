@@ -50,6 +50,7 @@ namespace Courseproject {
 	private:
 		void LoadAccountsToDataGridView();
 
+		int table_transaction = 0;
 
 		void LoadAccountsToComboBox();
 		void LoadTransactionsForAccount(const std::string& accountName);
