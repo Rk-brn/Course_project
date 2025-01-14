@@ -254,7 +254,7 @@ namespace Courseproject {
         }
     }
 
-    System::Void Account_TableForm::ñîçäàòüÑ÷¸òToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    System::Void Account_TableForm::ñîçäàòüÑ÷¸òToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
     {
         AccountForm^ accountForm = gcnew AccountForm();
         accountForm->ShowDialog();
@@ -292,6 +292,33 @@ namespace Courseproject {
                     std::istringstream nameStream(name);
                     std::getline(nameStream, accountName, ':');
                     comboBoxAccounts->Items->Add(gcnew String(accountName.c_str()));
+                }
+            }
+            file.close();
+        }
+    }
+
+    void Account_TableForm::LoadAccountsToComboBox_del() {
+        comboBox_del_ch_ac->Items->Clear();
+        msclr::interop::marshal_context context;
+        std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
+        std::ifstream file(filePath);
+        if (file.is_open())
+        {
+            std::string line;
+            while (std::getline(file, line))
+            {
+                std::istringstream iss(line);
+                std::string name;
+                std::string balance;
+                std::string count;
+                std::string description;
+                if (std::getline(iss, name, ':') && std::getline(iss, balance, ':') && std::getline(iss, count, ':') && std::getline(iss, description, ','))
+                {
+                    std::string accountName;
+                    std::istringstream nameStream(name);
+                    std::getline(nameStream, accountName, ':');
+                    comboBox_del_ch_ac->Items->Add(gcnew String(accountName.c_str()));
                 }
             }
             file.close();
@@ -350,7 +377,73 @@ namespace Courseproject {
         file.close();
     }
     
+    void Account_TableForm::DeleteAccountTransactions(const std::string& accountName, bool deleteTransactions) {
+        if (deleteTransactions) {
+            msclr::interop::marshal_context context;
+            std::string filePath = context.marshal_as<std::string>(gcnew System::String("transactions.txt"));
+            std::ifstream file(filePath);
+            std::vector<std::string> lines;
 
+            if (file.is_open()) {
+                std::string line;
+                while (std::getline(file, line)) {
+                    std::istringstream iss(line);
+                    std::string transactionName, amountStr, dateStr, typeStr, categoryStr, accountType;
+                    if (std::getline(iss, transactionName, ';') &&
+                        std::getline(iss, amountStr, ';') &&
+                        std::getline(iss, dateStr, ';') &&
+                        std::getline(iss, typeStr, ';') &&
+                        std::getline(iss, categoryStr, ';') &&
+                        std::getline(iss, accountType, ';'))
+                    {
+                        if (accountType != accountName) {
+                            lines.push_back(line);
+                        }
+                    }
+                }
+                file.close();
+            }
+
+            std::ofstream outFile(filePath, std::ios::trunc);
+            if (outFile.is_open()) {
+                for (const auto& line : lines) {
+                    outFile << line << std::endl;
+                }
+                outFile.close();
+            }
+        }
+    }
+    void Account_TableForm::DeleteAccountFromFile(const std::string& accountName) {
+        msclr::interop::marshal_context context;
+        std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
+        std::ifstream file(filePath);
+        std::vector<std::string> lines;
+
+        if (file.is_open()) {
+            std::string line;
+            while (std::getline(file, line)) {
+                std::istringstream iss(line);
+                std::string currentAccountName, balance, transactionCount, description;
+                if (std::getline(iss, currentAccountName, ':') &&
+                    std::getline(iss, balance, ':') &&
+                    std::getline(iss, transactionCount, ':') &&
+                    std::getline(iss, description, ','))
+                {
+                    if (currentAccountName != accountName) {
+                        lines.push_back(line);
+                    }
+                }
+            }
+            file.close();
+        }
+        std::ofstream outFile(filePath, std::ios::trunc);
+        if (outFile.is_open()) {
+            for (const auto& line : lines) {
+                outFile << line << std::endl;
+            }
+            outFile.close();
+        }
+    }
 
     System::Void Account_TableForm::ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
@@ -407,6 +500,57 @@ namespace Courseproject {
     {
         AccountAnalyticsForm^ analyticsForm = gcnew AccountAnalyticsForm();
         analyticsForm->ShowDialog();
+        return System::Void();
+    }
+    System::Void Account_TableForm::ðåäàêòèðîâàòüÑ÷¸òToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        return System::Void();
+    }
+    System::Void Account_TableForm::óäàëèòüÑ÷¸òToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        LoadAccountsToComboBox_del();
+        groupBox2->Visible = true;
+        groupBox2->Text = "Óäàëåíèå ñ÷¸òà!";
+        comboBox_del_ch_ac->Visible = true;
+        label_del_ch->Visible = true;
+        label_del_ch->Text = "Âûáåðåòå ñ÷¸ò äëÿ óäàëåíèÿ!";
+        button_del_ac->Visible = true;
+        return System::Void();
+
+    }
+
+    System::Void Account_TableForm::button_del_ac_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        if (comboBox_del_ch_ac->SelectedItem != nullptr) {
+            String^ selectedAccount = comboBox_del_ch_ac->SelectedItem->ToString();
+            std::string stdAccountName = msclr::interop::marshal_as<std::string>(selectedAccount);
+            if (MessageBox::Show("Âû óâåðåíû, ÷òî õîòèòå óäàëèòü ñ÷¸ò " + selectedAccount + "?", "Óäàëåíèå ñ÷¸òà", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes)
+            {
+                if (MessageBox::Show("Óäàëèòü òðàíçàêöèè ñâÿçàííûå ñ ýòèì ñ÷¸òîì?", "Óäàëåíèå òðàíçàêöèé", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
+                    DeleteAccountTransactions(stdAccountName, true);
+                    DeleteAccountFromFile(stdAccountName);
+                    LoadAccountsToDataGridView();
+                    UpdateBalancesFromTransactions();
+                    LoadAccountsToComboBox_del();
+                    groupBox2->Visible = false;
+
+                }
+                else {
+                    DeleteAccountTransactions(stdAccountName, false);
+                    DeleteAccountFromFile(stdAccountName);
+                    LoadAccountsToDataGridView();
+                    UpdateBalancesFromTransactions();
+                    LoadAccountsToComboBox_del();
+                    groupBox2->Visible = false;
+                }
+            }
+        }
+        else {
+            MessageBox::Show("Ïîæàëóéñòà, âûáåðèòå ñ÷¸ò", "Îøèáêà", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        }
+    }
+    System::Void Account_TableForm::button_change_ac_Click(System::Object^ sender, System::EventArgs^ e)
+    {
         return System::Void();
     }
 }

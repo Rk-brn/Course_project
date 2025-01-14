@@ -46,6 +46,16 @@ namespace Courseproject {
 	private: System::Windows::Forms::ToolStripMenuItem^ êîíâåğòàöèÿToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ àíàëèòèêàToolStripMenuItem;
 	private: System::Windows::Forms::Label^ labelAccounts;
+	private: System::Windows::Forms::ToolStripMenuItem^ ñîçäàòüÑ÷¸òToolStripMenuItem1;
+	private: System::Windows::Forms::ToolStripMenuItem^ ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ óäàëèòüÑ÷¸òToolStripMenuItem;
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::Button^ button_del_ac;
+	private: System::Windows::Forms::Button^ button_change_ac;
+
+	private: System::Windows::Forms::Label^ label_del_ch;
+	private: System::Windows::Forms::ComboBox^ comboBox_del_ch_ac;
+
 	private: System::Windows::Forms::ToolStripMenuItem^ âåğíóòüñÿÂÌåíşToolStripMenuItem;
 
 	private:
@@ -54,12 +64,15 @@ namespace Courseproject {
 		int table_transaction = 0;
 
 		void LoadAccountsToComboBox();
+		void LoadAccountsToComboBox_del();
 		void LoadTransactionsForAccount(const std::string& accountName);
 
 		void UpdateAccountData(const std::string& accountName, int newTransactionCount);
 		void UpdateBalancesFromTransactions();
 		int GetBalanceFromTransactions(const std::string& accountName);
-
+		bool deleteTransactions = false;
+		void DeleteAccountTransactions(const std::string& accountName, bool deleteTransactions);
+		void DeleteAccountFromFile(const std::string& accountName);
 	private:
 		/// <summary>
 		/// Îáÿçàòåëüíàÿ ïåğåìåííàÿ êîíñòğóêòîğà.
@@ -76,22 +89,31 @@ namespace Courseproject {
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->ñîçäàòüÑ÷¸òToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->óäàëèòüÑ÷¸òToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ïğîñìîòğÒğàíçàêöèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ïîêàçàòüÂñåÒğàíçàêöèèToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->èíôîğìàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->âåğíóòüñÿÂÌåíşToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->êîíâåğòàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->àíàëèòèêàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->èíôîğìàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->âåğíóòüñÿÂÌåíşToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->labelAccounts = (gcnew System::Windows::Forms::Label());
 			this->buttonLoadTransactions = (gcnew System::Windows::Forms::Button());
 			this->comboBoxAccounts = (gcnew System::Windows::Forms::ComboBox());
 			this->dataGridViewTransactions = (gcnew System::Windows::Forms::DataGridView());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->comboBox_del_ch_ac = (gcnew System::Windows::Forms::ComboBox());
+			this->label_del_ch = (gcnew System::Windows::Forms::Label());
+			this->button_del_ac = (gcnew System::Windows::Forms::Button());
+			this->button_change_ac = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewTransactions))->BeginInit();
+			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// dataGridView1
@@ -121,10 +143,34 @@ namespace Courseproject {
 			// 
 			// ñîçäàòüÑ÷¸òToolStripMenuItem
 			// 
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->ñîçäàòüÑ÷¸òToolStripMenuItem1,
+					this->ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem, this->óäàëèòüÑ÷¸òToolStripMenuItem
+			});
 			this->ñîçäàòüÑ÷¸òToolStripMenuItem->Name = L"ñîçäàòüÑ÷¸òToolStripMenuItem";
-			this->ñîçäàòüÑ÷¸òToolStripMenuItem->Size = System::Drawing::Size(111, 24);
-			this->ñîçäàòüÑ÷¸òToolStripMenuItem->Text = L"Ñîçäàòü ñ÷¸ò";
-			this->ñîçäàòüÑ÷¸òToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::ñîçäàòüÑ÷¸òToolStripMenuItem_Click);
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem->Size = System::Drawing::Size(144, 24);
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem->Text = L"Ğàáîòà ñî ñ÷¸òîì";
+			// 
+			// ñîçäàòüÑ÷¸òToolStripMenuItem1
+			// 
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem1->Name = L"ñîçäàòüÑ÷¸òToolStripMenuItem1";
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem1->Size = System::Drawing::Size(227, 26);
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem1->Text = L"Ñîçäàòü ñ÷¸ò";
+			this->ñîçäàòüÑ÷¸òToolStripMenuItem1->Click += gcnew System::EventHandler(this, &Account_TableForm::ñîçäàòüÑ÷¸òToolStripMenuItem1_Click);
+			// 
+			// ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem
+			// 
+			this->ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem->Name = L"ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem";
+			this->ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem->Size = System::Drawing::Size(227, 26);
+			this->ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem->Text = L"Ğåäàêòèğîâàòü ñ÷¸ò";
+			this->ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem_Click);
+			// 
+			// óäàëèòüÑ÷¸òToolStripMenuItem
+			// 
+			this->óäàëèòüÑ÷¸òToolStripMenuItem->Name = L"óäàëèòüÑ÷¸òToolStripMenuItem";
+			this->óäàëèòüÑ÷¸òToolStripMenuItem->Size = System::Drawing::Size(227, 26);
+			this->óäàëèòüÑ÷¸òToolStripMenuItem->Text = L"Óäàëèòü ñ÷¸ò";
+			this->óäàëèòüÑ÷¸òToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::óäàëèòüÑ÷¸òToolStripMenuItem_Click);
 			// 
 			// ïğîñìîòğÒğàíçàêöèéToolStripMenuItem
 			// 
@@ -150,20 +196,6 @@ namespace Courseproject {
 			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem->Text = L"Ïîêàçàòü òîëüêî äëÿ îäíîãî ñ÷¸òà";
 			this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click);
 			// 
-			// èíôîğìàöèÿToolStripMenuItem
-			// 
-			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
-			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 24);
-			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ";
-			this->èíôîğìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::èíôîğìàöèÿToolStripMenuItem_Click);
-			// 
-			// âåğíóòüñÿÂÌåíşToolStripMenuItem
-			// 
-			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Name = L"âåğíóòüñÿÂÌåíşToolStripMenuItem";
-			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Size = System::Drawing::Size(154, 24);
-			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Text = L"Âåğíóòüñÿ â ìåíş ";
-			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::âåğíóòüñÿÂÌåíşToolStripMenuItem_Click);
-			// 
 			// êîíâåğòàöèÿToolStripMenuItem
 			// 
 			this->êîíâåğòàöèÿToolStripMenuItem->Name = L"êîíâåğòàöèÿToolStripMenuItem";
@@ -178,6 +210,20 @@ namespace Courseproject {
 			this->àíàëèòèêàToolStripMenuItem->Text = L"Àíàëèòèêà";
 			this->àíàëèòèêàToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::àíàëèòèêàToolStripMenuItem_Click);
 			// 
+			// èíôîğìàöèÿToolStripMenuItem
+			// 
+			this->èíôîğìàöèÿToolStripMenuItem->Name = L"èíôîğìàöèÿToolStripMenuItem";
+			this->èíôîğìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 24);
+			this->èíôîğìàöèÿToolStripMenuItem->Text = L"Èíôîğìàöèÿ";
+			this->èíôîğìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::èíôîğìàöèÿToolStripMenuItem_Click);
+			// 
+			// âåğíóòüñÿÂÌåíşToolStripMenuItem
+			// 
+			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Name = L"âåğíóòüñÿÂÌåíşToolStripMenuItem";
+			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Size = System::Drawing::Size(154, 24);
+			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Text = L"Âåğíóòüñÿ â ìåíş ";
+			this->âåğíóòüñÿÂÌåíşToolStripMenuItem->Click += gcnew System::EventHandler(this, &Account_TableForm::âåğíóòüñÿÂÌåíşToolStripMenuItem_Click);
+			// 
 			// groupBox1
 			// 
 			this->groupBox1->Controls->Add(this->labelAccounts);
@@ -186,7 +232,7 @@ namespace Courseproject {
 			this->groupBox1->Controls->Add(this->dataGridViewTransactions);
 			this->groupBox1->Location = System::Drawing::Point(60, 433);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(894, 199);
+			this->groupBox1->Size = System::Drawing::Size(871, 199);
 			this->groupBox1->TabIndex = 2;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"groupBox1";
@@ -230,11 +276,67 @@ namespace Courseproject {
 			this->dataGridViewTransactions->Size = System::Drawing::Size(662, 150);
 			this->dataGridViewTransactions->TabIndex = 0;
 			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->comboBox_del_ch_ac);
+			this->groupBox2->Controls->Add(this->label_del_ch);
+			this->groupBox2->Controls->Add(this->button_del_ac);
+			this->groupBox2->Controls->Add(this->button_change_ac);
+			this->groupBox2->Location = System::Drawing::Point(995, 433);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(252, 199);
+			this->groupBox2->TabIndex = 3;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"groupBox2";
+			this->groupBox2->Visible = false;
+			// 
+			// comboBox_del_ch_ac
+			// 
+			this->comboBox_del_ch_ac->FormattingEnabled = true;
+			this->comboBox_del_ch_ac->Location = System::Drawing::Point(45, 89);
+			this->comboBox_del_ch_ac->Name = L"comboBox_del_ch_ac";
+			this->comboBox_del_ch_ac->Size = System::Drawing::Size(121, 24);
+			this->comboBox_del_ch_ac->TabIndex = 4;
+			this->comboBox_del_ch_ac->Visible = false;
+			// 
+			// label_del_ch
+			// 
+			this->label_del_ch->AutoSize = true;
+			this->label_del_ch->Location = System::Drawing::Point(42, 41);
+			this->label_del_ch->Name = L"label_del_ch";
+			this->label_del_ch->Size = System::Drawing::Size(46, 17);
+			this->label_del_ch->TabIndex = 3;
+			this->label_del_ch->Text = L"label1";
+			this->label_del_ch->Visible = false;
+			// 
+			// button_del_ac
+			// 
+			this->button_del_ac->Location = System::Drawing::Point(171, 156);
+			this->button_del_ac->Name = L"button_del_ac";
+			this->button_del_ac->Size = System::Drawing::Size(75, 23);
+			this->button_del_ac->TabIndex = 2;
+			this->button_del_ac->Text = L"button2";
+			this->button_del_ac->UseVisualStyleBackColor = true;
+			this->button_del_ac->Visible = false;
+			this->button_del_ac->Click += gcnew System::EventHandler(this, &Account_TableForm::button_del_ac_Click);
+			// 
+			// button_change_ac
+			// 
+			this->button_change_ac->Location = System::Drawing::Point(45, 156);
+			this->button_change_ac->Name = L"button_change_ac";
+			this->button_change_ac->Size = System::Drawing::Size(75, 23);
+			this->button_change_ac->TabIndex = 1;
+			this->button_change_ac->Text = L"button1";
+			this->button_change_ac->UseVisualStyleBackColor = true;
+			this->button_change_ac->Visible = false;
+			this->button_change_ac->Click += gcnew System::EventHandler(this, &Account_TableForm::button_change_ac_Click);
+			// 
 			// Account_TableForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1286, 698);
+			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->menuStrip1);
@@ -248,12 +350,14 @@ namespace Courseproject {
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewTransactions))->EndInit();
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox2->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void ñîçäàòüÑ÷¸òToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void ñîçäàòüÑ÷¸òToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ïîêàçàòüÂñåÒğàíçàêöèèToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void buttonLoadTransactions_Click(System::Object^ sender, System::EventArgs^ e);
@@ -261,5 +365,11 @@ private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, 
 private: System::Void âåğíóòüñÿÂÌåíşToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void êîíâåğòàöèÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void àíàëèòèêàToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+
+private: System::Void ğåäàêòèğîâàòüÑ÷¸òToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void óäàëèòüÑ÷¸òToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+
+private: System::Void button_del_ac_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_change_ac_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
