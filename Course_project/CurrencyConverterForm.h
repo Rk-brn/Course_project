@@ -193,12 +193,14 @@ namespace Courseproject {
 			this->редактироватьВалютуToolStripMenuItem->Name = L"редактироватьВалютуToolStripMenuItem";
 			this->редактироватьВалютуToolStripMenuItem->Size = System::Drawing::Size(247, 26);
 			this->редактироватьВалютуToolStripMenuItem->Text = L"Редактировать валюту";
+			this->редактироватьВалютуToolStripMenuItem->Click += gcnew System::EventHandler(this, &CurrencyConverterForm::редактироватьВалютуToolStripMenuItem_Click);
 			// 
 			// удалитьВалютуToolStripMenuItem
 			// 
 			this->удалитьВалютуToolStripMenuItem->Name = L"удалитьВалютуToolStripMenuItem";
 			this->удалитьВалютуToolStripMenuItem->Size = System::Drawing::Size(247, 26);
 			this->удалитьВалютуToolStripMenuItem->Text = L"Удалить валюту";
+			this->удалитьВалютуToolStripMenuItem->Click += gcnew System::EventHandler(this, &CurrencyConverterForm::удалитьВалютуToolStripMenuItem_Click);
 			// 
 			// информаицияToolStripMenuItem
 			// 
@@ -244,5 +246,7 @@ namespace Courseproject {
 private: System::Void информаицияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void вернутьсяКСчетамToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void buttonConversion_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void редактироватьВалютуToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void удалитьВалютуToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

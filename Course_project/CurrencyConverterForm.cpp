@@ -187,4 +187,38 @@ namespace Courseproject {
         }
         return System::Void();
     }
+    System::Void CurrencyConverterForm::ðåäàêòèðîâàòüÂàëþòóToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        CurrencyCreatForm^ change = gcnew CurrencyCreatForm();
+        change->label_Name->Visible = false;
+        change->label_Rate->Visible = false;
+        change->textBoxCurrencyName->Visible = false;
+        change->textBoxCurrencyRate->Visible = false;
+        change->buttonCreatCurrency->Visible = false;
+        change->dataGridViewCurrencies->Visible = true;
+        change->comboBoxCurrencies->Visible = true;
+        change->button_EditCurrency->Visible = true;
+        change->button_DelCurrency->Visible = true;
+        change->groupBox1->Visible = true;
+        change->ShowDialog();
+        LoadCurrenciesToComboBox();
+        return System::Void();
+    }
+    System::Void CurrencyConverterForm::óäàëèòüÂàëþòóToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        CurrencyCreatForm^ del = gcnew CurrencyCreatForm();
+        del->label_Name->Visible = false;
+        del->label_Rate->Visible = false;
+        del->textBoxCurrencyName->Visible = false;
+        del->textBoxCurrencyRate->Visible = false;
+        del->buttonCreatCurrency->Visible = false;
+        del->dataGridViewCurrencies->Visible = true;
+        del->comboBoxCurrencies->Visible = true;
+        del->button_EditCurrency->Visible = true;
+        del->button_DelCurrency->Visible = true;
+        del->groupBox1->Visible = true;
+        del->ShowDialog();
+        LoadCurrenciesToComboBox();
+        return System::Void();
+    }
 }
