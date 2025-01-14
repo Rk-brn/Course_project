@@ -219,6 +219,8 @@ namespace Courseproject {
             this->textBox_edit_del_tr->Visible = false;
             this->textBox_edit_del_tr->Clear();
             this->button_edit_del_tr->Visible = false;
+            this->button_changed_tr->Visible = false;
+            this->button_changed_tr->Enabled = false;
             flag_del = 0;
        }
         else if (!flag_del) {
@@ -227,6 +229,9 @@ namespace Courseproject {
             this->textBox_edit_del_tr->Visible = true;
             this->textBox_edit_del_tr->Text = "";
             this->button_edit_del_tr->Visible = true;
+            this->button_edit_del_tr->Enabled = true;
+            this->button_changed_tr->Visible = false;
+            this->button_changed_tr->Enabled = false;
             this->button_edit_del_tr->Text = "Удалить запись";
             flag_del = 1;
         }
@@ -320,6 +325,8 @@ namespace Courseproject {
             this->textBox_edit_del_tr->Visible = false;
             this->textBox_edit_del_tr->Clear();
             this->button_changed_tr->Visible = false;
+            this->button_edit_del_tr->Visible = false;
+            this->button_edit_del_tr->Enabled = false;
             flag_edit = 0;
         }
         else if (!flag_edit) {
@@ -328,6 +335,9 @@ namespace Courseproject {
             this->textBox_edit_del_tr->Visible = true;
             this->textBox_edit_del_tr->Text = "";
             this->button_changed_tr->Visible = true;
+            this->button_changed_tr->Enabled = true;
+            this->button_edit_del_tr->Visible = false;
+            this->button_edit_del_tr->Enabled = false;
             this->button_changed_tr->Text = "Редактировать запись";
             flag_edit = 1;
         }

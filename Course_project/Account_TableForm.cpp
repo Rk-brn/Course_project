@@ -14,6 +14,9 @@ namespace Courseproject {
     void Account_TableForm::LoadAccountsToDataGridView() {
         dataGridView1->Columns->Clear();
         // Добавляем столбцы
+        // Добавляем столбец для номера строки
+        dataGridView1->Columns->Add("RowNumber", "#");
+        dataGridView1->Columns[0]->Width = 40;
         dataGridView1->Columns->Add("Name", "Имя счёта");
         dataGridView1->Columns->Add("Balance", "Баланс");
         dataGridView1->Columns->Add("TransactionCount", "Кол-во транзакций");
@@ -24,6 +27,7 @@ namespace Courseproject {
 
         if (file.is_open())
         {
+            int rowNumber = 1;
             std::string line;
             while (std::getline(file, line))
             {
@@ -49,10 +53,12 @@ namespace Courseproject {
                             if (std::getline(iss, description, ','))
                             {
                                 int rowIndex = dataGridView1->Rows->Add();
+                                dataGridView1->Rows[rowIndex]->Cells["RowNumber"]->Value = rowNumber;
                                 dataGridView1->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(accountName.c_str());
                                 dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = gcnew System::String(balanceString.c_str());
                                 dataGridView1->Rows[rowIndex]->Cells["TransactionCount"]->Value = gcnew System::String(countString.c_str());
                                 dataGridView1->Rows[rowIndex]->Cells["Description"]->Value = gcnew System::String(description.c_str());
+                                rowNumber++;
                             }
                         }
                     }
@@ -298,7 +304,7 @@ namespace Courseproject {
         dataGridViewTransactions->Columns->Add("Date", "Дата");
         dataGridViewTransactions->Columns->Add("Type", "Тип");
         dataGridViewTransactions->Columns->Add("Category", "Категория");
-
+        int flag_empty = 0;
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("transactions.txt"));
         std::ifstream file(filePath);
@@ -326,6 +332,7 @@ namespace Courseproject {
                                             dataGridViewTransactions->Rows[rowIndex]->Cells["Date"]->Value = gcnew System::String(dateStr.c_str());
                                             dataGridViewTransactions->Rows[rowIndex]->Cells["Type"]->Value = gcnew System::String(typeStr.c_str());
                                             dataGridViewTransactions->Rows[rowIndex]->Cells["Category"]->Value = gcnew System::String(categoryStr.c_str());
+                                            flag_empty = 1;
                                         }
                                     }
                                 }
@@ -335,32 +342,37 @@ namespace Courseproject {
                 }
             }
         }
+        if (!flag_empty)
+        {
+            MessageBox::Show("По вашему запросу ничего не найдено.", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            return;
+        }
         file.close();
     }
     
 
 
     System::Void Account_TableForm::показатьТолькоДляОдногоСчётаToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-    {/*
+    {
         if (table_transaction) {
-            this->groupBox_prosmotr_category->Visible = false;
-            this->dataGridView1->Visible = false;
-            this->button1->Visible = false;
-            this->button2->Visible = false;
-            this->textBoxdel_cat->Visible = false;
-            this->textBoxdel_cat->Clear();
-            flag_prosmotr = 0;
+            this->groupBox1->Visible = false;
+            this->dataGridViewTransactions->Visible = false;
+            this->buttonLoadTransactions->Visible = false;
+            this->comboBoxAccounts->Visible = false;
+            this->labelAccounts->Visible = false;
+            table_transaction = 0;
         }
-        else if (!flag_prosmotr) {
+        else if (!table_transaction) {
             this->groupBox1->Visible = true;
-            this->dataGridView1->Visible = true;
-            this->button1->Visible = true;
-            this->button1->Enabled = true;
-            this->button2->Visible = false;
-            this->button2->Enabled = false;
-            flag_prosmotr = 1;
-        }*/
-        groupBox1->Visible = true;
+            this->groupBox1 -> Text = "Поиск транзакций по счёту!";
+            this->dataGridViewTransactions->Visible = true;
+            this->buttonLoadTransactions->Visible = true;
+            this->buttonLoadTransactions->Text = "Найти транзакции!";
+            this->comboBoxAccounts->Visible = true;
+            this->labelAccounts->Visible = true;
+            table_transaction = 1;
+        }
+        
         LoadAccountsToComboBox();
         return System::Void();
     }
