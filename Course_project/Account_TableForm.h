@@ -60,7 +60,8 @@ namespace Courseproject {
 
 	private:
 		void LoadAccountsToDataGridView();
-
+		int flag_edit_ac = 0;
+		int flag_del_ac = 0;
 		int table_transaction = 0;
 		void UpdateTransactionAccount(const std::string& oldAccountName, const std::string& newAccountName, bool updateAll);
 		void SaveUpdatedAccountToFile(const std::string& accountName, const std::string& newBalance, const std::string& newTransactionCount, const std::string& newDescription);
@@ -179,6 +180,7 @@ namespace Courseproject {
 				this->ïîêàçàòüÂñåÒðàíçàêöèèToolStripMenuItem,
 					this->ïîêàçàòüÒîëüêîÄëÿÎäíîãîÑ÷¸òàToolStripMenuItem
 			});
+			this->ïðîñìîòðÒðàíçàêöèéToolStripMenuItem->Enabled = false;
 			this->ïðîñìîòðÒðàíçàêöèéToolStripMenuItem->Name = L"ïðîñìîòðÒðàíçàêöèéToolStripMenuItem";
 			this->ïðîñìîòðÒðàíçàêöèéToolStripMenuItem->Size = System::Drawing::Size(179, 24);
 			this->ïðîñìîòðÒðàíçàêöèéToolStripMenuItem->Text = L"Ïðîñìîòð òðàíçàêöèé";
@@ -312,22 +314,22 @@ namespace Courseproject {
 			// 
 			// button_del_ac
 			// 
-			this->button_del_ac->Location = System::Drawing::Point(171, 156);
+			this->button_del_ac->Location = System::Drawing::Point(128, 156);
 			this->button_del_ac->Name = L"button_del_ac";
-			this->button_del_ac->Size = System::Drawing::Size(75, 23);
+			this->button_del_ac->Size = System::Drawing::Size(118, 23);
 			this->button_del_ac->TabIndex = 2;
-			this->button_del_ac->Text = L"button2";
+			this->button_del_ac->Text = L"Óäàëèòü";
 			this->button_del_ac->UseVisualStyleBackColor = true;
 			this->button_del_ac->Visible = false;
 			this->button_del_ac->Click += gcnew System::EventHandler(this, &Account_TableForm::button_del_ac_Click);
 			// 
 			// button_change_ac
 			// 
-			this->button_change_ac->Location = System::Drawing::Point(45, 156);
+			this->button_change_ac->Location = System::Drawing::Point(128, 156);
 			this->button_change_ac->Name = L"button_change_ac";
-			this->button_change_ac->Size = System::Drawing::Size(75, 23);
+			this->button_change_ac->Size = System::Drawing::Size(118, 23);
 			this->button_change_ac->TabIndex = 1;
-			this->button_change_ac->Text = L"button1";
+			this->button_change_ac->Text = L"Ðåäàêòèðîâàòü";
 			this->button_change_ac->UseVisualStyleBackColor = true;
 			this->button_change_ac->Visible = false;
 			this->button_change_ac->Click += gcnew System::EventHandler(this, &Account_TableForm::button_change_ac_Click);

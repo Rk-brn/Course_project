@@ -24,10 +24,10 @@ namespace Courseproject {
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
         std::ifstream file(filePath);
-
+        int flag_rowNumber = 0;
         if (file.is_open())
         {
-            int rowNumber = 1;
+            int rowNumber = 0;
             std::string line;
             while (std::getline(file, line))
             {
@@ -52,6 +52,7 @@ namespace Courseproject {
                             std::getline(countStream, countString, ':');
                             if (std::getline(iss, description, ','))
                             {
+                                rowNumber++;
                                 double balance = std::stod(balanceStr) / 100.0;
                                 System::String^ formattedBalance = String::Format("{0:F2}", balance);
                                 int rowIndex = dataGridView1->Rows->Add();
@@ -60,14 +61,20 @@ namespace Courseproject {
                                 dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = formattedBalance;
                                 dataGridView1->Rows[rowIndex]->Cells["TransactionCount"]->Value = gcnew System::String(countString.c_str());
                                 dataGridView1->Rows[rowIndex]->Cells["Description"]->Value = gcnew System::String(description.c_str());
-                                rowNumber++;
+                                flag_rowNumber = 1;
                             }
                         }
                     }
                 }
+                
             }
             file.close();
         }
+        
+        if (flag_rowNumber == 1) {
+            this->просмотрТранзакцийToolStripMenuItem->Enabled = true;
+        }
+        if (flag_rowNumber == 0) { this->просмотрТранзакцийToolStripMenuItem->Enabled = false; }
     }
 
 
@@ -122,7 +129,7 @@ namespace Courseproject {
     }
 
     int Account_TableForm::GetBalanceFromTransactions(const std::string& accountName) {
-        
+
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("transactions.txt"));
         std::ifstream file(filePath);
@@ -205,7 +212,7 @@ namespace Courseproject {
                     std::string currentAccountName;
                     std::getline(nameStream, currentAccountName, ':');
                     accounts.push_back(currentAccountName);
-                    
+
                 }
 
             }
@@ -343,7 +350,7 @@ namespace Courseproject {
             }
             outFile.close();
         }
-    
+
     }
 
     void Account_TableForm::LoadAccountsToComboBox() {
@@ -453,7 +460,7 @@ namespace Courseproject {
         }
         file.close();
     }
-    
+
     void Account_TableForm::DeleteAccountTransactions(const std::string& accountName, bool deleteTransactions) {
         if (deleteTransactions) {
             msclr::interop::marshal_context context;
@@ -534,7 +541,7 @@ namespace Courseproject {
         }
         else if (!table_transaction) {
             this->groupBox1->Visible = true;
-            this->groupBox1 -> Text = "Поиск транзакций по счёту!";
+            this->groupBox1->Text = "Поиск транзакций по счёту!";
             this->dataGridViewTransactions->Visible = true;
             this->buttonLoadTransactions->Visible = true;
             this->buttonLoadTransactions->Text = "Найти транзакции!";
@@ -542,7 +549,7 @@ namespace Courseproject {
             this->labelAccounts->Visible = true;
             table_transaction = 1;
         }
-        
+
         LoadAccountsToComboBox();
         return System::Void();
     }
@@ -582,23 +589,47 @@ namespace Courseproject {
     System::Void Account_TableForm::редактироватьСчётToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
         LoadAccountsToComboBox_del();
-        groupBox2->Visible = true;
-        groupBox2->Text = "Редактирование счёта!";
-        comboBox_del_ch_ac->Visible = true;
-        label_del_ch->Visible = true;
-        label_del_ch->Text = "Выберете счёт для редактирования!";
-        button_change_ac->Visible = true;
+        if (flag_edit_ac) {
+            groupBox2->Visible = false;
+            groupBox2->Text = "Редактирование счёта!";
+            comboBox_del_ch_ac->Visible = false;
+            label_del_ch->Visible = false;
+            label_del_ch->Text = "Выберете счёт для редактирования!";
+            button_change_ac->Visible = false;
+            flag_edit_ac = 0;
+        }
+        else if (!flag_edit_ac) {
+            groupBox2->Visible = true;
+            groupBox2->Text = "Редактирование счёта!";
+            comboBox_del_ch_ac->Visible = true;
+            label_del_ch->Visible = true;
+            label_del_ch->Text = "Выберете счёт для редактирования!";
+            button_change_ac->Visible = true;
+            flag_edit_ac = 1;
+        }
         return System::Void();
     }
     System::Void Account_TableForm::удалитьСчётToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
         LoadAccountsToComboBox_del();
-        groupBox2->Visible = true;
-        groupBox2->Text = "Удаление счёта!";
-        comboBox_del_ch_ac->Visible = true;
-        label_del_ch->Visible = true;
-        label_del_ch->Text = "Выберете счёт для удаления!";
-        button_del_ac->Visible = true;
+        if (flag_del_ac) {
+            groupBox2->Visible = false;
+            groupBox2->Text = "Удаление счёта!";
+            comboBox_del_ch_ac->Visible = false;
+            label_del_ch->Visible = false;
+            label_del_ch->Text = "Выберете счёт для удаления!";
+            button_del_ac->Visible = false;
+            flag_del_ac = 0;
+        }
+        else if (!flag_del_ac) {
+            groupBox2->Visible = true;
+            groupBox2->Text = "Удаление счёта!";
+            comboBox_del_ch_ac->Visible = true;
+            label_del_ch->Visible = true;
+            label_del_ch->Text = "Выберете счёт для удаления!";
+            button_del_ac->Visible = true;
+            flag_del_ac = 1;
+        }
         return System::Void();
 
     }
@@ -638,7 +669,7 @@ namespace Courseproject {
         if (comboBox_del_ch_ac->SelectedItem != nullptr) {
             String^ selectedAccount = comboBox_del_ch_ac->SelectedItem->ToString();
             std::string stdOldAccountName = msclr::interop::marshal_as<std::string>(selectedAccount);
-            String^ balance; 
+            String^ balance;
             String^ transactionCount;
             String^ description;
             msclr::interop::marshal_context context;
@@ -669,36 +700,14 @@ namespace Courseproject {
             AccountForm^ accountForm = gcnew AccountForm();
             accountForm->SetEditMode(true);
             accountForm->SetAccountData(selectedAccount, balance, transactionCount, description);
-            if (accountForm->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-                String^ newAccountName = accountForm->Controls["textBox_name_account"]->Text;
-                String^ newBalance = accountForm->Controls["textBox_balance"]->Text;
-                String^ newTransactionCount = accountForm->Controls["textBox_transaction_count"]->Text;
-                String^ newDescription = accountForm->Controls["textBox_description"]->Text;
+            accountForm->ShowDialog();
 
-                if (newAccountName != selectedAccount)
-                {
-                    if (MessageBox::Show("Изменить имя счёта во всех транзакциях?", "Изменение имени", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes)
-                    {
-                        std::string stdNewAccountName = msclr::interop::marshal_as<std::string>(newAccountName);
-                        UpdateTransactionAccount(stdOldAccountName, stdNewAccountName, true);
-                    }
-                    else
-                    {
-                        std::string stdNewAccountName = msclr::interop::marshal_as<std::string>(newAccountName);
-                        UpdateTransactionAccount(stdOldAccountName, stdNewAccountName, false);
-                    }
-                }
-                std::string stdNewBalance = msclr::interop::marshal_as<std::string>(newBalance);
-                std::string stdNewTransactionCount = msclr::interop::marshal_as<std::string>(newTransactionCount);
-                std::string stdNewDescription = msclr::interop::marshal_as<std::string>(newDescription);
-                SaveUpdatedAccountToFile(stdOldAccountName, stdNewBalance, stdNewTransactionCount, stdNewDescription);
-                LoadAccountsToDataGridView();
-                UpdateBalancesFromTransactions();
-                LoadAccountsToComboBox();
-                groupBox2->Visible = false;
-            }
+            
+            LoadAccountsToDataGridView();
+            groupBox2->Visible = false;
         }
-        else {
+        if (comboBox_del_ch_ac->SelectedItem == nullptr)
+        {
             MessageBox::Show("Пожалуйста, выберите счёт", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Warning);
         }
         return System::Void();
