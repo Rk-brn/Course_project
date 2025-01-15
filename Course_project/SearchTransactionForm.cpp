@@ -4,12 +4,19 @@
 #include <msclr\marshal_cppstd.h>
 #include <vector>
 #include <Windows.h>
+#include <regex>  // Для использования регулярных выражений
+#include <algorithm> // Для std::remove
 
 namespace Courseproject {
     SearchTransactionForm::SearchTransactionForm()
     {
         InitializeComponent();
         LoadCategoriesAndAccountsToComboBoxes();
+    }
+    bool SearchTransactionForm::isValidTransactionAmount(const std::string& str)
+    {
+        std::regex pattern("^\\d+\\.\\d{2}$");
+        return std::regex_match(str, pattern);
     }
     void SearchTransactionForm::LoadCategoriesAndAccountsToComboBoxes()
     {
@@ -143,15 +150,19 @@ namespace Courseproject {
                     }
                     //Поиск по сумме
                     if (checkBoxAmount->Checked) {
-                        int amountSearch = 0;
-                        try
+                        String^ transactionAmountStr = textBoxAmount->Text;
+                        std::string transactionAmountStrStd = context.marshal_as<std::string>(transactionAmountStr);
+                        if (!isValidTransactionAmount(transactionAmountStrStd))
                         {
-                            amountSearch = Int32::Parse(textBoxAmount->Text);
+                            MessageBox::Show("Некорректный ввод суммы. Введите число в формате целое.сотые (например, 123.45)", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                            return;
                         }
-                        catch (System::FormatException^)
-                        {
-                            match = false;
-                        }
+
+                        double amount = std::stod(transactionAmountStrStd) * 100.0;
+                        
+
+                        int amountSearch = static_cast<int>(std::round(amount));
+                        
                         if (match) {
                             if (radioButtonAmountEqual->Checked) {
                                 if (newTransaction.getAmount() != amountSearch)
@@ -226,8 +237,11 @@ namespace Courseproject {
         for (const auto& transaction : filteredTransactions) {
             int rowIndex = dataGridView_search->Rows->Add();
             dataGridView_search->Rows[rowIndex]->Cells["RowNumber"]->Value = rowNumber;
+            // Форматирование суммы транзакции
+            double amount = static_cast<double>(transaction.getAmount()) / 100.0;
+            System::String^ formattedAmount = String::Format("{0:F2}", amount);
             dataGridView_search->Rows[rowIndex]->Cells["TransactionName"]->Value = gcnew System::String(transaction.getName().c_str());
-            dataGridView_search->Rows[rowIndex]->Cells["TransactionAmount"]->Value = transaction.getAmount();
+            dataGridView_search->Rows[rowIndex]->Cells["TransactionAmount"]->Value = formattedAmount;
             dataGridView_search->Rows[rowIndex]->Cells["TransactionDate"]->Value = gcnew System::String(transaction.getDate().c_str());
             dataGridView_search->Rows[rowIndex]->Cells["TransactionType"]->Value = gcnew System::String(transaction.getType().c_str());
             if (transaction.getCategory() != nullptr) { // Проверка, что категория не nullptr

@@ -4,6 +4,8 @@
 #include <sstream> // Добавляем заголовочный файл для istringstream
 #include <fstream>
 #include "CategoryForm.h"
+#include <regex>  // Для использования регулярных выражений
+#include <algorithm> // Для std::remove
 
 namespace Courseproject {
     std::vector<Transaction> transactions;
@@ -17,6 +19,11 @@ namespace Courseproject {
         LoadAccountsFromFile();
     }
 
+    bool TransactionForm::isValidTransactionAmount(const std::string& str)
+    {
+        std::regex pattern("^\\d+\\.\\d{2}$");
+        return std::regex_match(str, pattern);
+    }
 
     void  TransactionForm::LoadAccountsFromFile()
     {
@@ -153,12 +160,16 @@ namespace Courseproject {
             return;
         }
 
+        std::string transactionAmountStrStd = msclr::interop::marshal_as<std::string>(transactionAmountStr);
+        if (!isValidTransactionAmount(transactionAmountStrStd))
+        {
+            MessageBox::Show("Некорректный ввод суммы. Введите число в формате целое.сотые (например, 123.45)", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            return;
+        }
 
-        int transactionAmount;
 
-        transactionAmount = std::stoi(msclr::interop::marshal_as<std::string>(transactionAmountStr));
-
-
+        double amount = std::stod(transactionAmountStrStd) * 100.0;
+        int transactionAmount = static_cast<int>(std::round(amount));
 
 
         Category* selectedCategory = nullptr;

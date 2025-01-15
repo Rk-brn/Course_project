@@ -69,7 +69,7 @@ namespace Courseproject {
 		
 	public:
 		std::vector<Transaction> LoadTransactionFile();
-		
+		bool isValidTransactionAmount(const std::string& str);
 		// Загрузка категорий из файла
 		void LoadCategoriesFromFile();
 		// Функция для сохранения транзакций в файл

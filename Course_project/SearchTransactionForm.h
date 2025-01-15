@@ -76,7 +76,7 @@ namespace Courseproject {
 		/// Обязательная переменная конструктора.
 		/// </summary>
 		System::ComponentModel::Container ^components;
-		
+		bool isValidTransactionAmount(const std::string& str);
 		void LoadCategoriesAndAccountsToComboBoxes();
 		void SearchTransactions();
 #pragma region Windows Form Designer generated code

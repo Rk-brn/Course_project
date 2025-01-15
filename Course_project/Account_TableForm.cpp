@@ -52,10 +52,12 @@ namespace Courseproject {
                             std::getline(countStream, countString, ':');
                             if (std::getline(iss, description, ','))
                             {
+                                double balance = std::stod(balanceStr) / 100.0;
+                                System::String^ formattedBalance = String::Format("{0:F2}", balance);
                                 int rowIndex = dataGridView1->Rows->Add();
                                 dataGridView1->Rows[rowIndex]->Cells["RowNumber"]->Value = rowNumber;
                                 dataGridView1->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(accountName.c_str());
-                                dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = gcnew System::String(balanceString.c_str());
+                                dataGridView1->Rows[rowIndex]->Cells["Balance"]->Value = formattedBalance;
                                 dataGridView1->Rows[rowIndex]->Cells["TransactionCount"]->Value = gcnew System::String(countString.c_str());
                                 dataGridView1->Rows[rowIndex]->Cells["Description"]->Value = gcnew System::String(description.c_str());
                                 rowNumber++;
@@ -426,9 +428,11 @@ namespace Courseproject {
                                     if (std::getline(iss, accountType, ';'))
                                     {
                                         if (accountType == accountName) {
+                                            double balance = std::stod(amountStr) / 100.0;
+                                            System::String^ formattedBalance = String::Format("{0:F2}", balance);
                                             int rowIndex = dataGridViewTransactions->Rows->Add();
                                             dataGridViewTransactions->Rows[rowIndex]->Cells["Name"]->Value = gcnew System::String(transactionName.c_str());
-                                            dataGridViewTransactions->Rows[rowIndex]->Cells["Amount"]->Value = gcnew System::String(amountStr.c_str());
+                                            dataGridViewTransactions->Rows[rowIndex]->Cells["Amount"]->Value = formattedBalance;
                                             dataGridViewTransactions->Rows[rowIndex]->Cells["Date"]->Value = gcnew System::String(dateStr.c_str());
                                             dataGridViewTransactions->Rows[rowIndex]->Cells["Type"]->Value = gcnew System::String(typeStr.c_str());
                                             dataGridViewTransactions->Rows[rowIndex]->Cells["Category"]->Value = gcnew System::String(categoryStr.c_str());

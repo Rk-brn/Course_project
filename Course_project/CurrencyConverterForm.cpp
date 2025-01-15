@@ -150,9 +150,11 @@ namespace Courseproject {
             {
                 
                 double kurs = currency.getRate() / 100.0;
+                
                 double convertedBalance = static_cast<double>(balance) / kurs;
+                double balanceV = balance / 100.0;
                 int rowIndex = dataGridViewConversions->Rows->Add();
-                dataGridViewConversions->Rows[rowIndex]->Cells["Balance"]->Value = gcnew String(std::to_string(balance).c_str());
+                dataGridViewConversions->Rows[rowIndex]->Cells["Balance"]->Value = gcnew String(System::String::Format("{0:F2}", balanceV));
                 dataGridViewConversions->Rows[rowIndex]->Cells["ConvertedBalance"]->Value = gcnew String(System::String::Format("{0:F2}", convertedBalance));
                 dataGridViewConversions->Rows[rowIndex]->Cells["Rate"]->Value = gcnew String(System::String::Format("{0:F2}", kurs));
                 break;
