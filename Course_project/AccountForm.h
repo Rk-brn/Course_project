@@ -54,7 +54,10 @@ namespace Courseproject {
 		/// ќб€зательна€ переменна€ конструктора.
 		/// </summary>
 		System::ComponentModel::Container ^components;
-
+		String^ originalAccountName;
+		bool editMode = false;
+	public: void SetEditMode(bool editMode);
+			void SetAccountData(String^ name, String^ balance, String^ transactionCount, String^ description);
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// “ребуемый метод дл€ поддержки конструктора Ч не измен€йте 

@@ -57,11 +57,12 @@ namespace Courseproject {
             file.close();
         }
     }
-    double CurrencyConverterForm::GetAccountBalance(const std::string& accountName) {
+    int CurrencyConverterForm::GetAccountBalance(const std::string& accountName) {
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
         std::ifstream file(filePath);
         int balance = 0;
+        int tr_count = 0;
         if (file.is_open())
         {
             std::string line;
@@ -77,6 +78,9 @@ namespace Courseproject {
                     {
                         if (std::getline(iss, balanceStr, ':'))
                         {
+                            if (std::getline(iss, count, ':')) {
+                                tr_count = std::stoi(count);
+                            }
                             try {
                                 balance = std::stoi(balanceStr);
                             }
@@ -94,6 +98,9 @@ namespace Courseproject {
                 }
             }
             file.close();
+        }
+        if (tr_count == 0) {
+            MessageBox::Show("На данном счёте нет транзакций!", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
         }
         return balance;
     }
@@ -141,16 +148,17 @@ namespace Courseproject {
             System::String^ targetCurrencyNameSystem = gcnew System::String(currencyName.c_str());
             if (currencyNameSystem->Trim() == targetCurrencyNameSystem->Trim())
             {
+                
                 double kurs = currency.getRate() / 100.0;
                 double convertedBalance = static_cast<double>(balance) / kurs;
                 int rowIndex = dataGridViewConversions->Rows->Add();
                 dataGridViewConversions->Rows[rowIndex]->Cells["Balance"]->Value = gcnew String(std::to_string(balance).c_str());
                 dataGridViewConversions->Rows[rowIndex]->Cells["ConvertedBalance"]->Value = gcnew String(System::String::Format("{0:F2}", convertedBalance));
-                dataGridViewConversions->Rows[rowIndex]->Cells["Rate"]->Value = gcnew String(std::to_string(kurs).c_str());
+                dataGridViewConversions->Rows[rowIndex]->Cells["Rate"]->Value = gcnew String(System::String::Format("{0:F2}", kurs));
                 break;
             }
         }
-
+        
     }
    
 
@@ -219,6 +227,13 @@ namespace Courseproject {
         del->groupBox1->Visible = true;
         del->ShowDialog();
         LoadCurrenciesToComboBox();
+        return System::Void();
+    }
+    System::Void CurrencyConverterForm::button_clear_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        comboBoxAccounts->SelectedIndex = -1;
+        comboBoxCurrencies->SelectedIndex = -1;
+        dataGridViewConversions->Rows->Clear();
         return System::Void();
     }
 }

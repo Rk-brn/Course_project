@@ -33,8 +33,9 @@ namespace Courseproject {
 			}
 		}
 	private: System::Windows::Forms::Button^ buttonConversion;
+	private: System::Windows::Forms::Button^ button_clear;
 	protected:
-	private: System::Windows::Forms::Button^ button;
+
 	private: System::Windows::Forms::ComboBox^ comboBoxAccounts;
 	private: System::Windows::Forms::ComboBox^ comboBoxCurrencies;
 	private: System::Windows::Forms::Label^ label1;
@@ -59,7 +60,7 @@ namespace Courseproject {
 
 		std::vector<Currency> LoadCurrenciesFromFile();
 		void LoadConversionResult(const std::string& accountName, const std::string& currencyName);
-		double GetAccountBalance(const std::string& accountName);
+		int GetAccountBalance(const std::string& accountName);
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Требуемый метод для поддержки конструктора — не изменяйте 
@@ -68,7 +69,7 @@ namespace Courseproject {
 		void InitializeComponent(void)
 		{
 			this->buttonConversion = (gcnew System::Windows::Forms::Button());
-			this->button = (gcnew System::Windows::Forms::Button());
+			this->button_clear = (gcnew System::Windows::Forms::Button());
 			this->comboBoxAccounts = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBoxCurrencies = (gcnew System::Windows::Forms::ComboBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -88,22 +89,23 @@ namespace Courseproject {
 			// 
 			// buttonConversion
 			// 
-			this->buttonConversion->Location = System::Drawing::Point(836, 423);
+			this->buttonConversion->Location = System::Drawing::Point(722, 423);
 			this->buttonConversion->Name = L"buttonConversion";
 			this->buttonConversion->Size = System::Drawing::Size(133, 61);
 			this->buttonConversion->TabIndex = 0;
-			this->buttonConversion->Text = L"button1";
+			this->buttonConversion->Text = L"Конверитровать";
 			this->buttonConversion->UseVisualStyleBackColor = true;
 			this->buttonConversion->Click += gcnew System::EventHandler(this, &CurrencyConverterForm::buttonConversion_Click);
 			// 
-			// button
+			// button_clear
 			// 
-			this->button->Location = System::Drawing::Point(833, 534);
-			this->button->Name = L"button";
-			this->button->Size = System::Drawing::Size(136, 56);
-			this->button->TabIndex = 1;
-			this->button->Text = L"button2";
-			this->button->UseVisualStyleBackColor = true;
+			this->button_clear->Location = System::Drawing::Point(722, 512);
+			this->button_clear->Name = L"button_clear";
+			this->button_clear->Size = System::Drawing::Size(136, 61);
+			this->button_clear->TabIndex = 1;
+			this->button_clear->Text = L"Очистка полей";
+			this->button_clear->UseVisualStyleBackColor = true;
+			this->button_clear->Click += gcnew System::EventHandler(this, &CurrencyConverterForm::button_clear_Click);
 			// 
 			// comboBoxAccounts
 			// 
@@ -116,7 +118,7 @@ namespace Courseproject {
 			// comboBoxCurrencies
 			// 
 			this->comboBoxCurrencies->FormattingEnabled = true;
-			this->comboBoxCurrencies->Location = System::Drawing::Point(657, 292);
+			this->comboBoxCurrencies->Location = System::Drawing::Point(614, 292);
 			this->comboBoxCurrencies->Name = L"comboBoxCurrencies";
 			this->comboBoxCurrencies->Size = System::Drawing::Size(121, 24);
 			this->comboBoxCurrencies->TabIndex = 3;
@@ -124,39 +126,41 @@ namespace Courseproject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(428, 99);
+			this->label1->Location = System::Drawing::Point(333, 107);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(46, 17);
+			this->label1->Size = System::Drawing::Size(200, 17);
 			this->label1->TabIndex = 4;
-			this->label1->Text = L"label1";
+			this->label1->Text = L"Конвертация баланса счета ";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(133, 240);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(46, 17);
+			this->label2->Size = System::Drawing::Size(112, 17);
 			this->label2->TabIndex = 5;
-			this->label2->Text = L"label2";
+			this->label2->Text = L"Выберете счёт:";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(667, 239);
+			this->label3->Location = System::Drawing::Point(611, 240);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(46, 17);
+			this->label3->Size = System::Drawing::Size(129, 17);
 			this->label3->TabIndex = 6;
-			this->label3->Text = L"label3";
+			this->label3->Text = L"Выберете валюту:";
 			// 
 			// dataGridViewConversions
 			// 
+			this->dataGridViewConversions->AllowUserToAddRows = false;
 			this->dataGridViewConversions->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridViewConversions->Location = System::Drawing::Point(116, 423);
+			this->dataGridViewConversions->Location = System::Drawing::Point(117, 423);
 			this->dataGridViewConversions->Name = L"dataGridViewConversions";
 			this->dataGridViewConversions->RowHeadersWidth = 51;
 			this->dataGridViewConversions->RowTemplate->Height = 24;
-			this->dataGridViewConversions->Size = System::Drawing::Size(597, 150);
+			this->dataGridViewConversions->Size = System::Drawing::Size(523, 150);
 			this->dataGridViewConversions->TabIndex = 7;
+			this->dataGridViewConversions->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
 			// 
 			// menuStrip1
 			// 
@@ -167,7 +171,7 @@ namespace Courseproject {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1028, 28);
+			this->menuStrip1->Size = System::Drawing::Size(903, 28);
 			this->menuStrip1->TabIndex = 8;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -220,14 +224,14 @@ namespace Courseproject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1028, 706);
+			this->ClientSize = System::Drawing::Size(903, 706);
 			this->Controls->Add(this->dataGridViewConversions);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->comboBoxCurrencies);
 			this->Controls->Add(this->comboBoxAccounts);
-			this->Controls->Add(this->button);
+			this->Controls->Add(this->button_clear);
 			this->Controls->Add(this->buttonConversion);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
@@ -248,5 +252,6 @@ private: System::Void вернутьсяКСчетамToolStripMenuItem_Click(System::Object^ se
 private: System::Void buttonConversion_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void редактироватьВалютуToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void удалитьВалютуToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_clear_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

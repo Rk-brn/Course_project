@@ -62,7 +62,8 @@ namespace Courseproject {
 		void LoadAccountsToDataGridView();
 
 		int table_transaction = 0;
-
+		void UpdateTransactionAccount(const std::string& oldAccountName, const std::string& newAccountName, bool updateAll);
+		void SaveUpdatedAccountToFile(const std::string& accountName, const std::string& newBalance, const std::string& newTransactionCount, const std::string& newDescription);
 		void LoadAccountsToComboBox();
 		void LoadAccountsToComboBox_del();
 		void LoadTransactionsForAccount(const std::string& accountName);

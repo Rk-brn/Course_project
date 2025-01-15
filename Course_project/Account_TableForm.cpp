@@ -271,6 +271,79 @@ namespace Courseproject {
     }
 
 
+    void Account_TableForm::UpdateTransactionAccount(const std::string& oldAccountName, const std::string& newAccountName, bool updateAll)
+    {
+        msclr::interop::marshal_context context;
+        std::string filePath = context.marshal_as<std::string>(gcnew System::String("transactions.txt"));
+        std::ifstream file(filePath);
+        std::vector<std::string> lines;
+
+        if (file.is_open()) {
+            std::string line;
+            while (std::getline(file, line)) {
+                std::istringstream iss(line);
+                std::string transactionName, amountStr, dateStr, typeStr, categoryStr, accountType;
+                if (std::getline(iss, transactionName, ';') &&
+                    std::getline(iss, amountStr, ';') &&
+                    std::getline(iss, dateStr, ';') &&
+                    std::getline(iss, typeStr, ';') &&
+                    std::getline(iss, categoryStr, ';') &&
+                    std::getline(iss, accountType, ';'))
+                {
+                    if (accountType == oldAccountName) {
+                        if (updateAll) {
+                            line = transactionName + ";" + amountStr + ";" + dateStr + ";" + typeStr + ";" + categoryStr + ";" + newAccountName + ";";
+                        }
+                    }
+                }
+                lines.push_back(line);
+            }
+            file.close();
+        }
+        std::ofstream outFile(filePath);
+        if (outFile.is_open()) {
+            for (const auto& line : lines) {
+                outFile << line << std::endl;
+            }
+            outFile.close();
+        }
+    }
+
+    void Account_TableForm::SaveUpdatedAccountToFile(const std::string& accountName, const std::string& newBalance, const std::string& newTransactionCount, const std::string& newDescription)
+    {
+        msclr::interop::marshal_context context;
+        std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
+        std::ifstream file(filePath);
+        std::vector<std::string> lines;
+
+        if (file.is_open()) {
+            std::string line;
+            while (std::getline(file, line)) {
+                std::istringstream iss(line);
+                std::string currentAccountName, balance, transactionCount, description;
+                if (std::getline(iss, currentAccountName, ':') &&
+                    std::getline(iss, balance, ':') &&
+                    std::getline(iss, transactionCount, ':') &&
+                    std::getline(iss, description, ','))
+                {
+                    if (currentAccountName == accountName) {
+                        line = accountName + ":" + newBalance + ":" + newTransactionCount + ":" + newDescription + ",";
+                    }
+                }
+                lines.push_back(line);
+            }
+            file.close();
+        }
+        std::ofstream outFile(filePath);
+        if (outFile.is_open()) {
+            for (const auto& line : lines) {
+                outFile << line << std::endl;
+            }
+            outFile.close();
+        }
+    
+    }
+
     void Account_TableForm::LoadAccountsToComboBox() {
         comboBoxAccounts->Items->Clear();
         msclr::interop::marshal_context context;
@@ -504,6 +577,13 @@ namespace Courseproject {
     }
     System::Void Account_TableForm::редактироватьСчётToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
+        LoadAccountsToComboBox_del();
+        groupBox2->Visible = true;
+        groupBox2->Text = "Редактирование счёта!";
+        comboBox_del_ch_ac->Visible = true;
+        label_del_ch->Visible = true;
+        label_del_ch->Text = "Выберете счёт для редактирования!";
+        button_change_ac->Visible = true;
         return System::Void();
     }
     System::Void Account_TableForm::удалитьСчётToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
@@ -551,6 +631,72 @@ namespace Courseproject {
     }
     System::Void Account_TableForm::button_change_ac_Click(System::Object^ sender, System::EventArgs^ e)
     {
+        if (comboBox_del_ch_ac->SelectedItem != nullptr) {
+            String^ selectedAccount = comboBox_del_ch_ac->SelectedItem->ToString();
+            std::string stdOldAccountName = msclr::interop::marshal_as<std::string>(selectedAccount);
+            String^ balance; 
+            String^ transactionCount;
+            String^ description;
+            msclr::interop::marshal_context context;
+            std::string filePath = context.marshal_as<std::string>(gcnew System::String("account.txt"));
+            std::ifstream file(filePath);
+
+            if (file.is_open()) {
+                std::string line;
+                while (std::getline(file, line)) {
+                    std::istringstream iss(line);
+                    std::string currentAccountName, balanceFromFile, transactionCountFromFile, descriptionFromFile;
+                    if (std::getline(iss, currentAccountName, ':') &&
+                        std::getline(iss, balanceFromFile, ':') &&
+                        std::getline(iss, transactionCountFromFile, ':') &&
+                        std::getline(iss, descriptionFromFile, ','))
+                    {
+                        if (currentAccountName == stdOldAccountName) {
+                            balance = gcnew String(balanceFromFile.c_str());
+                            transactionCount = gcnew String(transactionCountFromFile.c_str());
+                            description = gcnew String(descriptionFromFile.c_str());
+                            break;
+                        }
+                    }
+                }
+                file.close();
+            }
+
+            AccountForm^ accountForm = gcnew AccountForm();
+            accountForm->SetEditMode(true);
+            accountForm->SetAccountData(selectedAccount, balance, transactionCount, description);
+            if (accountForm->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+                String^ newAccountName = accountForm->Controls["textBox_name_account"]->Text;
+                String^ newBalance = accountForm->Controls["textBox_balance"]->Text;
+                String^ newTransactionCount = accountForm->Controls["textBox_transaction_count"]->Text;
+                String^ newDescription = accountForm->Controls["textBox_description"]->Text;
+
+                if (newAccountName != selectedAccount)
+                {
+                    if (MessageBox::Show("Изменить имя счёта во всех транзакциях?", "Изменение имени", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes)
+                    {
+                        std::string stdNewAccountName = msclr::interop::marshal_as<std::string>(newAccountName);
+                        UpdateTransactionAccount(stdOldAccountName, stdNewAccountName, true);
+                    }
+                    else
+                    {
+                        std::string stdNewAccountName = msclr::interop::marshal_as<std::string>(newAccountName);
+                        UpdateTransactionAccount(stdOldAccountName, stdNewAccountName, false);
+                    }
+                }
+                std::string stdNewBalance = msclr::interop::marshal_as<std::string>(newBalance);
+                std::string stdNewTransactionCount = msclr::interop::marshal_as<std::string>(newTransactionCount);
+                std::string stdNewDescription = msclr::interop::marshal_as<std::string>(newDescription);
+                SaveUpdatedAccountToFile(stdOldAccountName, stdNewBalance, stdNewTransactionCount, stdNewDescription);
+                LoadAccountsToDataGridView();
+                UpdateBalancesFromTransactions();
+                LoadAccountsToComboBox();
+                groupBox2->Visible = false;
+            }
+        }
+        else {
+            MessageBox::Show("Пожалуйста, выберите счёт", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        }
         return System::Void();
     }
 }
