@@ -3,16 +3,18 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <msclr/marshal_cppstd.h>  // Правильный путь к файлу
+#include <msclr/marshal_cppstd.h>
 #include <algorithm>
+#include <regex>
 
 namespace Courseproject {
     const char* CURRENCY_FILE_NAME = "currencies.txt";
 
-    // Функция для проверки, является ли строка числом (теперь константная ссылка)
-    bool isNumber(const std::string& str)
+    // Функция для проверки, является ли строка корректным курсом валюты (теперь константная ссылка)
+    bool isValidCurrencyRate(const std::string& str)
     {
-        return std::all_of(str.begin(), str.end(), ::isdigit);
+        std::regex pattern("^\\d+\\.\\d{2}$");
+        return std::regex_match(str, pattern);
     }
 
     CurrencyCreatForm::CurrencyCreatForm(void) : currencyFilePath(gcnew System::String(CURRENCY_FILE_NAME))
@@ -30,6 +32,13 @@ namespace Courseproject {
         dataGridViewCurrencies->Columns->Add("CurrencyName", "Название валюты");
         dataGridViewCurrencies->Columns->Add("CurrencyRate", "Курс валюты");
 
+
+        // Автоматический размер столбцов (по содержимому)
+        dataGridViewCurrencies->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+
+        // Задаем минимальную ширину для первого столбца
+        dataGridViewCurrencies->Columns[0]->MinimumWidth = 150;
+
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(currencyFilePath);
         std::ifstream file(filePath);
@@ -39,8 +48,25 @@ namespace Courseproject {
                 size_t separatorPos = line.find(':');
                 if (separatorPos != std::string::npos) {
                     std::string name = line.substr(0, separatorPos);
-                    std::string rate = line.substr(separatorPos + 1);
-                    dataGridViewCurrencies->Rows->Add(gcnew System::String(name.c_str()), gcnew System::String(rate.c_str()));
+                    std::string rateStr = line.substr(separatorPos + 1);
+
+                    double rate = 0.0;
+                    try {
+                        rate = std::stod(rateStr) / 100.0;
+                    }
+                    catch (const std::invalid_argument& e) {
+
+                        System::String^ message = gcnew System::String("Ошибка преобразования курса валют: ") + gcnew System::String(e.what());
+                        MessageBox::Show(message, "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                        continue;
+                    }
+                    catch (const std::out_of_range& e) {
+                        System::String^ message = gcnew System::String("Ошибка диапазона курса валют: ") + gcnew System::String(e.what());
+                        MessageBox::Show(message, "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                        continue;
+                    }
+                    System::String^ formattedRate = String::Format("{0:F2}", rate);
+                    dataGridViewCurrencies->Rows->Add(gcnew System::String(name.c_str()), formattedRate);
                 }
             }
             file.close();
@@ -69,21 +95,28 @@ namespace Courseproject {
 
     System::Void CurrencyCreatForm::buttonCreatCurrency_Click(System::Object^ sender, System::EventArgs^ e)
     {
+
         msclr::interop::marshal_context context;
         std::string filePath = context.marshal_as<std::string>(currencyFilePath);
         std::ofstream file(filePath, std::ios::app);
 
+        if (String::IsNullOrEmpty(textBoxCurrencyName->Text) || String::IsNullOrEmpty(textBoxCurrencyRate->Text)) {
+            MessageBox::Show("Пожалуйста, заполните все поля!", "Предупреждение", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+            return; // Выход из функции, если поля пустые.
+        }
+
         std::string currencyName = msclr::interop::marshal_as<std::string>(textBoxCurrencyName->Text);
         std::string currencyRateStr = msclr::interop::marshal_as<std::string>(textBoxCurrencyRate->Text);
 
-        std::string currencyRate = currencyRateStr; // Создаем копию, чтобы не менять оригинал
-        currencyRate.erase(std::remove(currencyRate.begin(), currencyRate.end(), '.'), currencyRate.end());
-
-        if (!isNumber(currencyRate)) // Используем currencyRate
+        if (!isValidCurrencyRate(currencyRateStr))
         {
-            MessageBox::Show("Некорректный ввод курса!");
+            MessageBox::Show("Некорректный ввод курса. Введите число в формате целое.сотые (например, 123.45)", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;
         }
+
+        // Преобразуем строку с курсом в число
+        double rate = std::stod(currencyRateStr) * 100.0;
+        std::string currencyRate = std::to_string(static_cast<int>(std::round(rate)));
 
         if (isEditing)
         {
@@ -183,7 +216,8 @@ namespace Courseproject {
         this->comboBoxCurrencies->Visible = false;
         this->button_EditCurrency->Visible = false;
         this->groupBox1->Visible = false;
-
+        this->label_del_ch->Visible = false;
+        this->label1->Visible = true;
         this->label_Name->Visible = true;
         this->label_Rate->Visible = true;
         this->textBoxCurrencyName->Visible = true;
@@ -191,6 +225,11 @@ namespace Courseproject {
         this->buttonCreatCurrency->Visible = true;
 
         isEditing = true;
+        if (comboBoxCurrencies->SelectedItem == nullptr) {
+            MessageBox::Show("Пожалуйста, выберите валюту для редактирования.", "Предупреждение", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+            return; // Выход из функции, если валюта не выбрана.
+        }
+
         String^ selectedCurrency = comboBoxCurrencies->SelectedItem->ToString();
 
         // Находим строку, которая должна быть отредактирована
@@ -198,7 +237,16 @@ namespace Courseproject {
             if (dataGridViewCurrencies->Rows[i]->Cells["CurrencyName"]->Value->ToString() == selectedCurrency) {
                 rowIndexToEdit = i;
                 textBoxCurrencyName->Text = dataGridViewCurrencies->Rows[i]->Cells["CurrencyName"]->Value->ToString();
-                textBoxCurrencyRate->Text = dataGridViewCurrencies->Rows[i]->Cells["CurrencyRate"]->Value->ToString();
+                // Получаем курс из DataGridView
+                double rate = std::stod(msclr::interop::marshal_as<std::string>(dataGridViewCurrencies->Rows[i]->Cells["CurrencyRate"]->Value->ToString()));
+
+
+                // Форматируем число для текстбокса в виде 1111.11
+                System::String^ formattedRate = String::Format("{0:F2}", rate);
+
+                
+                textBoxCurrencyRate->Text = formattedRate;
+
                 break;
             }
         }
@@ -208,11 +256,15 @@ namespace Courseproject {
 
     System::Void CurrencyCreatForm::button_DelCurrency_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        String^ selectedCurrency = comboBoxCurrencies->SelectedItem->ToString();
-        if (String::IsNullOrEmpty(selectedCurrency)) {
-            MessageBox::Show("Пожалуйста, выберите валюту для удаления.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-            return;
+
+        if (comboBoxCurrencies->SelectedItem == nullptr) {
+            MessageBox::Show("Пожалуйста, выберите валюту для удаления.", "Предупреждение", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+            return; // Выход из функции, если валюта не выбрана.
         }
+
+
+        String^ selectedCurrency = comboBoxCurrencies->SelectedItem->ToString();
+
         int rowNumber = -1;
         for (int i = 0; i < dataGridViewCurrencies->Rows->Count; i++) {
             if (dataGridViewCurrencies->Rows[i]->Cells["CurrencyName"]->Value->ToString() == selectedCurrency) {
@@ -259,11 +311,13 @@ namespace Courseproject {
             textBoxCurrencyName->Visible = true;
             textBoxCurrencyRate->Visible = true;
             buttonCreatCurrency->Visible = true;
+            label_del_ch->Visible = false;
             dataGridViewCurrencies->Visible = false;
             comboBoxCurrencies->Visible = false;
             button_EditCurrency->Visible = false;
             button_DelCurrency->Visible = false;
             groupBox1->Visible = false;
+            this->Close();
         }
         else {
             MessageBox::Show("Неверный номер строки.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -271,4 +325,3 @@ namespace Courseproject {
 
     }
 }
-

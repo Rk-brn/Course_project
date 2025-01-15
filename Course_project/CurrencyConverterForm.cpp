@@ -166,6 +166,7 @@ namespace Courseproject {
     System::Void CurrencyConverterForm::добавитьВалютуToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
         CurrencyCreatForm^ creat = gcnew CurrencyCreatForm();
+        creat->label1->Text = "Добавление записи!";
         creat->ShowDialog();
         LoadCurrenciesToComboBox();
         return System::Void();
@@ -206,8 +207,13 @@ namespace Courseproject {
         change->dataGridViewCurrencies->Visible = true;
         change->comboBoxCurrencies->Visible = true;
         change->button_EditCurrency->Visible = true;
-        change->button_DelCurrency->Visible = true;
+        change->button_DelCurrency->Visible = false;
         change->groupBox1->Visible = true;
+        change->groupBox1->Text = "Редактирование валюты!";
+        change->label_del_ch->Visible = true;
+        change->label_del_ch->Text = "Выберете валюту для редактирования:";
+        change->label1->Visible = false;
+        change->label1->Text = "Редактирование записи!";
         change->ShowDialog();
         LoadCurrenciesToComboBox();
         return System::Void();
@@ -215,6 +221,7 @@ namespace Courseproject {
     System::Void CurrencyConverterForm::удалитьВалютуToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
         CurrencyCreatForm^ del = gcnew CurrencyCreatForm();
+        del->label1->Visible = false;
         del->label_Name->Visible = false;
         del->label_Rate->Visible = false;
         del->textBoxCurrencyName->Visible = false;
@@ -222,9 +229,12 @@ namespace Courseproject {
         del->buttonCreatCurrency->Visible = false;
         del->dataGridViewCurrencies->Visible = true;
         del->comboBoxCurrencies->Visible = true;
-        del->button_EditCurrency->Visible = true;
+        del->button_EditCurrency->Visible = false;
         del->button_DelCurrency->Visible = true;
         del->groupBox1->Visible = true;
+        del->groupBox1->Text = "Удаление валюты!";
+        del->label_del_ch->Visible = true;
+        del->label_del_ch->Text = "Выберете валюту для удаления:";
         del->ShowDialog();
         LoadCurrenciesToComboBox();
         return System::Void();

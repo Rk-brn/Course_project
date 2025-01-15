@@ -34,16 +34,17 @@ namespace Courseproject {
 			System::Windows::Forms::Label^ label_Name;
 			System::Windows::Forms::Label^ label_Rate;
 			System::Windows::Forms::TextBox^ textBoxCurrencyName;
-			System::Windows::Forms::TextBox^ textBoxCurrencyRate;
+
 			System::Windows::Forms::Button^ buttonCreatCurrency;
 			System::Windows::Forms::MenuStrip^ menuStrip1;
 			System::Windows::Forms::ToolStripMenuItem^ èíôîğìàöèÿToolStripMenuItem;
 			System::Windows::Forms::ToolStripMenuItem^ âåğíóòüñÿÍàçàäToolStripMenuItem;
-
+			System::Windows::Forms::Label^ label_del_ch;
 			System::Windows::Forms::Button^ button_EditCurrency;
 			System::Windows::Forms::Button^ button_DelCurrency;
 			System::Windows::Forms::ComboBox^ comboBoxCurrencies;
 			System::Windows::Forms::GroupBox^ groupBox1;
+			System::Windows::Forms::TextBox^ textBoxCurrencyRate;
 			System::Windows::Forms::DataGridView^ dataGridViewCurrencies;
 	private:
 		/// <summary>
@@ -54,7 +55,10 @@ namespace Courseproject {
 		bool isDeleting = false;
 		int rowIndexToEdit = -1;
 		System::String^ currencyFilePath;
-		bool isChanged = false;
+	
+
+
+		   bool isChanged = false;
 
 		void LoadCurrenciesToDataGridView();
 		void LoadCurrenciesToComboBoxes();
@@ -69,7 +73,6 @@ namespace Courseproject {
 			this->label_Name = (gcnew System::Windows::Forms::Label());
 			this->label_Rate = (gcnew System::Windows::Forms::Label());
 			this->textBoxCurrencyName = (gcnew System::Windows::Forms::TextBox());
-			this->textBoxCurrencyRate = (gcnew System::Windows::Forms::TextBox());
 			this->buttonCreatCurrency = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->èíôîğìàöèÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -78,7 +81,9 @@ namespace Courseproject {
 			this->button_DelCurrency = (gcnew System::Windows::Forms::Button());
 			this->comboBoxCurrencies = (gcnew System::Windows::Forms::ComboBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->label_del_ch = (gcnew System::Windows::Forms::Label());
 			this->dataGridViewCurrencies = (gcnew System::Windows::Forms::DataGridView());
+			this->textBoxCurrencyRate = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewCurrencies))->BeginInit();
@@ -87,7 +92,7 @@ namespace Courseproject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(352, 81);
+			this->label1->Location = System::Drawing::Point(324, 78);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(167, 17);
 			this->label1->TabIndex = 0;
@@ -118,14 +123,6 @@ namespace Courseproject {
 			this->textBoxCurrencyName->Size = System::Drawing::Size(100, 22);
 			this->textBoxCurrencyName->TabIndex = 3;
 			this->textBoxCurrencyName->Text = L"USD";
-			// 
-			// textBoxCurrencyRate
-			// 
-			this->textBoxCurrencyRate->Location = System::Drawing::Point(128, 439);
-			this->textBoxCurrencyRate->Name = L"textBoxCurrencyRate";
-			this->textBoxCurrencyRate->Size = System::Drawing::Size(100, 22);
-			this->textBoxCurrencyRate->TabIndex = 4;
-			this->textBoxCurrencyRate->Text = L"110.00";
 			// 
 			// buttonCreatCurrency
 			// 
@@ -166,9 +163,9 @@ namespace Courseproject {
 			// 
 			// button_EditCurrency
 			// 
-			this->button_EditCurrency->Location = System::Drawing::Point(257, 60);
+			this->button_EditCurrency->Location = System::Drawing::Point(297, 60);
 			this->button_EditCurrency->Name = L"button_EditCurrency";
-			this->button_EditCurrency->Size = System::Drawing::Size(75, 23);
+			this->button_EditCurrency->Size = System::Drawing::Size(138, 26);
 			this->button_EditCurrency->TabIndex = 7;
 			this->button_EditCurrency->Text = L"Ğåäàêòèğîâàòü";
 			this->button_EditCurrency->UseVisualStyleBackColor = true;
@@ -177,9 +174,9 @@ namespace Courseproject {
 			// 
 			// button_DelCurrency
 			// 
-			this->button_DelCurrency->Location = System::Drawing::Point(348, 60);
+			this->button_DelCurrency->Location = System::Drawing::Point(297, 58);
 			this->button_DelCurrency->Name = L"button_DelCurrency";
-			this->button_DelCurrency->Size = System::Drawing::Size(75, 23);
+			this->button_DelCurrency->Size = System::Drawing::Size(138, 25);
 			this->button_DelCurrency->TabIndex = 8;
 			this->button_DelCurrency->Text = L"Óäàëèòü";
 			this->button_DelCurrency->UseVisualStyleBackColor = true;
@@ -189,7 +186,7 @@ namespace Courseproject {
 			// comboBoxCurrencies
 			// 
 			this->comboBoxCurrencies->FormattingEnabled = true;
-			this->comboBoxCurrencies->Location = System::Drawing::Point(35, 21);
+			this->comboBoxCurrencies->Location = System::Drawing::Point(35, 60);
 			this->comboBoxCurrencies->Name = L"comboBoxCurrencies";
 			this->comboBoxCurrencies->Size = System::Drawing::Size(121, 24);
 			this->comboBoxCurrencies->TabIndex = 9;
@@ -197,28 +194,46 @@ namespace Courseproject {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->label_del_ch);
 			this->groupBox1->Controls->Add(this->dataGridViewCurrencies);
 			this->groupBox1->Controls->Add(this->comboBoxCurrencies);
 			this->groupBox1->Controls->Add(this->button_EditCurrency);
 			this->groupBox1->Controls->Add(this->button_DelCurrency);
-			this->groupBox1->Location = System::Drawing::Point(206, 195);
+			this->groupBox1->Location = System::Drawing::Point(172, 201);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(467, 247);
+			this->groupBox1->Size = System::Drawing::Size(441, 247);
 			this->groupBox1->TabIndex = 10;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"groupBox1";
 			this->groupBox1->Visible = false;
 			// 
+			// label_del_ch
+			// 
+			this->label_del_ch->AutoSize = true;
+			this->label_del_ch->Location = System::Drawing::Point(32, 30);
+			this->label_del_ch->Name = L"label_del_ch";
+			this->label_del_ch->Size = System::Drawing::Size(46, 17);
+			this->label_del_ch->TabIndex = 11;
+			this->label_del_ch->Text = L"label2";
+			// 
 			// dataGridViewCurrencies
 			// 
+			this->dataGridViewCurrencies->AllowUserToAddRows = false;
 			this->dataGridViewCurrencies->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridViewCurrencies->Location = System::Drawing::Point(35, 105);
 			this->dataGridViewCurrencies->Name = L"dataGridViewCurrencies";
 			this->dataGridViewCurrencies->RowHeadersWidth = 51;
 			this->dataGridViewCurrencies->RowTemplate->Height = 24;
-			this->dataGridViewCurrencies->Size = System::Drawing::Size(388, 106);
+			this->dataGridViewCurrencies->Size = System::Drawing::Size(379, 106);
 			this->dataGridViewCurrencies->TabIndex = 10;
 			this->dataGridViewCurrencies->Visible = false;
+			// 
+			// textBoxCurrencyRate
+			// 
+			this->textBoxCurrencyRate->Location = System::Drawing::Point(128, 426);
+			this->textBoxCurrencyRate->Name = L"textBoxCurrencyRate";
+			this->textBoxCurrencyRate->Size = System::Drawing::Size(100, 22);
+			this->textBoxCurrencyRate->TabIndex = 11;
 			// 
 			// CurrencyCreatForm
 			// 
@@ -227,12 +242,12 @@ namespace Courseproject {
 			this->ClientSize = System::Drawing::Size(829, 622);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->buttonCreatCurrency);
-			this->Controls->Add(this->textBoxCurrencyRate);
 			this->Controls->Add(this->textBoxCurrencyName);
 			this->Controls->Add(this->label_Rate);
 			this->Controls->Add(this->label_Name);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->menuStrip1);
+			this->Controls->Add(this->textBoxCurrencyRate);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"CurrencyCreatForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -240,6 +255,7 @@ namespace Courseproject {
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewCurrencies))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -251,5 +267,6 @@ private: System::Void èíôîğìàöèÿToolStripMenuItem_Click(System::Object^ sender, 
 private: System::Void âåğíóòüñÿÍàçàäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_EditCurrency_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_DelCurrency_Click(System::Object^ sender, System::EventArgs^ e);
+
 };
 }

@@ -166,10 +166,10 @@ namespace Courseproject {
                 double balance = GetAccountBalance(accountName);
                 // Проверяем, является ли счет профицитным или дефицитным
                 if (balance >= 0) {
-                    labelBalanceStatus->Text = "Счет профицитный";
+                    labelBalanceStatus->Text = "Ваш тип счёта: профицитный";
                 }
                 else {
-                    labelBalanceStatus->Text = "Счет дефицитный";
+                    labelBalanceStatus->Text = "Ваш тип счёта: дефицитный";
                 }
 
                 // Очищаем график перед добавлением данных
@@ -236,5 +236,23 @@ namespace Courseproject {
             }
             return System::Void();
         }
+    }
+    System::Void AccountAnalyticsForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        return System::Void();
+    }
+    System::Void AccountAnalyticsForm::button_clear_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        comboBoxAccounts->SelectedIndex = -1;
+        chartAnalytics->Series->Clear();
+        chartMonthly->Series->Clear();
+        labelBalanceStatus->Text = "Тип вашего счёта!";
+        return System::Void();
+    }
+    System::Void AccountAnalyticsForm::вернутьсяНазадToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+    {
+        this->Close();
+        return System::Void();
     }
 }
