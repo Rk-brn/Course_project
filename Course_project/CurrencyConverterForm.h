@@ -151,7 +151,7 @@ namespace Courseproject {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(151, 24);
 			this->label2->TabIndex = 5;
-			this->label2->Text = L"Выберете счёт:";
+			this->label2->Text = L"Выберите счёт:";
 			// 
 			// label3
 			// 
@@ -162,7 +162,7 @@ namespace Courseproject {
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(174, 24);
 			this->label3->TabIndex = 6;
-			this->label3->Text = L"Выберете валюту:";
+			this->label3->Text = L"Выберите валюту:";
 			// 
 			// dataGridViewConversions
 			// 

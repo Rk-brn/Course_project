@@ -595,8 +595,9 @@ namespace Courseproject {
             groupBox2->Text = "Редактирование счёта!";
             comboBox_del_ch_ac->Visible = false;
             label_del_ch->Visible = false;
-            label_del_ch->Text = "Выберете счёт для редактирования!";
+            label_del_ch->Text = "Выберите счёт для редактирования!";
             button_change_ac->Visible = false;
+            button_del_ac->Visible = false;
             flag_edit_ac = 0;
         }
         else if (!flag_edit_ac) {
@@ -604,8 +605,9 @@ namespace Courseproject {
             groupBox2->Text = "Редактирование счёта!";
             comboBox_del_ch_ac->Visible = true;
             label_del_ch->Visible = true;
-            label_del_ch->Text = "Выберете счёт для редактирования!";
+            label_del_ch->Text = "Выберите счёт для редактирования!";
             button_change_ac->Visible = true;
+            button_del_ac->Visible = false;
             flag_edit_ac = 1;
         }
         return System::Void();
@@ -618,16 +620,18 @@ namespace Courseproject {
             groupBox2->Text = "Удаление счёта!";
             comboBox_del_ch_ac->Visible = false;
             label_del_ch->Visible = false;
-            label_del_ch->Text = "Выберете счёт для удаления!";
+            label_del_ch->Text = "Выберите счёт для удаления!";
             button_del_ac->Visible = false;
+            button_change_ac->Visible = false;
             flag_del_ac = 0;
         }
         else if (!flag_del_ac) {
             groupBox2->Visible = true;
+            button_change_ac->Visible = false;
             groupBox2->Text = "Удаление счёта!";
             comboBox_del_ch_ac->Visible = true;
             label_del_ch->Visible = true;
-            label_del_ch->Text = "Выберете счёт для удаления!";
+            label_del_ch->Text = "Выберите счёт для удаления!";
             button_del_ac->Visible = true;
             flag_del_ac = 1;
         }
@@ -649,6 +653,7 @@ namespace Courseproject {
                     UpdateBalancesFromTransactions();
                     LoadAccountsToComboBox_del();
                     groupBox2->Visible = false;
+                    MessageBox::Show("Счёт и соответствующие транзакции к счёту успешно удалены.", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
                 }
                 else {
@@ -658,6 +663,7 @@ namespace Courseproject {
                     UpdateBalancesFromTransactions();
                     LoadAccountsToComboBox_del();
                     groupBox2->Visible = false;
+                    MessageBox::Show("Счёт успешно удалён.", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
                 }
             }
         }

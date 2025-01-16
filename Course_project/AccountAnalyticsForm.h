@@ -99,7 +99,7 @@ namespace Courseproject {
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(151, 24);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"Выберете счёт:";
+			this->label1->Text = L"Выберите счёт:";
 			// 
 			// comboBoxAccounts
 			// 

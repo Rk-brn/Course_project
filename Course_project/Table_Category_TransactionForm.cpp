@@ -335,17 +335,22 @@ namespace Courseproject {
     System::Void Table_Category_TransactionForm::button_changed_tr_Click(System::Object^ sender, System::EventArgs^ e) {
         String^ rowNumberStr = textBox_edit_del_tr->Text;
         if (String::IsNullOrEmpty(rowNumberStr)) {
-            MessageBox::Show("Пожалуйста, введите номер строки для редактирования.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            MessageBox::Show("Пожалуйста, введите номер строки для удаления.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;
         }
-        else {
-            int col = dataGridViewTransactions->Rows->Count;
-            int nomer_row = int::Parse(this->textBox_edit_del_tr->Text);
-            if (nomer_row > col || nomer_row == 0)
-            {
-                MessageBox::Show("Такого номера нет, попробуйте еще раз!", "Ошибка ввода", MessageBoxButtons::OK, MessageBoxIcon::Error);
-                return;
 
+        int nomer_row;
+        try {
+            nomer_row = System::Int32::Parse(rowNumberStr);
+        }
+        catch (System::FormatException^) {
+            MessageBox::Show("Неверный формат номера строки.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            return;
+        }
+
+            if (nomer_row <= 0 || nomer_row > dataGridViewTransactions->Rows->Count) {
+                MessageBox::Show("Неверный номер строки.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                return;
             }
             else {
                 TransactionForm^ transactionForm = gcnew TransactionForm();
@@ -375,7 +380,8 @@ namespace Courseproject {
             flag_edit = 0;
         
         }
-    }
+    
+
     System::Void Table_Category_TransactionForm::удалитьКатегориюToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
         if (flag_prosmotr) {

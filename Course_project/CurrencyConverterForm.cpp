@@ -213,7 +213,7 @@ namespace Courseproject {
         change->groupBox1->Visible = true;
         change->groupBox1->Text = "Редактирование валюты!";
         change->label_del_ch->Visible = true;
-        change->label_del_ch->Text = "Выберете валюту для редактирования:";
+        change->label_del_ch->Text = "Выберите валюту для редактирования:";
         change->label1->Visible = false;
         change->label1->Text = "Редактирование записи!";
         change->ShowDialog();
@@ -236,7 +236,7 @@ namespace Courseproject {
         del->groupBox1->Visible = true;
         del->groupBox1->Text = "Удаление валюты!";
         del->label_del_ch->Visible = true;
-        del->label_del_ch->Text = "Выберете валюту для удаления:";
+        del->label_del_ch->Text = "Выберите валюту для удаления:";
         del->ShowDialog();
         LoadCurrenciesToComboBox();
         return System::Void();

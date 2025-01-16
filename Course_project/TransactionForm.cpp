@@ -281,7 +281,7 @@ namespace Courseproject {
         comboBox_TransactionType->SelectedIndex = -1;
         comboBox_Category->SelectedIndex = -1;
         dateTimePicker_Date->Value = System::DateTime::Now;
-
+        comboBox_Account->SelectedIndex = -1;
         return System::Void();
     }
 

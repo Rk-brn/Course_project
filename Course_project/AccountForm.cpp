@@ -81,7 +81,7 @@ System::Void Courseproject::AccountForm::button_creat_account_Click(System::Obje
             file << line.c_str() << std::endl;
         }
         file.close();
-
+        MessageBox::Show("Счёт успешно редактирован.", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
     }
     else { // Режим создания
         file.open("account.txt", std::ios::app);

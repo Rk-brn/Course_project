@@ -81,7 +81,7 @@ System::Void Courseproject::CategoryForm::buttonCreateCategory_Click(System::Obj
         }
         file.close();
     }
-
+    MessageBox::Show("Êàòåãîðèÿ ñîçäàíà.", "Óñïåõ", MessageBoxButtons::OK, MessageBoxIcon::Information);
     textBoxCategoryName->Text = "";
     textBoxCategoryDescription->Text = "";
     return System::Void();
@@ -90,8 +90,7 @@ System::Void Courseproject::CategoryForm::buttonCreateCategory_Click(System::Obj
 
 System::Void Courseproject::CategoryForm::âåðíóòüñÿÍàçàäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    //TransactionForm^ transactionForm = gcnew TransactionForm(this); // Ïåðåäàåì ññûëêó íà CategoryForm
-    //transactionForm->Show();
+   
     this->Close();
     return System::Void();
 }

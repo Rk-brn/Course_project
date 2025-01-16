@@ -210,18 +210,7 @@ namespace Courseproject {
 
     System::Void CurrencyCreatForm::button_EditCurrency_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        // Скрываем таблицу, комбобоксы и кнопку
-        this->dataGridViewCurrencies->Visible = false;
-        this->comboBoxCurrencies->Visible = false;
-        this->button_EditCurrency->Visible = false;
-        this->groupBox1->Visible = false;
-        this->label_del_ch->Visible = false;
-        this->label1->Visible = true;
-        this->label_Name->Visible = true;
-        this->label_Rate->Visible = true;
-        this->textBoxCurrencyName->Visible = true;
-        this->textBoxCurrencyRate->Visible = true;
-        this->buttonCreatCurrency->Visible = true;
+
 
         isEditing = true;
         if (comboBoxCurrencies->SelectedItem == nullptr) {
@@ -229,28 +218,42 @@ namespace Courseproject {
             return; // Выход из функции, если валюта не выбрана.
         }
 
-        String^ selectedCurrency = comboBoxCurrencies->SelectedItem->ToString();
+        else {
+            // Скрываем таблицу, комбобоксы и кнопку
+            this->dataGridViewCurrencies->Visible = false;
+            this->comboBoxCurrencies->Visible = false;
+            this->button_EditCurrency->Visible = false;
+            this->groupBox1->Visible = false;
+            this->label_del_ch->Visible = false;
+            this->label1->Visible = true;
+            this->label_Name->Visible = true;
+            this->label_Rate->Visible = true;
+            this->textBoxCurrencyName->Visible = true;
+            this->textBoxCurrencyRate->Visible = true;
+            this->buttonCreatCurrency->Visible = true;
+            String^ selectedCurrency = comboBoxCurrencies->SelectedItem->ToString();
 
-        // Находим строку, которая должна быть отредактирована
-        for (int i = 0; i < dataGridViewCurrencies->Rows->Count; ++i) {
-            if (dataGridViewCurrencies->Rows[i]->Cells["CurrencyName"]->Value->ToString() == selectedCurrency) {
-                rowIndexToEdit = i;
-                textBoxCurrencyName->Text = dataGridViewCurrencies->Rows[i]->Cells["CurrencyName"]->Value->ToString();
-                // Получаем курс из DataGridView
-                double rate = std::stod(msclr::interop::marshal_as<std::string>(dataGridViewCurrencies->Rows[i]->Cells["CurrencyRate"]->Value->ToString()));
+            // Находим строку, которая должна быть отредактирована
+            for (int i = 0; i < dataGridViewCurrencies->Rows->Count; ++i) {
+                if (dataGridViewCurrencies->Rows[i]->Cells["CurrencyName"]->Value->ToString() == selectedCurrency) {
+                    rowIndexToEdit = i;
+                    textBoxCurrencyName->Text = dataGridViewCurrencies->Rows[i]->Cells["CurrencyName"]->Value->ToString();
+                    // Получаем курс из DataGridView
+                    double rate = std::stod(msclr::interop::marshal_as<std::string>(dataGridViewCurrencies->Rows[i]->Cells["CurrencyRate"]->Value->ToString()));
 
 
-                // Форматируем число для текстбокса в виде 1111.11
-                System::String^ formattedRate = String::Format("{0:F2}", rate);
+                    // Форматируем число для текстбокса в виде 1111.11
+                    System::String^ formattedRate = String::Format("{0:F2}", rate);
 
-                
-                textBoxCurrencyRate->Text = formattedRate;
 
-                break;
+                    textBoxCurrencyRate->Text = formattedRate;
+
+                    break;
+                }
             }
-        }
 
-        buttonCreatCurrency->Text = "Изменить!";
+            buttonCreatCurrency->Text = "Изменить!";
+        }
     }
 
     System::Void CurrencyCreatForm::button_DelCurrency_Click(System::Object^ sender, System::EventArgs^ e)

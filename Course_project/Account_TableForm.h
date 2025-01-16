@@ -251,7 +251,7 @@ namespace Courseproject {
 			this->labelAccounts->Name = L"labelAccounts";
 			this->labelAccounts->Size = System::Drawing::Size(142, 20);
 			this->labelAccounts->TabIndex = 3;
-			this->labelAccounts->Text = L"Выберете счёт:";
+			this->labelAccounts->Text = L"Выберите счёт:";
 			// 
 			// buttonLoadTransactions
 			// 

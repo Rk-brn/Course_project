@@ -173,7 +173,7 @@ namespace Courseproject {
 			// 
 			// button_EditCurrency
 			// 
-			this->button_EditCurrency->Location = System::Drawing::Point(294, 76);
+			this->button_EditCurrency->Location = System::Drawing::Point(304, 77);
 			this->button_EditCurrency->Name = L"button_EditCurrency";
 			this->button_EditCurrency->Size = System::Drawing::Size(173, 28);
 			this->button_EditCurrency->TabIndex = 7;
@@ -184,9 +184,9 @@ namespace Courseproject {
 			// 
 			// button_DelCurrency
 			// 
-			this->button_DelCurrency->Location = System::Drawing::Point(294, 78);
+			this->button_DelCurrency->Location = System::Drawing::Point(304, 77);
 			this->button_DelCurrency->Name = L"button_DelCurrency";
-			this->button_DelCurrency->Size = System::Drawing::Size(173, 25);
+			this->button_DelCurrency->Size = System::Drawing::Size(173, 28);
 			this->button_DelCurrency->TabIndex = 8;
 			this->button_DelCurrency->Text = L"Удалить";
 			this->button_DelCurrency->UseVisualStyleBackColor = true;
@@ -232,7 +232,7 @@ namespace Courseproject {
 			// 
 			this->dataGridViewCurrencies->AllowUserToAddRows = false;
 			this->dataGridViewCurrencies->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridViewCurrencies->Location = System::Drawing::Point(51, 126);
+			this->dataGridViewCurrencies->Location = System::Drawing::Point(62, 135);
 			this->dataGridViewCurrencies->Name = L"dataGridViewCurrencies";
 			this->dataGridViewCurrencies->RowHeadersWidth = 51;
 			this->dataGridViewCurrencies->RowTemplate->Height = 24;

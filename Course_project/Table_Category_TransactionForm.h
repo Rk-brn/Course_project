@@ -323,7 +323,7 @@ namespace Courseproject {
 			this->label_cat->Name = L"label_cat";
 			this->label_cat->Size = System::Drawing::Size(247, 20);
 			this->label_cat->TabIndex = 4;
-			this->label_cat->Text = L"Выберете номер категории:";
+			this->label_cat->Text = L"Выберите номер категории:";
 			this->label_cat->Visible = false;
 			// 
 			// label_del_ch_tr
@@ -333,7 +333,7 @@ namespace Courseproject {
 			this->label_del_ch_tr->Name = L"label_del_ch_tr";
 			this->label_del_ch_tr->Size = System::Drawing::Size(53, 20);
 			this->label_del_ch_tr->TabIndex = 3;
-			this->label_del_ch_tr->Text = L"Выберете номер транзакции:";
+			this->label_del_ch_tr->Text = L"Выберите номер транзакции:";
 			// 
 			// Table_Category_TransactionForm
 			// 
