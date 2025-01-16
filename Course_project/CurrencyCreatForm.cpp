@@ -33,8 +33,7 @@ namespace Courseproject {
         dataGridViewCurrencies->Columns->Add("CurrencyRate", "Курс валюты");
 
 
-        // Автоматический размер столбцов (по содержимому)
-        dataGridViewCurrencies->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+        
 
         // Задаем минимальную ширину для первого столбца
         dataGridViewCurrencies->Columns[0]->MinimumWidth = 150;
@@ -201,7 +200,7 @@ namespace Courseproject {
 
     System::Void CurrencyCreatForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        MessageBox::Show("В данном окне вы можете создавать, редактировать и удалять валюты.\nДля создания новой валюты, введите её название и курс, затем нажмите кнопку 'Создать валюту!'.\nДля редактирования валюты, выберите её в списке и введите новый курс, затем нажмите кнопку 'Создать валюту!'.\nДля удаления валюты, выберите её в списке и нажмите кнопку 'Редактировать'.\nВсе поля должны быть заполнены. После успешного создания или редактирования валюты, вы будете уведомлены об этом.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
     }
 
     System::Void CurrencyCreatForm::вернутьсяНазадToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)

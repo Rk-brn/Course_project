@@ -127,130 +127,136 @@ namespace Courseproject {
     }
     System::Void AccountAnalyticsForm::buttonAnalitics_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        System::String^ selectedAccount = comboBoxAccounts->SelectedItem->ToString();
-        msclr::interop::marshal_context context;
-        std::string accountName = context.marshal_as<std::string>(selectedAccount);
-
-        // Загружаем транзакции
-        std::vector<Transaction*> transactions = LoadTransactionsFromFile();
-
-        // Фильтруем транзакции по выбранному счету
-        std::vector<Transaction*> filteredTransactions;
-        for (const auto& transaction : transactions) {
-            if (transaction->getTypeAccount() == accountName) {
-                filteredTransactions.push_back(transaction);
-            }
-        }
-
-        // Рассчитываем доходы и расходы
-        if (filteredTransactions.empty())
-        {
-            MessageBox::Show("Нет транзакций для данного счета.", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        if (comboBoxAccounts->SelectedIndex == -1) {
+            MessageBox::Show("Пожалуйста, выберите счёт из списка.", "Предупреждение", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+            return; // Завершаем выполнение метода
         }
         else {
-            double totalIncome = 0;
-            double totalExpense = 0;
+            System::String^ selectedAccount = comboBoxAccounts->SelectedItem->ToString();
+            msclr::interop::marshal_context context;
+            std::string accountName = context.marshal_as<std::string>(selectedAccount);
 
-            for (const auto& transaction : filteredTransactions) {
-                if (transaction->getType() == "Доход") {
-                    totalIncome += transaction->getAmount();
-                }
-                else if (transaction->getType() == "Расход") {
-                    totalExpense += transaction->getAmount();
+            // Загружаем транзакции
+            std::vector<Transaction*> transactions = LoadTransactionsFromFile();
+
+            // Фильтруем транзакции по выбранному счету
+            std::vector<Transaction*> filteredTransactions;
+            for (const auto& transaction : transactions) {
+                if (transaction->getTypeAccount() == accountName) {
+                    filteredTransactions.push_back(transaction);
                 }
             }
-            // Форматирование дохода и расхода
-            double formattedIncome = static_cast<double>(totalIncome) / 100.0;
-            double formattedExpenses = static_cast<double>(totalExpense) / 100.0;
-            // расчет общего кол-ва денег
-            double total = totalIncome + totalExpense;
 
-            // Рассчитываем проценты
-            double incomePercentage = 0.0;
-            double expensesPercentage = 0.0;
-            if (total > 0) {
-                incomePercentage = (totalIncome / total) * 100.0;
-                expensesPercentage = (totalExpense / total) * 100.0;
-            }
-
-            // Форматируем проценты
-            System::String^ formattedIncomePercentage = String::Format("{0:F2}", incomePercentage);
-            System::String^ formattedExpensesPercentage = String::Format("{0:F2}", expensesPercentage);
-
-            // Получаем текущий баланс счета
-            double balance = GetAccountBalance(accountName);
-            // Проверяем, является ли счет профицитным или дефицитным
-            if (balance >= 0) {
-                labelBalanceStatus->Text = "Ваш тип счёта: профицитный";
+            // Рассчитываем доходы и расходы
+            if (filteredTransactions.empty())
+            {
+                MessageBox::Show("Нет транзакций для данного счета.", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
             }
             else {
-                labelBalanceStatus->Text = "Ваш тип счёта: дефицитный";
-            }
+                double totalIncome = 0;
+                double totalExpense = 0;
 
-            // Очищаем график перед добавлением данных
-            chartAnalytics->Series->Clear();
-            // Создаем серию данных для круговой диаграммы
-            Series^ pieSeries = gcnew Series("Доходы/Расходы");
-            pieSeries->ChartType = SeriesChartType::Pie;
+                for (const auto& transaction : filteredTransactions) {
+                    if (transaction->getType() == "Доход") {
+                        totalIncome += transaction->getAmount();
+                    }
+                    else if (transaction->getType() == "Расход") {
+                        totalExpense += transaction->getAmount();
+                    }
+                }
+                // Форматирование дохода и расхода
+                double formattedIncome = static_cast<double>(totalIncome) / 100.0;
+                double formattedExpenses = static_cast<double>(totalExpense) / 100.0;
+                // расчет общего кол-ва денег
+                double total = totalIncome + totalExpense;
 
-            pieSeries->Points->AddXY(String::Format("Доходы ({0}%)", formattedIncomePercentage), totalIncome); // Проценты
-            pieSeries->Points->AddXY(String::Format("Расходы ({0}%)", formattedExpensesPercentage), totalExpense); // Проценты
-
-            // Добавляем серию данных на график
-            chartAnalytics->Series->Add(pieSeries);
-
-            // Подготавливаем данные для гистограммы
-            chartMonthly->Series->Clear();
-            Series^ monthlySeriesIncome = gcnew Series(String::Format("Доходы ({0:F2})", formattedIncome)); // Форматированный вывод
-            Series^ monthlySeriesExpense = gcnew Series(String::Format("Расходы ({0:F2})", formattedExpenses));
-            monthlySeriesIncome->ChartType = SeriesChartType::Column;
-            monthlySeriesExpense->ChartType = SeriesChartType::Column;
-            // Создаем карту для хранения данных о доходах и расходах по месяцам
-            std::map<std::string, double> monthlyIncomes;
-            std::map<std::string, double> monthlyExpenses;
-
-            for (const auto& transaction : filteredTransactions) {
-                std::tm t{};
-                std::istringstream ss(transaction->getDate());
-                ss >> std::get_time(&t, "%d.%m.%Y");
-
-                if (ss.fail()) {
-                    std::cerr << "failed to parse time string\n";
+                // Рассчитываем проценты
+                double incomePercentage = 0.0;
+                double expensesPercentage = 0.0;
+                if (total > 0) {
+                    incomePercentage = (totalIncome / total) * 100.0;
+                    expensesPercentage = (totalExpense / total) * 100.0;
                 }
 
-                char month_str[10];
-                std::strftime(month_str, sizeof(month_str), "%b %Y", &t);
-                std::string month(month_str);
+                // Форматируем проценты
+                System::String^ formattedIncomePercentage = String::Format("{0:F2}", incomePercentage);
+                System::String^ formattedExpensesPercentage = String::Format("{0:F2}", expensesPercentage);
+
+                // Получаем текущий баланс счета
+                double balance = GetAccountBalance(accountName);
+                // Проверяем, является ли счет профицитным или дефицитным
+                if (balance >= 0) {
+                    labelBalanceStatus->Text = "Ваш тип счёта: профицитный";
+                }
+                else {
+                    labelBalanceStatus->Text = "Ваш тип счёта: дефицитный";
+                }
+
+                // Очищаем график перед добавлением данных
+                chartAnalytics->Series->Clear();
+                // Создаем серию данных для круговой диаграммы
+                Series^ pieSeries = gcnew Series("Доходы/Расходы");
+                pieSeries->ChartType = SeriesChartType::Pie;
+
+                pieSeries->Points->AddXY(String::Format("Доходы ({0}%)", formattedIncomePercentage), totalIncome); // Проценты
+                pieSeries->Points->AddXY(String::Format("Расходы ({0}%)", formattedExpensesPercentage), totalExpense); // Проценты
+
+                // Добавляем серию данных на график
+                chartAnalytics->Series->Add(pieSeries);
+
+                // Подготавливаем данные для гистограммы
+                chartMonthly->Series->Clear();
+                Series^ monthlySeriesIncome = gcnew Series(String::Format("Доходы ({0:F2})", formattedIncome)); // Форматированный вывод
+                Series^ monthlySeriesExpense = gcnew Series(String::Format("Расходы ({0:F2})", formattedExpenses));
+                monthlySeriesIncome->ChartType = SeriesChartType::Column;
+                monthlySeriesExpense->ChartType = SeriesChartType::Column;
+                // Создаем карту для хранения данных о доходах и расходах по месяцам
+                std::map<std::string, double> monthlyIncomes;
+                std::map<std::string, double> monthlyExpenses;
+
+                for (const auto& transaction : filteredTransactions) {
+                    std::tm t{};
+                    std::istringstream ss(transaction->getDate());
+                    ss >> std::get_time(&t, "%d.%m.%Y");
+
+                    if (ss.fail()) {
+                        std::cerr << "failed to parse time string\n";
+                    }
+
+                    char month_str[10];
+                    std::strftime(month_str, sizeof(month_str), "%b %Y", &t);
+                    std::string month(month_str);
 
 
-                if (transaction->getType() == "Доход")
+                    if (transaction->getType() == "Доход")
+                    {
+                        monthlyIncomes[month] += transaction->getAmount();
+                    }
+                    else if (transaction->getType() == "Расход")
+                    {
+                        monthlyExpenses[month] += transaction->getAmount();
+                    }
+                }
+
+                // Добавляем данные в серии
+                for (const auto& pair : monthlyIncomes)
                 {
-                    monthlyIncomes[month] += transaction->getAmount();
+                    monthlySeriesIncome->Points->AddXY(gcnew String(pair.first.c_str()), pair.second / 100.0); // Выводим значения с точкой
                 }
-                else if (transaction->getType() == "Расход")
+                for (const auto& pair : monthlyExpenses)
                 {
-                    monthlyExpenses[month] += transaction->getAmount();
+                    monthlySeriesExpense->Points->AddXY(gcnew String(pair.first.c_str()), pair.second / 100.0); // Выводим значения с точкой
                 }
-            }
 
-            // Добавляем данные в серии
-            for (const auto& pair : monthlyIncomes)
-            {
-                monthlySeriesIncome->Points->AddXY(gcnew String(pair.first.c_str()), pair.second / 100.0); // Выводим значения с точкой
+                // Добавляем серии на график
+                chartMonthly->Series->Add(monthlySeriesIncome);
+                chartMonthly->Series->Add(monthlySeriesExpense);
             }
-            for (const auto& pair : monthlyExpenses)
-            {
-                monthlySeriesExpense->Points->AddXY(gcnew String(pair.first.c_str()), pair.second / 100.0); // Выводим значения с точкой
-            }
-
-            // Добавляем серии на график
-            chartMonthly->Series->Add(monthlySeriesIncome);
-            chartMonthly->Series->Add(monthlySeriesExpense);
         }
     }
     System::Void AccountAnalyticsForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        MessageBox::Show("В данном окне отображается аналитика выбранного счёта.\nЧтобы просмотреть аналитику, выберите счёт из списка 'Выберите счёт:'.\nПосле этого нажмите кнопку 'Провести аналитику', чтобы обновить график с балансом счёта.\nЧтобы очистить графики и убрать выбранный счёт, нажмите кнопку 'Очистить блоки'.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
         return System::Void();
     }
     System::Void AccountAnalyticsForm::button_clear_Click(System::Object^ sender, System::EventArgs^ e)

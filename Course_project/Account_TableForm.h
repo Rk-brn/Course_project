@@ -121,12 +121,13 @@ namespace Courseproject {
 			// dataGridView1
 			// 
 			this->dataGridView1->AllowUserToAddRows = false;
+			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(292, 64);
+			this->dataGridView1->Location = System::Drawing::Point(336, 58);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(593, 220);
+			this->dataGridView1->Size = System::Drawing::Size(639, 220);
 			this->dataGridView1->TabIndex = 0;
 			// 
 			// menuStrip1
@@ -233,9 +234,11 @@ namespace Courseproject {
 			this->groupBox1->Controls->Add(this->buttonLoadTransactions);
 			this->groupBox1->Controls->Add(this->comboBoxAccounts);
 			this->groupBox1->Controls->Add(this->dataGridViewTransactions);
-			this->groupBox1->Location = System::Drawing::Point(60, 433);
+			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->groupBox1->Location = System::Drawing::Point(12, 433);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(871, 199);
+			this->groupBox1->Size = System::Drawing::Size(890, 199);
 			this->groupBox1->TabIndex = 2;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"groupBox1";
@@ -246,9 +249,9 @@ namespace Courseproject {
 			this->labelAccounts->AutoSize = true;
 			this->labelAccounts->Location = System::Drawing::Point(724, 30);
 			this->labelAccounts->Name = L"labelAccounts";
-			this->labelAccounts->Size = System::Drawing::Size(112, 17);
+			this->labelAccounts->Size = System::Drawing::Size(142, 20);
 			this->labelAccounts->TabIndex = 3;
-			this->labelAccounts->Text = L"Выберете счёт ";
+			this->labelAccounts->Text = L"Выберете счёт:";
 			// 
 			// buttonLoadTransactions
 			// 
@@ -265,12 +268,13 @@ namespace Courseproject {
 			this->comboBoxAccounts->FormattingEnabled = true;
 			this->comboBoxAccounts->Location = System::Drawing::Point(727, 70);
 			this->comboBoxAccounts->Name = L"comboBoxAccounts";
-			this->comboBoxAccounts->Size = System::Drawing::Size(132, 24);
+			this->comboBoxAccounts->Size = System::Drawing::Size(132, 28);
 			this->comboBoxAccounts->TabIndex = 1;
 			// 
 			// dataGridViewTransactions
 			// 
 			this->dataGridViewTransactions->AllowUserToAddRows = false;
+			this->dataGridViewTransactions->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridViewTransactions->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridViewTransactions->Location = System::Drawing::Point(18, 30);
 			this->dataGridViewTransactions->Name = L"dataGridViewTransactions";
@@ -285,9 +289,11 @@ namespace Courseproject {
 			this->groupBox2->Controls->Add(this->label_del_ch);
 			this->groupBox2->Controls->Add(this->button_del_ac);
 			this->groupBox2->Controls->Add(this->button_change_ac);
-			this->groupBox2->Location = System::Drawing::Point(995, 433);
+			this->groupBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->groupBox2->Location = System::Drawing::Point(908, 433);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(252, 199);
+			this->groupBox2->Size = System::Drawing::Size(366, 199);
 			this->groupBox2->TabIndex = 3;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"groupBox2";
@@ -296,27 +302,27 @@ namespace Courseproject {
 			// comboBox_del_ch_ac
 			// 
 			this->comboBox_del_ch_ac->FormattingEnabled = true;
-			this->comboBox_del_ch_ac->Location = System::Drawing::Point(45, 89);
+			this->comboBox_del_ch_ac->Location = System::Drawing::Point(30, 93);
 			this->comboBox_del_ch_ac->Name = L"comboBox_del_ch_ac";
-			this->comboBox_del_ch_ac->Size = System::Drawing::Size(121, 24);
+			this->comboBox_del_ch_ac->Size = System::Drawing::Size(121, 28);
 			this->comboBox_del_ch_ac->TabIndex = 4;
 			this->comboBox_del_ch_ac->Visible = false;
 			// 
 			// label_del_ch
 			// 
 			this->label_del_ch->AutoSize = true;
-			this->label_del_ch->Location = System::Drawing::Point(42, 41);
+			this->label_del_ch->Location = System::Drawing::Point(6, 47);
 			this->label_del_ch->Name = L"label_del_ch";
-			this->label_del_ch->Size = System::Drawing::Size(46, 17);
+			this->label_del_ch->Size = System::Drawing::Size(53, 20);
 			this->label_del_ch->TabIndex = 3;
 			this->label_del_ch->Text = L"label1";
 			this->label_del_ch->Visible = false;
 			// 
 			// button_del_ac
 			// 
-			this->button_del_ac->Location = System::Drawing::Point(128, 156);
+			this->button_del_ac->Location = System::Drawing::Point(147, 142);
 			this->button_del_ac->Name = L"button_del_ac";
-			this->button_del_ac->Size = System::Drawing::Size(118, 23);
+			this->button_del_ac->Size = System::Drawing::Size(169, 38);
 			this->button_del_ac->TabIndex = 2;
 			this->button_del_ac->Text = L"Удалить";
 			this->button_del_ac->UseVisualStyleBackColor = true;
@@ -325,9 +331,9 @@ namespace Courseproject {
 			// 
 			// button_change_ac
 			// 
-			this->button_change_ac->Location = System::Drawing::Point(128, 156);
+			this->button_change_ac->Location = System::Drawing::Point(147, 142);
 			this->button_change_ac->Name = L"button_change_ac";
-			this->button_change_ac->Size = System::Drawing::Size(118, 23);
+			this->button_change_ac->Size = System::Drawing::Size(169, 38);
 			this->button_change_ac->TabIndex = 1;
 			this->button_change_ac->Text = L"Редактировать";
 			this->button_change_ac->UseVisualStyleBackColor = true;
@@ -338,6 +344,7 @@ namespace Courseproject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Info;
 			this->ClientSize = System::Drawing::Size(1286, 698);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
@@ -346,7 +353,7 @@ namespace Courseproject {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Account_TableForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Account_TableForm";
+			this->Text = L"Работа со счетами";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();

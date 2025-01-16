@@ -286,7 +286,7 @@ namespace Courseproject {
     }
     System::Void SearchTransactionForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        MessageBox::Show("В данном окне вы можете осуществлять поиск транзакций по различным критериям.\n\nДля поиска необходимо:\n1. Отметьте флажком ('Использовать...') те поля, по которым вы хотите искать.\n2. Заполните соответствующие поля для поиска.\n3. Для поля 'Использовать сумму' выберите тип сравнения (=, >, <).\n4. Нажмите кнопку 'Поиск', чтобы отобразить результаты поиска внизу окна.\n5. Используйте кнопку 'Очистка поиска', чтобы сбросить все выбранные критерии и результаты.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
         return System::Void();
         
     }

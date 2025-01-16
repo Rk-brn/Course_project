@@ -98,7 +98,8 @@ System::Void Courseproject::CategoryForm::вернутьсяНазадToolStripMenuItem_Click(
 
 System::Void Courseproject::CategoryForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    MessageBox::Show("В данном окне необходимо заполнить поля для названия и описания новой категории.\nПосле чего нажать на кнопку 'Добавить категорию'.\nПоля не должны быть пустыми. После нажатия на кнопку 'Добавить категорию', вы будете уведомлены, о том что категория добавлена.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    
     return System::Void();
 }
 

@@ -89,9 +89,11 @@ namespace Courseproject {
 			// 
 			// buttonConversion
 			// 
-			this->buttonConversion->Location = System::Drawing::Point(722, 423);
+			this->buttonConversion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->buttonConversion->Location = System::Drawing::Point(686, 423);
 			this->buttonConversion->Name = L"buttonConversion";
-			this->buttonConversion->Size = System::Drawing::Size(133, 61);
+			this->buttonConversion->Size = System::Drawing::Size(181, 61);
 			this->buttonConversion->TabIndex = 0;
 			this->buttonConversion->Text = L"Конверитровать";
 			this->buttonConversion->UseVisualStyleBackColor = true;
@@ -99,9 +101,11 @@ namespace Courseproject {
 			// 
 			// button_clear
 			// 
-			this->button_clear->Location = System::Drawing::Point(722, 512);
+			this->button_clear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button_clear->Location = System::Drawing::Point(686, 512);
 			this->button_clear->Name = L"button_clear";
-			this->button_clear->Size = System::Drawing::Size(136, 61);
+			this->button_clear->Size = System::Drawing::Size(181, 61);
 			this->button_clear->TabIndex = 1;
 			this->button_clear->Text = L"Очистка полей";
 			this->button_clear->UseVisualStyleBackColor = true;
@@ -109,44 +113,54 @@ namespace Courseproject {
 			// 
 			// comboBoxAccounts
 			// 
+			this->comboBoxAccounts->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->comboBoxAccounts->FormattingEnabled = true;
 			this->comboBoxAccounts->Location = System::Drawing::Point(136, 292);
 			this->comboBoxAccounts->Name = L"comboBoxAccounts";
-			this->comboBoxAccounts->Size = System::Drawing::Size(121, 24);
+			this->comboBoxAccounts->Size = System::Drawing::Size(121, 30);
 			this->comboBoxAccounts->TabIndex = 2;
 			// 
 			// comboBoxCurrencies
 			// 
+			this->comboBoxCurrencies->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->comboBoxCurrencies->FormattingEnabled = true;
 			this->comboBoxCurrencies->Location = System::Drawing::Point(614, 292);
 			this->comboBoxCurrencies->Name = L"comboBoxCurrencies";
-			this->comboBoxCurrencies->Size = System::Drawing::Size(121, 24);
+			this->comboBoxCurrencies->Size = System::Drawing::Size(121, 30);
 			this->comboBoxCurrencies->TabIndex = 3;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(333, 107);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(246, 79);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(200, 17);
+			this->label1->Size = System::Drawing::Size(394, 32);
 			this->label1->TabIndex = 4;
 			this->label1->Text = L"Конвертация баланса счета ";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(133, 240);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(112, 17);
+			this->label2->Size = System::Drawing::Size(151, 24);
 			this->label2->TabIndex = 5;
 			this->label2->Text = L"Выберете счёт:";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(611, 240);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(129, 17);
+			this->label3->Size = System::Drawing::Size(174, 24);
 			this->label3->TabIndex = 6;
 			this->label3->Text = L"Выберете валюту:";
 			// 
@@ -160,7 +174,6 @@ namespace Courseproject {
 			this->dataGridViewConversions->RowTemplate->Height = 24;
 			this->dataGridViewConversions->Size = System::Drawing::Size(523, 150);
 			this->dataGridViewConversions->TabIndex = 7;
-			this->dataGridViewConversions->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
 			// 
 			// menuStrip1
 			// 
@@ -224,6 +237,7 @@ namespace Courseproject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Info;
 			this->ClientSize = System::Drawing::Size(903, 706);
 			this->Controls->Add(this->dataGridViewConversions);
 			this->Controls->Add(this->label3);
@@ -237,7 +251,7 @@ namespace Courseproject {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"CurrencyConverterForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"CurrencyConverterForm";
+			this->Text = L"Конвертация";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewConversions))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();

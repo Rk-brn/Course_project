@@ -54,6 +54,8 @@ namespace Courseproject {
 	private: System::Windows::Forms::GroupBox^ groupBox_edit_del_tran;
 	private: System::Windows::Forms::Button^ button_edit_del_tr;
 	private: System::Windows::Forms::Button^ button_changed_tr;
+	private: System::Windows::Forms::Label^ label_cat;
+	private: System::Windows::Forms::Label^ label_del_ch_tr;
 	private: System::Windows::Forms::TextBox^ textBoxdel_cat;
 	private: System::Windows::Forms::ToolStripMenuItem^ óäàëèòüÒðàíçàêöèþToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ óäàëèòüÊàòåãîðèþToolStripMenuItem;
@@ -98,6 +100,8 @@ namespace Courseproject {
 			this->button_changed_tr = (gcnew System::Windows::Forms::Button());
 			this->button_edit_del_tr = (gcnew System::Windows::Forms::Button());
 			this->textBox_edit_del_tr = (gcnew System::Windows::Forms::TextBox());
+			this->label_cat = (gcnew System::Windows::Forms::Label());
+			this->label_del_ch_tr = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox_prosmotr_category->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
@@ -108,6 +112,7 @@ namespace Courseproject {
 			// dataGridView1
 			// 
 			this->dataGridView1->AllowUserToAddRows = false;
+			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Location = System::Drawing::Point(27, 37);
 			this->dataGridView1->Name = L"dataGridView1";
@@ -141,13 +146,16 @@ namespace Courseproject {
 			// 
 			// groupBox_prosmotr_category
 			// 
+			this->groupBox_prosmotr_category->Controls->Add(this->label_cat);
 			this->groupBox_prosmotr_category->Controls->Add(this->textBoxdel_cat);
 			this->groupBox_prosmotr_category->Controls->Add(this->button1);
 			this->groupBox_prosmotr_category->Controls->Add(this->button2);
 			this->groupBox_prosmotr_category->Controls->Add(this->dataGridView1);
-			this->groupBox_prosmotr_category->Location = System::Drawing::Point(60, 371);
+			this->groupBox_prosmotr_category->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->groupBox_prosmotr_category->Location = System::Drawing::Point(50, 415);
 			this->groupBox_prosmotr_category->Name = L"groupBox_prosmotr_category";
-			this->groupBox_prosmotr_category->Size = System::Drawing::Size(629, 277);
+			this->groupBox_prosmotr_category->Size = System::Drawing::Size(629, 233);
 			this->groupBox_prosmotr_category->TabIndex = 3;
 			this->groupBox_prosmotr_category->TabStop = false;
 			this->groupBox_prosmotr_category->Text = L"Ïðîñìîòð êàòåãîðèé";
@@ -155,9 +163,9 @@ namespace Courseproject {
 			// 
 			// textBoxdel_cat
 			// 
-			this->textBoxdel_cat->Location = System::Drawing::Point(409, 62);
+			this->textBoxdel_cat->Location = System::Drawing::Point(370, 79);
 			this->textBoxdel_cat->Name = L"textBoxdel_cat";
-			this->textBoxdel_cat->Size = System::Drawing::Size(110, 22);
+			this->textBoxdel_cat->Size = System::Drawing::Size(110, 27);
 			this->textBoxdel_cat->TabIndex = 3;
 			this->textBoxdel_cat->Visible = false;
 			// 
@@ -171,28 +179,28 @@ namespace Courseproject {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1399, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1399, 30);
 			this->menuStrip1->TabIndex = 4;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// äîáàâèòüÒðàíçàêöèþToolStripMenuItem
 			// 
 			this->äîáàâèòüÒðàíçàêöèþToolStripMenuItem->Name = L"äîáàâèòüÒðàíçàêöèþToolStripMenuItem";
-			this->äîáàâèòüÒðàíçàêöèþToolStripMenuItem->Size = System::Drawing::Size(178, 24);
+			this->äîáàâèòüÒðàíçàêöèþToolStripMenuItem->Size = System::Drawing::Size(178, 26);
 			this->äîáàâèòüÒðàíçàêöèþToolStripMenuItem->Text = L"Äîáàâèòü òðàíçàêöèþ";
 			this->äîáàâèòüÒðàíçàêöèþToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::äîáàâèòüÒðàíçàêöèþToolStripMenuItem_Click);
 			// 
 			// îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem
 			// 
 			this->îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem->Name = L"îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem";
-			this->îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem->Size = System::Drawing::Size(213, 24);
+			this->îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem->Size = System::Drawing::Size(213, 26);
 			this->îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem->Text = L"Îáíîâèòü äàííûå òàáëèöû";
 			this->îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::îáíîâèòüÄàííûåÒàáëèöûToolStripMenuItem_Click);
 			// 
 			// ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem
 			// 
 			this->ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem->Name = L"ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem";
-			this->ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem->Size = System::Drawing::Size(177, 24);
+			this->ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem->Size = System::Drawing::Size(177, 26);
 			this->ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem->Text = L"Ðåäàêòèðîâàòü çàïèñü";
 			this->ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::ðåäàêòèðîâàòüÇàïèñüToolStripMenuItem_Click);
 			// 
@@ -203,7 +211,7 @@ namespace Courseproject {
 					this->óäàëèòüÊàòåãîðèþToolStripMenuItem
 			});
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Name = L"óäàëèòüÇàïèñüToolStripMenuItem";
-			this->óäàëèòüÇàïèñüToolStripMenuItem->Size = System::Drawing::Size(131, 24);
+			this->óäàëèòüÇàïèñüToolStripMenuItem->Size = System::Drawing::Size(131, 26);
 			this->óäàëèòüÇàïèñüToolStripMenuItem->Text = L"Óäàëèòü çàïèñü";
 			// 
 			// óäàëèòüÒðàíçàêöèþToolStripMenuItem
@@ -223,34 +231,35 @@ namespace Courseproject {
 			// ïðîñìîòðÊàòåãîðèéToolStripMenuItem
 			// 
 			this->ïðîñìîòðÊàòåãîðèéToolStripMenuItem->Name = L"ïðîñìîòðÊàòåãîðèéToolStripMenuItem";
-			this->ïðîñìîòðÊàòåãîðèéToolStripMenuItem->Size = System::Drawing::Size(173, 24);
+			this->ïðîñìîòðÊàòåãîðèéToolStripMenuItem->Size = System::Drawing::Size(173, 26);
 			this->ïðîñìîòðÊàòåãîðèéToolStripMenuItem->Text = L"Ïðîñìîòð êàòåãîðèé ";
 			this->ïðîñìîòðÊàòåãîðèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::ïðîñìîòðÊàòåãîðèéToolStripMenuItem_Click);
 			// 
 			// ïîèñêToolStripMenuItem
 			// 
 			this->ïîèñêToolStripMenuItem->Name = L"ïîèñêToolStripMenuItem";
-			this->ïîèñêToolStripMenuItem->Size = System::Drawing::Size(70, 24);
+			this->ïîèñêToolStripMenuItem->Size = System::Drawing::Size(70, 26);
 			this->ïîèñêToolStripMenuItem->Text = L"Ïîèñê ";
 			this->ïîèñêToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::ïîèñêToolStripMenuItem_Click);
 			// 
 			// èíôîðìàöèÿToolStripMenuItem
 			// 
 			this->èíôîðìàöèÿToolStripMenuItem->Name = L"èíôîðìàöèÿToolStripMenuItem";
-			this->èíôîðìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 24);
+			this->èíôîðìàöèÿToolStripMenuItem->Size = System::Drawing::Size(116, 26);
 			this->èíôîðìàöèÿToolStripMenuItem->Text = L"Èíôîðìàöèÿ";
 			this->èíôîðìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::èíôîðìàöèÿToolStripMenuItem_Click);
 			// 
 			// âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem
 			// 
 			this->âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem->Name = L"âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem";
-			this->âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem->Size = System::Drawing::Size(145, 24);
+			this->âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem->Size = System::Drawing::Size(145, 26);
 			this->âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem->Text = L"Âåðíóòüñÿ ê ñ÷¸òó";
 			this->âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem->Click += gcnew System::EventHandler(this, &Table_Category_TransactionForm::âåðíóòüñÿÊÑ÷¸òóToolStripMenuItem_Click);
 			// 
 			// dataGridViewTransactions
 			// 
 			this->dataGridViewTransactions->AllowUserToAddRows = false;
+			this->dataGridViewTransactions->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridViewTransactions->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridViewTransactions->Location = System::Drawing::Point(240, 51);
 			this->dataGridViewTransactions->Name = L"dataGridViewTransactions";
@@ -261,12 +270,15 @@ namespace Courseproject {
 			// 
 			// groupBox_edit_del_tran
 			// 
+			this->groupBox_edit_del_tran->Controls->Add(this->label_del_ch_tr);
 			this->groupBox_edit_del_tran->Controls->Add(this->button_changed_tr);
 			this->groupBox_edit_del_tran->Controls->Add(this->button_edit_del_tr);
 			this->groupBox_edit_del_tran->Controls->Add(this->textBox_edit_del_tr);
-			this->groupBox_edit_del_tran->Location = System::Drawing::Point(872, 371);
+			this->groupBox_edit_del_tran->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->groupBox_edit_del_tran->Location = System::Drawing::Point(872, 415);
 			this->groupBox_edit_del_tran->Name = L"groupBox_edit_del_tran";
-			this->groupBox_edit_del_tran->Size = System::Drawing::Size(448, 277);
+			this->groupBox_edit_del_tran->Size = System::Drawing::Size(448, 233);
 			this->groupBox_edit_del_tran->TabIndex = 6;
 			this->groupBox_edit_del_tran->TabStop = false;
 			this->groupBox_edit_del_tran->Text = L"groupBox1";
@@ -274,7 +286,7 @@ namespace Courseproject {
 			// 
 			// button_changed_tr
 			// 
-			this->button_changed_tr->Location = System::Drawing::Point(36, 176);
+			this->button_changed_tr->Location = System::Drawing::Point(242, 136);
 			this->button_changed_tr->Name = L"button_changed_tr";
 			this->button_changed_tr->Size = System::Drawing::Size(200, 75);
 			this->button_changed_tr->TabIndex = 2;
@@ -285,7 +297,7 @@ namespace Courseproject {
 			// 
 			// button_edit_del_tr
 			// 
-			this->button_edit_del_tr->Location = System::Drawing::Point(242, 176);
+			this->button_edit_del_tr->Location = System::Drawing::Point(242, 136);
 			this->button_edit_del_tr->Name = L"button_edit_del_tr";
 			this->button_edit_del_tr->Size = System::Drawing::Size(200, 75);
 			this->button_edit_del_tr->TabIndex = 1;
@@ -296,16 +308,38 @@ namespace Courseproject {
 			// 
 			// textBox_edit_del_tr
 			// 
-			this->textBox_edit_del_tr->Location = System::Drawing::Point(58, 63);
+			this->textBox_edit_del_tr->Location = System::Drawing::Point(36, 79);
 			this->textBox_edit_del_tr->Name = L"textBox_edit_del_tr";
-			this->textBox_edit_del_tr->Size = System::Drawing::Size(100, 22);
+			this->textBox_edit_del_tr->Size = System::Drawing::Size(100, 27);
 			this->textBox_edit_del_tr->TabIndex = 0;
 			this->textBox_edit_del_tr->Visible = false;
+			// 
+			// label_cat
+			// 
+			this->label_cat->AutoSize = true;
+			this->label_cat->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label_cat->Location = System::Drawing::Point(366, 46);
+			this->label_cat->Name = L"label_cat";
+			this->label_cat->Size = System::Drawing::Size(247, 20);
+			this->label_cat->TabIndex = 4;
+			this->label_cat->Text = L"Âûáåðåòå íîìåð êàòåãîðèè:";
+			this->label_cat->Visible = false;
+			// 
+			// label_del_ch_tr
+			// 
+			this->label_del_ch_tr->AutoSize = true;
+			this->label_del_ch_tr->Location = System::Drawing::Point(36, 37);
+			this->label_del_ch_tr->Name = L"label_del_ch_tr";
+			this->label_del_ch_tr->Size = System::Drawing::Size(53, 20);
+			this->label_del_ch_tr->TabIndex = 3;
+			this->label_del_ch_tr->Text = L"Âûáåðåòå íîìåð òðàíçàêöèè:";
 			// 
 			// Table_Category_TransactionForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Info;
 			this->ClientSize = System::Drawing::Size(1399, 696);
 			this->Controls->Add(this->groupBox_edit_del_tran);
 			this->Controls->Add(this->dataGridViewTransactions);
@@ -314,7 +348,7 @@ namespace Courseproject {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Table_Category_TransactionForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Table_Category_TransactionForm";
+			this->Text = L"Òðàíçàêöèè";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox_prosmotr_category->ResumeLayout(false);
 			this->groupBox_prosmotr_category->PerformLayout();

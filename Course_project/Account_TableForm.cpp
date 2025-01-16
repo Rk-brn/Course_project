@@ -567,7 +567,7 @@ namespace Courseproject {
     }
     System::Void Account_TableForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        MessageBox::Show("В данном окне вы можете просматривать данные о счетах и транзакциях.\nВ верхней таблице отображается название счёта, баланс, количество транзакций и описание счёта.\nВ нижней таблице отображаются транзакции по выбранному счёту.\nЕсли у вас нет ни одного счёта, просмотр транзакций будет заблокирован. Как только вы создадите хотя бы один счёт, возможность просмотра станет доступна.\nДля просмотра транзакций выберите счёт из списка 'Выберите счёт:' и транзакции отобразятся в нижней таблице.\nВы можете 'Редактировать' или 'Удалить' выбранную транзакцию.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
         return System::Void();
     }
     System::Void Account_TableForm::вернутьсяВМенюToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
@@ -701,6 +701,8 @@ namespace Courseproject {
             AccountForm^ accountForm = gcnew AccountForm();
             accountForm->SetEditMode(true);
             accountForm->SetAccountData(selectedAccount, balance, transactionCount, description);
+            accountForm->Text = "Редактировать счёт";
+            accountForm->label_creat_account->Text = "Редактировать счёт";
             accountForm->ShowDialog();
 
             

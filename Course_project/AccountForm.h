@@ -34,7 +34,7 @@ namespace Courseproject {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ label_creat_account;
+	public: System::Windows::Forms::Label^ label_creat_account;
 	private: System::Windows::Forms::Label^ label_creat_name_ac;
 	private: System::Windows::Forms::Label^ label_creat_des_ac;
 	protected:
@@ -80,27 +80,33 @@ namespace Courseproject {
 			// label_creat_account
 			// 
 			this->label_creat_account->AutoSize = true;
-			this->label_creat_account->Location = System::Drawing::Point(485, 78);
+			this->label_creat_account->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label_creat_account->Location = System::Drawing::Point(410, 73);
 			this->label_creat_account->Name = L"label_creat_account";
-			this->label_creat_account->Size = System::Drawing::Size(114, 17);
+			this->label_creat_account->Size = System::Drawing::Size(226, 32);
 			this->label_creat_account->TabIndex = 0;
 			this->label_creat_account->Text = L"—оздание счЄта";
 			// 
 			// label_creat_name_ac
 			// 
 			this->label_creat_name_ac->AutoSize = true;
+			this->label_creat_name_ac->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label_creat_name_ac->Location = System::Drawing::Point(189, 248);
 			this->label_creat_name_ac->Name = L"label_creat_name_ac";
-			this->label_creat_name_ac->Size = System::Drawing::Size(175, 17);
+			this->label_creat_name_ac->Size = System::Drawing::Size(239, 24);
 			this->label_creat_name_ac->TabIndex = 1;
 			this->label_creat_name_ac->Text = L"¬ведите название счЄта:";
 			// 
 			// label_creat_des_ac
 			// 
 			this->label_creat_des_ac->AutoSize = true;
-			this->label_creat_des_ac->Location = System::Drawing::Point(772, 248);
+			this->label_creat_des_ac->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label_creat_des_ac->Location = System::Drawing::Point(188, 399);
 			this->label_creat_des_ac->Name = L"label_creat_des_ac";
-			this->label_creat_des_ac->Size = System::Drawing::Size(176, 17);
+			this->label_creat_des_ac->Size = System::Drawing::Size(240, 24);
 			this->label_creat_des_ac->TabIndex = 2;
 			this->label_creat_des_ac->Text = L"¬ведите описание счЄта:";
 			// 
@@ -113,14 +119,16 @@ namespace Courseproject {
 			// 
 			// textBox_balance_account
 			// 
-			this->textBox_balance_account->Location = System::Drawing::Point(775, 299);
+			this->textBox_balance_account->Location = System::Drawing::Point(191, 450);
 			this->textBox_balance_account->Name = L"textBox_balance_account";
 			this->textBox_balance_account->Size = System::Drawing::Size(100, 22);
 			this->textBox_balance_account->TabIndex = 4;
 			// 
 			// button_creat_account
 			// 
-			this->button_creat_account->Location = System::Drawing::Point(901, 498);
+			this->button_creat_account->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->button_creat_account->Location = System::Drawing::Point(778, 521);
 			this->button_creat_account->Name = L"button_creat_account";
 			this->button_creat_account->Size = System::Drawing::Size(211, 67);
 			this->button_creat_account->TabIndex = 5;
@@ -137,7 +145,7 @@ namespace Courseproject {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1181, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1032, 28);
 			this->menuStrip1->TabIndex = 6;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -159,7 +167,8 @@ namespace Courseproject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1181, 656);
+			this->BackColor = System::Drawing::SystemColors::Info;
+			this->ClientSize = System::Drawing::Size(1032, 656);
 			this->Controls->Add(this->button_creat_account);
 			this->Controls->Add(this->textBox_balance_account);
 			this->Controls->Add(this->textBox_name_account);
@@ -170,7 +179,7 @@ namespace Courseproject {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"AccountForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"AccountForm";
+			this->Text = L"—оздание счЄта";
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);

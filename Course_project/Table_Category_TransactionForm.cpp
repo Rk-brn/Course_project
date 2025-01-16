@@ -175,6 +175,7 @@ namespace Courseproject {
             this->button2->Visible = false;
             this->textBoxdel_cat->Visible = false;
             this->textBoxdel_cat->Clear();
+            this->label_cat->Visible = false;
             flag_prosmotr = 0;
         }
         else if (!flag_prosmotr) {
@@ -299,7 +300,7 @@ namespace Courseproject {
     }
     System::Void Table_Category_TransactionForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        MessageBox::Show("В данном окне вы можете управлять транзакциями.\n\nЗдесь вы можете:\n- Добавлять новые транзакции с помощью кнопки 'Добавить транзакцию'.\n- Обновлять данные в таблице, используя кнопку 'Обновить данные таблицы'.\n- Редактировать выбранную транзакцию, нажав на кнопку 'Редактировать запись'.\n- Удалять транзакции или категории, используя пункты меню 'Удалить запись' > 'Удалить транзакцию' или 'Удалить запись' > 'Удалить категорию'.\n- Просматривать список доступных категорий, используя пункт меню 'Просмотр категорий'.\n- Искать транзакции по определённым критериям используя пункт меню 'Поиск'.\n- Вернуться в главное меню используя пункт меню 'Вернуться к счёту'.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
         return System::Void();
     }
     System::Void Table_Category_TransactionForm::вернутьсяКСчётуToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
@@ -349,6 +350,7 @@ namespace Courseproject {
             else {
                 TransactionForm^ transactionForm = gcnew TransactionForm();
                 transactionForm->Text = "Редактировать строку";
+                transactionForm->label1->Text = "Редактировать запись";
                 transactionForm->button_TransactionCreat->Text = "Изменить!";
                 transactionForm->isEditing = true; // флаг что это редактирование
                 transactionForm->rowIndexToEdit = nomer_row - 1; // Индекс редактируемой строки
@@ -382,6 +384,7 @@ namespace Courseproject {
             this->button1->Visible = false;
             this->button2->Visible = false;
             this->textBoxdel_cat->Visible = false;
+            this->label_cat->Visible = false;
             this->textBoxdel_cat->Clear();
             flag_prosmotr = 0;
         }
@@ -394,6 +397,7 @@ namespace Courseproject {
             this->button2->Visible = true;
             this->button2->Enabled = true;
             this->textBoxdel_cat->Visible = true;
+            this->label_cat->Visible = true;
             this->textBoxdel_cat->Clear();
             flag_prosmotr = 1;
         }

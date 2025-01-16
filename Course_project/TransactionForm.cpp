@@ -287,7 +287,7 @@ namespace Courseproject {
 
     System::Void TransactionForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        MessageBox::Show("В данном окне вы можете создавать или редактировать транзакции.\nДля создания новой транзакции заполните все поля и нажмите кнопку 'Создать транзакцию'.\nДля редактирования транзакции выберите нужную транзакцию, внесите изменения в поля и нажмите кнопку 'Создать транзакцию'.\nПоля не должны быть пустыми. После нажатия на кнопку 'Создать транзакцию', вы будете уведомлены об успешном создании или редактировании транзакции.\nВыберите дату транзакции, название, категорию, сумму, тип и счёт.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
         return System::Void();
     }
 

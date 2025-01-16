@@ -110,7 +110,7 @@ namespace Courseproject {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(774, 28);
+			this->menuStrip1->Size = System::Drawing::Size(774, 30);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -121,7 +121,7 @@ namespace Courseproject {
 					this->íàñòğîéêèToolStripMenuItem
 			});
 			this->ìåíşToolStripMenuItem->Name = L"ìåíşToolStripMenuItem";
-			this->ìåíşToolStripMenuItem->Size = System::Drawing::Size(65, 24);
+			this->ìåíşToolStripMenuItem->Size = System::Drawing::Size(65, 26);
 			this->ìåíşToolStripMenuItem->Text = L"Ìåíş";
 			// 
 			// íîâàÿÈãğàToolStripMenuItem
@@ -141,22 +141,22 @@ namespace Courseproject {
 			// èíôîğìàöèÿÎÈãğåToolStripMenuItem
 			// 
 			this->èíôîğìàöèÿÎÈãğåToolStripMenuItem->Name = L"èíôîğìàöèÿÎÈãğåToolStripMenuItem";
-			this->èíôîğìàöèÿÎÈãğåToolStripMenuItem->Size = System::Drawing::Size(165, 24);
+			this->èíôîğìàöèÿÎÈãğåToolStripMenuItem->Size = System::Drawing::Size(165, 26);
 			this->èíôîğìàöèÿÎÈãğåToolStripMenuItem->Text = L"Èíôîğìàöèÿ î èãğå";
 			this->èíôîğìàöèÿÎÈãğåToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::èíôîğìàöèÿÎÈãğåToolStripMenuItem_Click);
 			// 
 			// âûõîäToolStripMenuItem
 			// 
 			this->âûõîäToolStripMenuItem->Name = L"âûõîäToolStripMenuItem";
-			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(67, 24);
+			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(67, 26);
 			this->âûõîäToolStripMenuItem->Text = L"Âûõîä";
 			this->âûõîäToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::âûõîäToolStripMenuItem_Click);
 			// 
 			// groupBoxGameData
 			// 
 			this->groupBoxGameData->Controls->Add(this->labelScore);
-			this->groupBoxGameData->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			this->groupBoxGameData->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->groupBoxGameData->Location = System::Drawing::Point(12, 47);
 			this->groupBoxGameData->Name = L"groupBoxGameData";
 			this->groupBoxGameData->Size = System::Drawing::Size(361, 72);
@@ -274,7 +274,7 @@ namespace Courseproject {
 			this->groupBox_name_user->Controls->Add(this->button_user_name);
 			this->groupBox_name_user->Controls->Add(this->textBox_name_user);
 			this->groupBox_name_user->Controls->Add(this->label_name_user);
-			this->groupBox_name_user->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular,
+			this->groupBox_name_user->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->groupBox_name_user->Location = System::Drawing::Point(72, 139);
 			this->groupBox_name_user->Name = L"groupBox_name_user";
@@ -297,7 +297,7 @@ namespace Courseproject {
 			// 
 			this->textBox_name_user->Location = System::Drawing::Point(327, 115);
 			this->textBox_name_user->Name = L"textBox_name_user";
-			this->textBox_name_user->Size = System::Drawing::Size(100, 31);
+			this->textBox_name_user->Size = System::Drawing::Size(100, 27);
 			this->textBox_name_user->TabIndex = 1;
 			// 
 			// label_name_user
@@ -305,7 +305,7 @@ namespace Courseproject {
 			this->label_name_user->AutoSize = true;
 			this->label_name_user->Location = System::Drawing::Point(81, 115);
 			this->label_name_user->Name = L"label_name_user";
-			this->label_name_user->Size = System::Drawing::Size(176, 23);
+			this->label_name_user->Size = System::Drawing::Size(174, 20);
 			this->label_name_user->TabIndex = 0;
 			this->label_name_user->Text = L"Ââåäèòå âàøå èìÿ:";
 			// 

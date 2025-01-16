@@ -93,18 +93,22 @@ namespace Courseproject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->label1->Location = System::Drawing::Point(122, 102);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(112, 17);
+			this->label1->Size = System::Drawing::Size(151, 24);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Выберете счёт:";
 			// 
 			// comboBoxAccounts
 			// 
+			this->comboBoxAccounts->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->comboBoxAccounts->FormattingEnabled = true;
 			this->comboBoxAccounts->Location = System::Drawing::Point(125, 145);
 			this->comboBoxAccounts->Name = L"comboBoxAccounts";
-			this->comboBoxAccounts->Size = System::Drawing::Size(121, 24);
+			this->comboBoxAccounts->Size = System::Drawing::Size(121, 30);
 			this->comboBoxAccounts->TabIndex = 1;
 			// 
 			// labelBalanceStatus
@@ -112,13 +116,15 @@ namespace Courseproject {
 			this->labelBalanceStatus->AutoSize = true;
 			this->labelBalanceStatus->Location = System::Drawing::Point(13, 41);
 			this->labelBalanceStatus->Name = L"labelBalanceStatus";
-			this->labelBalanceStatus->Size = System::Drawing::Size(129, 17);
+			this->labelBalanceStatus->Size = System::Drawing::Size(165, 20);
 			this->labelBalanceStatus->TabIndex = 2;
 			this->labelBalanceStatus->Text = L"Тип вашего счёта!";
 			// 
 			// buttonAnalitics
 			// 
-			this->buttonAnalitics->Location = System::Drawing::Point(1122, 407);
+			this->buttonAnalitics->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->buttonAnalitics->Location = System::Drawing::Point(1131, 387);
 			this->buttonAnalitics->Name = L"buttonAnalitics";
 			this->buttonAnalitics->Size = System::Drawing::Size(119, 81);
 			this->buttonAnalitics->TabIndex = 4;
@@ -128,7 +134,9 @@ namespace Courseproject {
 			// 
 			// button_clear
 			// 
-			this->button_clear->Location = System::Drawing::Point(1122, 526);
+			this->button_clear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button_clear->Location = System::Drawing::Point(1131, 523);
 			this->button_clear->Name = L"button_clear";
 			this->button_clear->Size = System::Drawing::Size(119, 78);
 			this->button_clear->TabIndex = 5;
@@ -173,6 +181,8 @@ namespace Courseproject {
 			this->groupBox1->Controls->Add(this->chartMonthly);
 			this->groupBox1->Controls->Add(this->labelBalanceStatus);
 			this->groupBox1->Controls->Add(this->chartAnalytics);
+			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->groupBox1->Location = System::Drawing::Point(125, 228);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(969, 415);
@@ -210,16 +220,19 @@ namespace Courseproject {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(530, 53);
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(491, 47);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(208, 17);
+			this->label2->Size = System::Drawing::Size(238, 32);
 			this->label2->TabIndex = 10;
-			this->label2->Text = L"Проведения аналитики счёта!";
+			this->label2->Text = L"Аналитика счёта";
 			// 
 			// AccountAnalyticsForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Info;
 			this->ClientSize = System::Drawing::Size(1299, 655);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->button_clear);
@@ -230,7 +243,7 @@ namespace Courseproject {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"AccountAnalyticsForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"AccountAnalyticsForm";
+			this->Text = L"Аналитика";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartAnalytics))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartMonthly))->EndInit();
 			this->groupBox1->ResumeLayout(false);

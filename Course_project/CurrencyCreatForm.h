@@ -92,40 +92,50 @@ namespace Courseproject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(324, 78);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(251, 61);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(167, 17);
+			this->label1->Size = System::Drawing::Size(334, 32);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Создание курса валюты";
 			// 
 			// label_Name
 			// 
 			this->label_Name->AutoSize = true;
+			this->label_Name->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->label_Name->Location = System::Drawing::Point(125, 214);
 			this->label_Name->Name = L"label_Name";
-			this->label_Name->Size = System::Drawing::Size(346, 17);
+			this->label_Name->Size = System::Drawing::Size(470, 24);
 			this->label_Name->TabIndex = 1;
 			this->label_Name->Text = L"Введите название новой валюты (например, USD):";
 			// 
 			// label_Rate
 			// 
 			this->label_Rate->AutoSize = true;
-			this->label_Rate->Location = System::Drawing::Point(125, 379);
+			this->label_Rate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label_Rate->Location = System::Drawing::Point(125, 378);
 			this->label_Rate->Name = L"label_Rate";
-			this->label_Rate->Size = System::Drawing::Size(448, 17);
+			this->label_Rate->Size = System::Drawing::Size(625, 24);
 			this->label_Rate->TabIndex = 2;
-			this->label_Rate->Text = L"Введите курс новой валюты к рублю (например, 1 USD = 110 руб):";
+			this->label_Rate->Text = L"Введите курс новой валюты к рублю (например, 1 USD = 110.00 руб):";
 			// 
 			// textBoxCurrencyName
 			// 
+			this->textBoxCurrencyName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->textBoxCurrencyName->Location = System::Drawing::Point(128, 265);
 			this->textBoxCurrencyName->Name = L"textBoxCurrencyName";
-			this->textBoxCurrencyName->Size = System::Drawing::Size(100, 22);
+			this->textBoxCurrencyName->Size = System::Drawing::Size(100, 28);
 			this->textBoxCurrencyName->TabIndex = 3;
 			this->textBoxCurrencyName->Text = L"USD";
 			// 
 			// buttonCreatCurrency
 			// 
+			this->buttonCreatCurrency->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->buttonCreatCurrency->Location = System::Drawing::Point(577, 501);
 			this->buttonCreatCurrency->Name = L"buttonCreatCurrency";
 			this->buttonCreatCurrency->Size = System::Drawing::Size(210, 71);
@@ -163,9 +173,9 @@ namespace Courseproject {
 			// 
 			// button_EditCurrency
 			// 
-			this->button_EditCurrency->Location = System::Drawing::Point(297, 60);
+			this->button_EditCurrency->Location = System::Drawing::Point(294, 76);
 			this->button_EditCurrency->Name = L"button_EditCurrency";
-			this->button_EditCurrency->Size = System::Drawing::Size(138, 26);
+			this->button_EditCurrency->Size = System::Drawing::Size(173, 28);
 			this->button_EditCurrency->TabIndex = 7;
 			this->button_EditCurrency->Text = L"Редактировать";
 			this->button_EditCurrency->UseVisualStyleBackColor = true;
@@ -174,9 +184,9 @@ namespace Courseproject {
 			// 
 			// button_DelCurrency
 			// 
-			this->button_DelCurrency->Location = System::Drawing::Point(297, 58);
+			this->button_DelCurrency->Location = System::Drawing::Point(294, 78);
 			this->button_DelCurrency->Name = L"button_DelCurrency";
-			this->button_DelCurrency->Size = System::Drawing::Size(138, 25);
+			this->button_DelCurrency->Size = System::Drawing::Size(173, 25);
 			this->button_DelCurrency->TabIndex = 8;
 			this->button_DelCurrency->Text = L"Удалить";
 			this->button_DelCurrency->UseVisualStyleBackColor = true;
@@ -186,9 +196,9 @@ namespace Courseproject {
 			// comboBoxCurrencies
 			// 
 			this->comboBoxCurrencies->FormattingEnabled = true;
-			this->comboBoxCurrencies->Location = System::Drawing::Point(35, 60);
+			this->comboBoxCurrencies->Location = System::Drawing::Point(36, 78);
 			this->comboBoxCurrencies->Name = L"comboBoxCurrencies";
-			this->comboBoxCurrencies->Size = System::Drawing::Size(121, 24);
+			this->comboBoxCurrencies->Size = System::Drawing::Size(121, 28);
 			this->comboBoxCurrencies->TabIndex = 9;
 			this->comboBoxCurrencies->Visible = false;
 			// 
@@ -199,9 +209,11 @@ namespace Courseproject {
 			this->groupBox1->Controls->Add(this->comboBoxCurrencies);
 			this->groupBox1->Controls->Add(this->button_EditCurrency);
 			this->groupBox1->Controls->Add(this->button_DelCurrency);
-			this->groupBox1->Location = System::Drawing::Point(172, 201);
+			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->groupBox1->Location = System::Drawing::Point(195, 195);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(441, 247);
+			this->groupBox1->Size = System::Drawing::Size(483, 268);
 			this->groupBox1->TabIndex = 10;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"groupBox1";
@@ -212,7 +224,7 @@ namespace Courseproject {
 			this->label_del_ch->AutoSize = true;
 			this->label_del_ch->Location = System::Drawing::Point(32, 30);
 			this->label_del_ch->Name = L"label_del_ch";
-			this->label_del_ch->Size = System::Drawing::Size(46, 17);
+			this->label_del_ch->Size = System::Drawing::Size(53, 20);
 			this->label_del_ch->TabIndex = 11;
 			this->label_del_ch->Text = L"label2";
 			// 
@@ -220,7 +232,7 @@ namespace Courseproject {
 			// 
 			this->dataGridViewCurrencies->AllowUserToAddRows = false;
 			this->dataGridViewCurrencies->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridViewCurrencies->Location = System::Drawing::Point(35, 105);
+			this->dataGridViewCurrencies->Location = System::Drawing::Point(51, 126);
 			this->dataGridViewCurrencies->Name = L"dataGridViewCurrencies";
 			this->dataGridViewCurrencies->RowHeadersWidth = 51;
 			this->dataGridViewCurrencies->RowTemplate->Height = 24;
@@ -230,15 +242,18 @@ namespace Courseproject {
 			// 
 			// textBoxCurrencyRate
 			// 
+			this->textBoxCurrencyRate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->textBoxCurrencyRate->Location = System::Drawing::Point(128, 426);
 			this->textBoxCurrencyRate->Name = L"textBoxCurrencyRate";
-			this->textBoxCurrencyRate->Size = System::Drawing::Size(100, 22);
+			this->textBoxCurrencyRate->Size = System::Drawing::Size(100, 28);
 			this->textBoxCurrencyRate->TabIndex = 11;
 			// 
 			// CurrencyCreatForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Info;
 			this->ClientSize = System::Drawing::Size(829, 622);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->buttonCreatCurrency);
@@ -251,7 +266,7 @@ namespace Courseproject {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"CurrencyCreatForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"CurrencyCreatForm";
+			this->Text = L"Работа с валютой";
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);

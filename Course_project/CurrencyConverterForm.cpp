@@ -176,7 +176,7 @@ namespace Courseproject {
 
     System::Void CurrencyConverterForm::информаицияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
     {
-        MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        MessageBox::Show("В данном окне вы можете конвертировать баланс выбранного счёта в выбранную валюту.\nДля этого необходимо выбрать счёт и валюту в соответствующих полях.\nВ таблице отображается баланс выбранного счёта, конвертированный баланс и курс валюты.\nДля запуска конвертации, нажмите кнопку 'Конвертировать'.\nДля очистки таблицы и полей выбора, нажмите кнопку 'Очистка полей'.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
         return System::Void();
     }
 

@@ -79,14 +79,16 @@ namespace Courseproject {
 			// 
 			// textBoxCategoryName
 			// 
-			this->textBoxCategoryName->Location = System::Drawing::Point(246, 213);
+			this->textBoxCategoryName->Location = System::Drawing::Point(113, 222);
 			this->textBoxCategoryName->Name = L"textBoxCategoryName";
 			this->textBoxCategoryName->Size = System::Drawing::Size(100, 22);
 			this->textBoxCategoryName->TabIndex = 0;
 			// 
 			// buttonCreateCategory
 			// 
-			this->buttonCreateCategory->Location = System::Drawing::Point(856, 473);
+			this->buttonCreateCategory->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->buttonCreateCategory->Location = System::Drawing::Point(702, 489);
 			this->buttonCreateCategory->Name = L"buttonCreateCategory";
 			this->buttonCreateCategory->Size = System::Drawing::Size(236, 64);
 			this->buttonCreateCategory->TabIndex = 1;
@@ -96,7 +98,7 @@ namespace Courseproject {
 			// 
 			// textBoxCategoryDescription
 			// 
-			this->textBoxCategoryDescription->Location = System::Drawing::Point(246, 393);
+			this->textBoxCategoryDescription->Location = System::Drawing::Point(113, 402);
 			this->textBoxCategoryDescription->Name = L"textBoxCategoryDescription";
 			this->textBoxCategoryDescription->Size = System::Drawing::Size(100, 22);
 			this->textBoxCategoryDescription->TabIndex = 2;
@@ -104,9 +106,11 @@ namespace Courseproject {
 			// label_new_category
 			// 
 			this->label_new_category->AutoSize = true;
-			this->label_new_category->Location = System::Drawing::Point(491, 60);
+			this->label_new_category->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label_new_category->Location = System::Drawing::Point(329, 61);
 			this->label_new_category->Name = L"label_new_category";
-			this->label_new_category->Size = System::Drawing::Size(186, 17);
+			this->label_new_category->Size = System::Drawing::Size(372, 32);
 			this->label_new_category->TabIndex = 3;
 			this->label_new_category->Text = L"Ñîçäàíèå íîâîé êàòåãîðèè";
 			// 
@@ -119,47 +123,52 @@ namespace Courseproject {
 			});
 			this->menuStrip_new_category->Location = System::Drawing::Point(0, 0);
 			this->menuStrip_new_category->Name = L"menuStrip_new_category";
-			this->menuStrip_new_category->Size = System::Drawing::Size(1201, 28);
+			this->menuStrip_new_category->Size = System::Drawing::Size(1028, 30);
 			this->menuStrip_new_category->TabIndex = 4;
 			this->menuStrip_new_category->Text = L"menuStrip1";
 			// 
 			// èíôîðìàöèÿToolStripMenuItem
 			// 
 			this->èíôîðìàöèÿToolStripMenuItem->Name = L"èíôîðìàöèÿToolStripMenuItem";
-			this->èíôîðìàöèÿToolStripMenuItem->Size = System::Drawing::Size(120, 24);
+			this->èíôîðìàöèÿToolStripMenuItem->Size = System::Drawing::Size(120, 26);
 			this->èíôîðìàöèÿToolStripMenuItem->Text = L"Èíôîðìàöèÿ ";
 			this->èíôîðìàöèÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &CategoryForm::èíôîðìàöèÿToolStripMenuItem_Click);
 			// 
 			// âåðíóòüñÿÍàçàäToolStripMenuItem
 			// 
 			this->âåðíóòüñÿÍàçàäToolStripMenuItem->Name = L"âåðíóòüñÿÍàçàäToolStripMenuItem";
-			this->âåðíóòüñÿÍàçàäToolStripMenuItem->Size = System::Drawing::Size(138, 24);
+			this->âåðíóòüñÿÍàçàäToolStripMenuItem->Size = System::Drawing::Size(138, 26);
 			this->âåðíóòüñÿÍàçàäToolStripMenuItem->Text = L"Âåðíóòüñÿ íàçàä";
 			this->âåðíóòüñÿÍàçàäToolStripMenuItem->Click += gcnew System::EventHandler(this, &CategoryForm::âåðíóòüñÿÍàçàäToolStripMenuItem_Click);
 			// 
 			// label_name_category
 			// 
 			this->label_name_category->AutoSize = true;
-			this->label_name_category->Location = System::Drawing::Point(246, 147);
+			this->label_name_category->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label_name_category->Location = System::Drawing::Point(113, 156);
 			this->label_name_category->Name = L"label_name_category";
-			this->label_name_category->Size = System::Drawing::Size(204, 17);
+			this->label_name_category->Size = System::Drawing::Size(281, 24);
 			this->label_name_category->TabIndex = 5;
 			this->label_name_category->Text = L"Ââåäèòå íàçâàíèå êàòåãîðèè:";
 			// 
 			// label_opis_category
 			// 
 			this->label_opis_category->AutoSize = true;
-			this->label_opis_category->Location = System::Drawing::Point(246, 341);
+			this->label_opis_category->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label_opis_category->Location = System::Drawing::Point(113, 350);
 			this->label_opis_category->Name = L"label_opis_category";
-			this->label_opis_category->Size = System::Drawing::Size(201, 17);
+			this->label_opis_category->Size = System::Drawing::Size(282, 24);
 			this->label_opis_category->TabIndex = 6;
-			this->label_opis_category->Text = L"Ââåäèòå îïèñàíèå êàòåãîðèè";
+			this->label_opis_category->Text = L"Ââåäèòå îïèñàíèå êàòåãîðèè:";
 			// 
 			// CategoryForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1201, 658);
+			this->BackColor = System::Drawing::SystemColors::Info;
+			this->ClientSize = System::Drawing::Size(1028, 628);
 			this->Controls->Add(this->label_opis_category);
 			this->Controls->Add(this->label_name_category);
 			this->Controls->Add(this->label_new_category);
@@ -169,6 +178,7 @@ namespace Courseproject {
 			this->Controls->Add(this->menuStrip_new_category);
 			this->MainMenuStrip = this->menuStrip_new_category;
 			this->Name = L"CategoryForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Íîâàÿ êàòåãîðèÿ";
 			this->menuStrip_new_category->ResumeLayout(false);
 			this->menuStrip_new_category->PerformLayout();

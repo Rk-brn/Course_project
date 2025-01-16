@@ -105,7 +105,7 @@ System::Void Courseproject::AccountForm::button_creat_account_Click(System::Obje
 
 System::Void Courseproject::AccountForm::информацияToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    MessageBox::Show("Будет текст", "Информация", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    MessageBox::Show("В данном окне вы можете создавать или редактировать счета.\nДля создания нового счёта заполните поля 'Введите название счёта:' и 'Введите описание счёта:' и нажмите кнопку 'Создать счёт!'.\nДля редактирования счёта выберите его из списка и внесите изменения в соответствующие поля, затем нажмите кнопку 'Создать счёт!'.\nПосле успешного создания или редактирования счёта вы будете уведомлены об этом.\nВсе поля должны быть заполнены.", "Справка", MessageBoxButtons::OK, MessageBoxIcon::Information);
     return System::Void();
     
 }

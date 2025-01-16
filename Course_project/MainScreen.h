@@ -66,24 +66,30 @@ namespace Courseproject {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(442, 110);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(260, 62);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(136, 17);
+			this->label1->Size = System::Drawing::Size(477, 32);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"Добро пожаловать!";
+			this->label1->Text = L"Главное меню финансового учёта!";
 			// 
 			// button_start
 			// 
+			this->button_start->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->button_start->Location = System::Drawing::Point(378, 182);
 			this->button_start->Name = L"button_start";
 			this->button_start->Size = System::Drawing::Size(277, 83);
 			this->button_start->TabIndex = 1;
-			this->button_start->Text = L"Запуск программы";
+			this->button_start->Text = L"Начать работу с финансами\r\n";
 			this->button_start->UseVisualStyleBackColor = true;
 			this->button_start->Click += gcnew System::EventHandler(this, &MyForm::button_start_Click);
 			// 
 			// button_inf
 			// 
+			this->button_inf->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->button_inf->Location = System::Drawing::Point(378, 408);
 			this->button_inf->Name = L"button_inf";
 			this->button_inf->Size = System::Drawing::Size(277, 83);
@@ -94,6 +100,8 @@ namespace Courseproject {
 			// 
 			// button_out
 			// 
+			this->button_out->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->button_out->Location = System::Drawing::Point(378, 515);
 			this->button_out->Name = L"button_out";
 			this->button_out->Size = System::Drawing::Size(277, 86);
@@ -104,6 +112,8 @@ namespace Courseproject {
 			// 
 			// button_game
 			// 
+			this->button_game->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->button_game->Location = System::Drawing::Point(378, 296);
 			this->button_game->Name = L"button_game";
 			this->button_game->Size = System::Drawing::Size(277, 86);
@@ -116,7 +126,8 @@ namespace Courseproject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1069, 662);
+			this->BackColor = System::Drawing::SystemColors::Info;
+			this->ClientSize = System::Drawing::Size(1033, 662);
 			this->Controls->Add(this->button_game);
 			this->Controls->Add(this->button_out);
 			this->Controls->Add(this->button_inf);
