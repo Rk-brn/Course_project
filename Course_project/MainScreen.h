@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Account_TableForm.h"
+
 namespace Courseproject {
 
 	using namespace System;
@@ -39,6 +41,7 @@ namespace Courseproject {
 	private: System::Windows::Forms::Button^ button_start;
 	private: System::Windows::Forms::Button^ button_inf;
 	private: System::Windows::Forms::Button^ button_out;
+	private: System::Windows::Forms::Button^ button_game;
 
 	private:
 		/// <summary>
@@ -57,6 +60,7 @@ namespace Courseproject {
 			this->button_start = (gcnew System::Windows::Forms::Button());
 			this->button_inf = (gcnew System::Windows::Forms::Button());
 			this->button_out = (gcnew System::Windows::Forms::Button());
+			this->button_game = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -80,7 +84,7 @@ namespace Courseproject {
 			// 
 			// button_inf
 			// 
-			this->button_inf->Location = System::Drawing::Point(378, 293);
+			this->button_inf->Location = System::Drawing::Point(378, 408);
 			this->button_inf->Name = L"button_inf";
 			this->button_inf->Size = System::Drawing::Size(277, 83);
 			this->button_inf->TabIndex = 2;
@@ -90,7 +94,7 @@ namespace Courseproject {
 			// 
 			// button_out
 			// 
-			this->button_out->Location = System::Drawing::Point(378, 405);
+			this->button_out->Location = System::Drawing::Point(378, 515);
 			this->button_out->Name = L"button_out";
 			this->button_out->Size = System::Drawing::Size(277, 86);
 			this->button_out->TabIndex = 3;
@@ -98,11 +102,22 @@ namespace Courseproject {
 			this->button_out->UseVisualStyleBackColor = true;
 			this->button_out->Click += gcnew System::EventHandler(this, &MyForm::button_out_Click);
 			// 
+			// button_game
+			// 
+			this->button_game->Location = System::Drawing::Point(378, 296);
+			this->button_game->Name = L"button_game";
+			this->button_game->Size = System::Drawing::Size(277, 86);
+			this->button_game->TabIndex = 4;
+			this->button_game->Text = L"Развлекательная игра \"Змейка\"";
+			this->button_game->UseVisualStyleBackColor = true;
+			this->button_game->Click += gcnew System::EventHandler(this, &MyForm::button_game_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1069, 662);
+			this->Controls->Add(this->button_game);
 			this->Controls->Add(this->button_out);
 			this->Controls->Add(this->button_inf);
 			this->Controls->Add(this->button_start);
@@ -118,5 +133,6 @@ namespace Courseproject {
 	private: System::Void button_start_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void button_inf_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void button_out_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_game_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

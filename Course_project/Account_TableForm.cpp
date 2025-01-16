@@ -277,6 +277,7 @@ namespace Courseproject {
         Form->ShowDialog();
         UpdateBalancesFromTransactions();
         LoadAccountsToDataGridView();
+        
     }
 
 
